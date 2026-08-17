@@ -1,0 +1,2455 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CrediFlow | Productos</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#edf2f7;
+    color:#1f2937;
+}
+
+.wrapper{
+    display:flex;
+    min-height:100vh;
+}
+
+.sidebar{
+    width:260px;
+    background:#17375e;
+    color:#fff;
+    padding:25px 0;
+    flex-shrink:0;
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.logo h1{
+    font-size:30px;
+}
+
+.logo p{
+    font-size:14px;
+    opacity:.8;
+    margin-top:5px;
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+}
+
+.menu a{
+    color:#fff;
+    text-decoration:none;
+    padding:15px 25px;
+    transition:.3s;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.menu a:hover{
+    background:#285b9a;
+}
+
+.menu .activo{
+    background:#285b9a;
+}
+
+.main{
+    flex:1;
+    padding:35px;
+    min-width:0;
+}
+
+.topo{
+    margin-bottom:25px;
+}
+
+.topo h2{
+    color:#17375e;
+    font-size:32px;
+}
+
+/* ======================================================
+PESTAÑAS
+====================================================== */
+
+.pestanas{
+    display:flex;
+    gap:8px;
+    margin-bottom:0;
+}
+
+.pestana{
+    background:#dbe4ef;
+    color:#17375e;
+    border:none;
+    padding:13px 22px;
+    border-radius:8px 8px 0 0;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:bold;
+    transition:.2s;
+}
+
+.pestana:hover{
+    background:#cbd8e8;
+}
+
+.pestana.activa{
+    background:#fff;
+    color:#17375e;
+}
+
+/* ======================================================
+CONTENIDO
+====================================================== */
+
+.contenidoPestana{
+    display:none;
+}
+
+.contenidoPestana.activo{
+    display:block;
+}
+
+.card{
+    background:#fff;
+    padding:25px;
+    border-radius:0 12px 12px 12px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    margin-bottom:25px;
+}
+
+.card h3{
+    color:#17375e;
+    margin-bottom:20px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+}
+
+.campo{
+    display:flex;
+    flex-direction:column;
+}
+
+.campo label{
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.campo input,
+.campo select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+    background:#fff;
+}
+
+.campo input:focus,
+.campo select:focus{
+    outline:none;
+    border-color:#285b9a;
+    box-shadow:0 0 0 2px rgba(40,91,154,.12);
+}
+
+.botones{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.btnGuardar{
+    background:#16a34a;
+    color:#fff;
+    border:none;
+    padding:14px 24px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btnGuardar:hover{
+    background:#15803d;
+}
+
+.btnLimpiar{
+    background:#6b7280;
+    color:#fff;
+    border:none;
+    padding:14px 24px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btnLimpiar:hover{
+    background:#4b5563;
+}
+
+.btnEditar{
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    padding:8px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-right:5px;
+}
+
+.btnEliminar{
+    background:#f59e0b;
+    color:#fff;
+    border:none;
+    padding:8px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btnEditar:hover{
+    background:#1d4ed8;
+}
+
+.btnEliminar:hover{
+    background:#d97706;
+}
+.btnEliminarSeleccionados{
+    background:#f59e0b;
+    color:#fff;
+    border:none;
+    padding:10px 16px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.btnEliminarSeleccionados:hover{
+    background:#d97706;
+}
+
+.checkboxProducto{
+    width:18px;
+    height:18px;
+    cursor:pointer;
+}
+.mensaje{
+    display:none;
+    margin-bottom:20px;
+    padding:14px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.mensaje.exito{
+    display:block;
+    background:#dcfce7;
+    color:#166534;
+    border:1px solid #86efac;
+}
+
+.mensaje.error{
+    display:block;
+    background:#fee2e2;
+    color:#991b1b;
+    border:1px solid #fca5a5;
+}
+
+.tabla-scroll{
+    width:100%;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:750px;
+}
+
+th{
+    background:#17375e;
+    color:#fff;
+    padding:12px;
+    white-space:nowrap;
+}
+
+td{
+    padding:12px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+    white-space:nowrap;
+}
+
+tbody tr:hover{
+    background:#f8fafc;
+}
+
+.sinRegistros{
+    color:#6b7280;
+    padding:20px;
+}
+
+.categoriaPersonalizada{
+    display:none;
+}
+
+.categoriaPersonalizada.visible{
+    display:flex;
+}
+
+@media(max-width:800px){
+
+    .wrapper{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        padding:15px 0;
+    }
+
+    .logo{
+        margin-bottom:15px;
+    }
+
+    .menu{
+        flex-direction:row;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .menu a{
+        padding:10px 12px;
+        font-size:14px;
+    }
+
+    .main{
+        padding:20px;
+    }
+
+    .topo h2{
+        font-size:26px;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .pestanas{
+        flex-wrap:wrap;
+    }
+
+    .pestana{
+        flex:1;
+        min-width:150px;
+    }
+
+    .card{
+        border-radius:0 12px 12px 12px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<aside class="sidebar">
+
+<div class="logo">
+
+<h1>CrediFlow</h1>
+
+<p>Sistema de Ventas a Crédito</p>
+
+</div>
+
+<div class="menu">
+
+<a href="index.html">
+
+<i class="fa-solid fa-house"></i>
+
+Inicio
+
+</a>
+
+<a href="clientes.html">
+
+<i class="fa-solid fa-users"></i>
+
+Clientes
+
+</a>
+
+<a href="productos.html" class="activo">
+
+<i class="fa-solid fa-box"></i>
+
+Productos
+
+</a>
+
+<a href="creditos.html">
+
+<i class="fa-solid fa-file-invoice-dollar"></i>
+
+Créditos
+
+</a>
+
+<a href="reportes.html">
+
+<i class="fa-solid fa-chart-line"></i>
+
+Reportes
+
+</a>
+
+</div>
+
+</aside>
+
+<main class="main">
+
+<div class="topo">
+
+<h2>Gestión de Productos</h2>
+
+</div>
+
+<div id="mensajeProducto" class="mensaje"></div>
+
+<!-- ======================================================
+PESTAÑAS
+====================================================== -->
+
+<div class="pestanas">
+
+<button
+type="button"
+class="pestana activa"
+id="pestanaNuevoProducto">
+
+<i class="fa-solid fa-box-open"></i>
+
+Nuevo Producto
+
+</button>
+
+<button
+type="button"
+class="pestana"
+id="pestanaReposicion">
+
+<i class="fa-solid fa-boxes-stacked"></i>
+
+Reposición de Inventario
+
+</button>
+
+<button
+type="button"
+class="pestana"
+id="pestanaInventario">
+
+<i class="fa-solid fa-warehouse"></i>
+
+Inventario
+
+</button>
+
+</div>
+
+<!-- ======================================================
+NUEVO PRODUCTO
+====================================================== -->
+
+<div
+id="contenidoNuevoProducto"
+class="contenidoPestana activo">
+
+<div class="card">
+
+<h3 id="tituloFormularioProducto">
+Nuevo Producto
+</h3>
+
+<div class="grid">
+
+<div class="campo">
+
+<label for="nombreProducto">
+Nombre del producto
+</label>
+
+<input
+type="text"
+id="nombreProducto"
+autocomplete="off"
+
+>
+
+</div>
+
+<div class="campo">
+
+<label for="categoriaProducto">
+Categoría
+</label>
+
+<select id="categoriaProducto">
+
+<option value="">
+Seleccione una categoría
+</option>
+
+<option value="Cama">
+Cama
+</option>
+
+<option value="Colchón">
+Colchón
+</option>
+
+<option value="Peinadora">
+Peinadora
+</option>
+
+<option value="Escaparate">
+Escaparate
+</option>
+
+<option value="Juego de recibo">
+Juego de recibo
+</option>
+
+<option value="Comedor">
+Comedor
+</option>
+
+<option value="Otro">
+Otro
+</option>
+
+</select>
+
+</div>
+
+<div
+class="campo categoriaPersonalizada"
+id="contenedorCategoriaPersonalizada">
+
+<label for="categoriaPersonalizada">
+Especifique la categoría
+</label>
+
+<input
+type="text"
+id="categoriaPersonalizada"
+autocomplete="off"
+
+>
+
+</div>
+
+<div class="campo">
+
+<label for="costoProducto">
+Costo del producto ($)
+</label>
+
+<input
+type="number"
+id="costoProducto"
+step="0.01"
+min="0"
+
+>
+
+</div>
+
+<div class="campo">
+
+<label for="precioVenta">
+Precio de venta ($)
+</label>
+
+<input
+type="number"
+id="precioVenta"
+step="0.01"
+min="0"
+
+>
+
+</div>
+
+<div class="campo">
+
+<label for="cantidadProducto">
+Cantidad
+</label>
+
+<input
+type="number"
+id="cantidadProducto"
+min="0"
+step="1"
+
+>
+
+</div>
+
+<div class="campo">
+
+<label for="fechaProducto">
+Fecha
+</label>
+
+<input
+type="date"
+id="fechaProducto"
+
+>
+
+</div>
+
+</div>
+
+<div class="botones">
+
+<button
+type="button"
+class="btnGuardar"
+id="btnGuardarProducto"
+
+>
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+Guardar Producto
+
+</button>
+
+<button
+type="button"
+class="btnLimpiar"
+id="btnLimpiarProducto"
+
+>
+
+<i class="fa-solid fa-eraser"></i>
+
+Limpiar
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================================
+REPOSICIÓN
+====================================================== -->
+
+<div
+id="contenidoReposicion"
+class="contenidoPestana">
+
+<div class="card">
+
+<h3>
+Reposición de Inventario
+</h3>
+
+<div class="grid">
+
+<div class="campo">
+
+<label for="reposicionProducto">
+Nombre del producto
+</label>
+
+<select id="reposicionProducto">
+
+<option value="">
+Seleccione un producto
+</option>
+
+</select>
+
+</div>
+
+<div class="campo">
+
+<label for="reposicionCategoria">
+Categoría
+</label>
+
+<select id="reposicionCategoria">
+
+<option value="">
+Seleccione una categoría
+</option>
+
+</select>
+
+</div>
+
+<div class="campo">
+
+<label for="reposicionCosto">
+Costo del producto ($)
+</label>
+
+<input
+type="number"
+id="reposicionCosto"
+step="0.01"
+min="0"
+
+>
+
+</div>
+
+<div class="campo">
+
+<label for="reposicionPrecio">
+Precio de venta ($)
+</label>
+
+<input
+type="number"
+id="reposicionPrecio"
+step="0.01"
+min="0"
+
+>
+
+</div>
+
+<div class="campo">
+
+<label for="reposicionCantidad">
+Cantidad
+</label>
+
+<input
+type="number"
+id="reposicionCantidad"
+min="1"
+step="1"
+
+>
+
+</div>
+
+<div class="campo">
+
+<label for="reposicionFecha">
+Fecha
+</label>
+
+<input
+type="date"
+id="reposicionFecha"
+
+>
+
+</div>
+
+</div>
+
+<div class="botones">
+
+<button
+type="button"
+class="btnGuardar"
+id="btnGuardarReposicion"
+
+>
+
+<i class="fa-solid fa-plus"></i>
+
+Guardar Reposición
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================================
+INVENTARIO
+====================================================== -->
+
+<div
+id="contenidoInventario"
+class="contenidoPestana">
+
+<div class="card">
+
+<h3>
+Inventario
+</h3>
+
+<button
+type="button"
+class="btnEliminarSeleccionados"
+id="btnEliminarProductosSeleccionados">
+
+<i class="fa-solid fa-trash"></i>
+
+Eliminar seleccionados
+
+</button>
+
+<div class="tabla-scroll">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+<input
+type="checkbox"
+id="seleccionarTodosProductos"
+class="checkboxProducto">
+</th>
+
+<th>Producto</th>
+
+<th>Categoría</th>
+
+<th>Costo ($)</th>
+
+<th>Precio de venta ($)</th>
+
+<th>Cantidad</th>
+
+<th>Acción</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tablaProductos">
+
+<tr>
+
+<td colspan="7" class="sinRegistros">
+
+No hay productos registrados.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+<script>
+
+/* ======================================================
+DATOS DEL SISTEMA
+====================================================== */
+
+let productos =
+JSON.parse(
+localStorage.getItem("productos")
+) || [];
+
+let productoEditando = null;
+
+
+/* ======================================================
+REFERENCIAS
+====================================================== */
+
+const nombreProducto =
+document.getElementById("nombreProducto");
+
+const categoriaProducto =
+document.getElementById("categoriaProducto");
+
+const categoriaPersonalizada =
+document.getElementById("categoriaPersonalizada");
+
+const contenedorCategoriaPersonalizada =
+document.getElementById("contenedorCategoriaPersonalizada");
+
+const costoProducto =
+document.getElementById("costoProducto");
+
+const precioVenta =
+document.getElementById("precioVenta");
+
+const cantidadProducto =
+document.getElementById("cantidadProducto");
+
+const fechaProducto =
+document.getElementById("fechaProducto");
+
+const tablaProductos =
+document.getElementById("tablaProductos");
+
+const btnGuardarProducto =
+document.getElementById("btnGuardarProducto");
+
+const btnLimpiarProducto =
+document.getElementById("btnLimpiarProducto");
+const btnEliminarProductosSeleccionados =
+document.getElementById(
+    "btnEliminarProductosSeleccionados"
+);
+
+const seleccionarTodosProductos =
+document.getElementById(
+    "seleccionarTodosProductos"
+);
+const tituloFormularioProducto =
+document.getElementById("tituloFormularioProducto");
+
+const mensajeProducto =
+document.getElementById("mensajeProducto");
+
+const reposicionProducto =
+document.getElementById("reposicionProducto");
+
+const reposicionCategoria =
+document.getElementById("reposicionCategoria");
+
+const reposicionCosto =
+document.getElementById("reposicionCosto");
+
+const reposicionPrecio =
+document.getElementById("reposicionPrecio");
+
+const reposicionCantidad =
+document.getElementById("reposicionCantidad");
+
+const reposicionFecha =
+document.getElementById("reposicionFecha");
+
+const btnGuardarReposicion =
+document.getElementById("btnGuardarReposicion");
+
+const pestanaNuevoProducto =
+document.getElementById("pestanaNuevoProducto");
+
+const pestanaReposicion =
+document.getElementById("pestanaReposicion");
+
+const pestanaInventario =
+document.getElementById("pestanaInventario");
+
+const contenidoNuevoProducto =
+document.getElementById("contenidoNuevoProducto");
+
+const contenidoReposicion =
+document.getElementById("contenidoReposicion");
+
+const contenidoInventario =
+document.getElementById("contenidoInventario");
+
+
+/* ======================================================
+CAMBIO DE PESTAÑAS
+====================================================== */
+
+function mostrarPestana(nombrePestana){
+
+pestanaNuevoProducto.classList.remove("activa");
+
+pestanaReposicion.classList.remove("activa");
+
+pestanaInventario.classList.remove("activa");
+
+contenidoNuevoProducto.classList.remove("activo");
+
+contenidoReposicion.classList.remove("activo");
+
+contenidoInventario.classList.remove("activo");
+
+
+if(nombrePestana === "nuevo"){
+
+pestanaNuevoProducto.classList.add("activa");
+
+contenidoNuevoProducto.classList.add("activo");
+
+}
+
+
+else if(nombrePestana === "reposicion"){
+
+pestanaReposicion.classList.add("activa");
+
+contenidoReposicion.classList.add("activo");
+
+actualizarProductosReposicion();
+
+}
+
+
+else{
+
+pestanaInventario.classList.add("activa");
+
+contenidoInventario.classList.add("activo");
+
+actualizarTablaProductos();
+
+}
+
+}
+
+
+pestanaNuevoProducto.addEventListener(
+"click",
+function(){
+
+mostrarPestana("nuevo");
+
+}
+);
+
+
+pestanaReposicion.addEventListener(
+"click",
+function(){
+
+mostrarPestana("reposicion");
+
+}
+);
+
+
+pestanaInventario.addEventListener(
+"click",
+function(){
+
+mostrarPestana("inventario");
+
+}
+);
+
+
+/* ======================================================
+MENSAJE
+====================================================== */
+
+function mostrarMensajeProducto(
+texto,
+tipo
+){
+
+mensajeProducto.textContent =
+texto;
+
+mensajeProducto.className =
+"mensaje " + tipo;
+
+mensajeProducto.style.display =
+"block";
+
+setTimeout(
+function(){
+
+mensajeProducto.style.display =
+"none";
+
+mensajeProducto.className =
+"mensaje";
+
+},
+3000
+);
+
+}
+
+
+/* ======================================================
+ESCAPAR HTML
+====================================================== */
+
+function escaparHTMLProducto(
+valor
+){
+
+return String(
+valor || ""
+)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* ======================================================
+CATEGORÍA PERSONALIZADA
+====================================================== */
+
+categoriaProducto.addEventListener(
+"change",
+function(){
+
+if(this.value === "Otro"){
+
+contenedorCategoriaPersonalizada.classList.add(
+"visible"
+);
+
+}else{
+
+contenedorCategoriaPersonalizada.classList.remove(
+"visible"
+);
+
+categoriaPersonalizada.value =
+"";
+
+}
+
+}
+);
+
+
+/* ======================================================
+OBTENER DATOS MÁS RECIENTES DEL PRODUCTO
+====================================================== */
+
+function obtenerDatosMasRecientes(producto){
+
+return {
+
+costo:
+Number(
+producto.costo || 0
+),
+
+precioVenta:
+Number(
+producto.precioVenta || 0
+),
+
+fecha:
+producto.fecha || ""
+
+};
+
+}
+
+
+/* ======================================================
+TABLA DE INVENTARIO
+====================================================== */
+
+function actualizarTablaProductos(){
+
+if(productos.length === 0){
+
+tablaProductos.innerHTML =
+
+'<tr>' +
+
+'<td colspan="7" class="sinRegistros">' +
+
+'No hay productos registrados.' +
+
+'</td>' +
+
+'</tr>';
+
+return;
+
+}
+
+
+let html = "";
+
+
+productos.forEach(
+function(p,index){
+
+const datosActuales =
+obtenerDatosMasRecientes(p);
+
+
+html +=
+
+"<tr>" +
+
+"<td>" +
+
+'<input ' +
+'type="checkbox" ' +
+'class="checkboxProducto productoSeleccionado" ' +
+'data-index="' +
+index +
+'">' +
+
+"</td>" +
+
+"<td>" +
+escaparHTMLProducto(p.nombre) +
+"</td>" +
+
+"<td>" +
+escaparHTMLProducto(p.categoria) +
+"</td>" +
+
+"<td>$" +
+datosActuales.costo.toFixed(2) +
+"</td>" +
+
+"<td>$" +
+datosActuales.precioVenta.toFixed(2) +
+"</td>" +
+
+"<td>" +
+Number(
+p.cantidad || 0
+) +
+"</td>" +
+
+"<td>" +
+
+'<button ' +
+'type="button" ' +
+'class="btnEditar" ' +
+'onclick="editarProducto(' +
+index +
+')">' +
+
+'<i class="fa-solid fa-pen"></i> ' +
+
+'Editar' +
+
+'</button>' +
+
+'<button ' +
+'type="button" ' +
+'class="btnEliminar" ' +
+'onclick="eliminarProducto(' +
+index +
+')">' +
+
+'<i class="fa-solid fa-trash"></i> ' +
+
+'Eliminar' +
+
+'</button>' +
+
+"</td>" +
+
+"</tr>";
+
+}
+);
+
+
+tablaProductos.innerHTML =
+html;
+
+}
+
+
+/* ======================================================
+PRODUCTOS PARA REPOSICIÓN
+====================================================== */
+
+function actualizarProductosReposicion(){
+
+reposicionProducto.innerHTML =
+'<option value="">Seleccione un producto</option>';
+
+
+if(productos.length === 0){
+
+return;
+
+}
+
+
+productos.forEach(
+function(p,index){
+
+const opcion =
+document.createElement("option");
+
+opcion.value =
+index;
+
+opcion.textContent =
+p.nombre;
+
+reposicionProducto.appendChild(
+opcion
+);
+
+}
+);
+
+
+actualizarCategoriasReposicion();
+
+}
+
+
+/* ======================================================
+CATEGORÍAS DE REPOSICIÓN
+====================================================== */
+
+function actualizarCategoriasReposicion(){
+
+reposicionCategoria.innerHTML =
+'<option value="">Seleccione una categoría</option>';
+
+const categorias = [];
+
+
+productos.forEach(
+function(p){
+
+const categoria =
+String(
+p.categoria || ""
+).trim();
+
+if(
+categoria !== "" &&
+!categorias.includes(categoria)
+){
+
+categorias.push(categoria);
+
+}
+
+}
+);
+
+
+categorias.sort(
+function(a,b){
+
+return a.localeCompare(
+b,
+"es",
+{
+sensitivity:"base"
+}
+);
+
+}
+);
+
+
+categorias.forEach(
+function(categoria){
+
+const opcion =
+document.createElement("option");
+
+opcion.value =
+categoria;
+
+opcion.textContent =
+categoria;
+
+reposicionCategoria.appendChild(
+opcion
+);
+
+}
+);
+
+}
+
+
+/* ======================================================
+SELECCIÓN DE PRODUCTO
+====================================================== */
+
+reposicionProducto.addEventListener(
+"change",
+function(){
+
+const index =
+Number(this.value);
+
+
+if(
+this.value === "" ||
+!productos[index]
+){
+
+reposicionCategoria.value =
+"";
+
+reposicionCosto.value =
+"";
+
+reposicionPrecio.value =
+"";
+
+return;
+
+}
+
+
+const producto =
+productos[index];
+
+
+reposicionCategoria.value =
+producto.categoria || "";
+
+
+const datosActuales =
+obtenerDatosMasRecientes(
+producto
+);
+
+
+reposicionCosto.value =
+datosActuales.costo.toFixed(2);
+
+reposicionPrecio.value =
+datosActuales.precioVenta.toFixed(2);
+
+}
+);
+
+
+/* ======================================================
+LIMPIAR FORMULARIO
+====================================================== */
+
+function limpiarFormularioProducto(){
+
+productoEditando =
+null;
+
+nombreProducto.value =
+"";
+
+categoriaProducto.value =
+"";
+
+categoriaPersonalizada.value =
+"";
+
+contenedorCategoriaPersonalizada.classList.remove(
+"visible"
+);
+
+costoProducto.value =
+"";
+
+precioVenta.value =
+"";
+
+cantidadProducto.value =
+"";
+
+const hoy = new Date();
+
+const año =
+hoy.getFullYear();
+
+const mes =
+String(
+    hoy.getMonth() + 1
+).padStart(2,"0");
+
+const dia =
+String(
+    hoy.getDate()
+).padStart(2,"0");
+
+fechaProducto.value =
+año + "-" + mes + "-" + dia;
+
+tituloFormularioProducto.textContent =
+"Nuevo Producto";
+
+btnGuardarProducto.innerHTML =
+'<i class="fa-solid fa-floppy-disk"></i> ' +
+'Guardar Producto';
+
+}
+
+
+/* ======================================================
+EDITAR PRODUCTO
+====================================================== */
+
+function editarProducto(index){
+
+const producto =
+productos[index];
+
+if(!producto){
+return;
+}
+
+
+productoEditando =
+index;
+
+
+nombreProducto.value =
+producto.nombre || "";
+
+
+const categoriasEstandar = [
+
+"Cama",
+"Colchón",
+"Peinadora",
+"Escaparate",
+"Juego de recibo",
+"Comedor"
+
+];
+
+
+if(
+categoriasEstandar.includes(
+producto.categoria
+)
+){
+
+categoriaProducto.value =
+producto.categoria;
+
+contenedorCategoriaPersonalizada.classList.remove(
+"visible"
+);
+
+categoriaPersonalizada.value =
+"";
+
+}else{
+
+categoriaProducto.value =
+"Otro";
+
+contenedorCategoriaPersonalizada.classList.add(
+"visible"
+);
+
+categoriaPersonalizada.value =
+producto.categoria || "";
+
+}
+
+
+const datosActuales =
+obtenerDatosMasRecientes(
+producto
+);
+
+
+costoProducto.value =
+datosActuales.costo.toFixed(2);
+
+precioVenta.value =
+datosActuales.precioVenta.toFixed(2);
+
+cantidadProducto.value =
+Number(
+producto.cantidad || 0
+);
+
+fechaProducto.value =
+producto.fecha || "";
+
+
+tituloFormularioProducto.textContent =
+"Editar Producto";
+
+
+btnGuardarProducto.innerHTML =
+'<i class="fa-solid fa-rotate"></i> ' +
+'Actualizar Producto';
+
+
+mostrarPestana("nuevo");
+
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+/* ======================================================
+ELIMINAR PRODUCTO
+====================================================== */
+
+function eliminarProducto(index){
+
+const producto =
+productos[index];
+
+if(!producto){
+return;
+}
+
+
+const confirmar =
+confirm(
+"¿Desea eliminar el producto " +
+(producto.nombre || "") +
+"?\n\nEsta acción eliminará el registro del producto."
+);
+
+
+if(!confirmar){
+return;
+}
+
+
+productos.splice(
+index,
+1
+);
+
+
+localStorage.setItem(
+"productos",
+JSON.stringify(productos)
+);
+
+
+actualizarTablaProductos();
+
+actualizarProductosReposicion();
+
+
+if(productoEditando === index){
+
+limpiarFormularioProducto();
+
+}
+
+
+mostrarMensajeProducto(
+"Producto eliminado correctamente.",
+"exito"
+);
+
+}
+/* ======================================================
+ELIMINAR PRODUCTOS SELECCIONADOS
+====================================================== */
+
+if(btnEliminarProductosSeleccionados){
+
+    btnEliminarProductosSeleccionados.addEventListener(
+        "click",
+        function(){
+
+            const seleccionados =
+            Array.from(
+                document.querySelectorAll(
+                    ".productoSeleccionado:checked"
+                )
+            )
+            .map(
+                function(checkbox){
+
+                    return Number(
+                        checkbox.dataset.index
+                    );
+
+                }
+            );
+
+
+            if(seleccionados.length === 0){
+
+                mostrarMensajeProducto(
+                    "Seleccione al menos un producto para eliminar.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const confirmar =
+            confirm(
+                "¿Está seguro de que desea eliminar " +
+                seleccionados.length +
+                " producto(s) seleccionados?"
+            );
+
+
+            if(!confirmar){
+                return;
+            }
+
+
+            /* ELIMINAR DE MAYOR A MENOR */
+
+            seleccionados
+            .sort(
+                function(a,b){
+                    return b - a;
+                }
+            )
+            .forEach(
+                function(index){
+
+                    productos.splice(
+                        index,
+                        1
+                    );
+
+                }
+            );
+
+
+            /* GUARDAR */
+
+            localStorage.setItem(
+                "productos",
+                JSON.stringify(
+                    productos
+                )
+            );
+
+
+            /* RECARGAR DATOS */
+
+            productos =
+            JSON.parse(
+                localStorage.getItem("productos")
+            ) || [];
+
+
+            /* ACTUALIZAR TABLAS */
+
+            actualizarTablaProductos();
+
+            actualizarProductosReposicion();
+
+
+            /* DESMARCAR TODOS */
+
+            if(seleccionarTodosProductos){
+
+                seleccionarTodosProductos.checked =
+                false;
+
+            }
+
+
+            /* AVISO */
+
+            mostrarMensajeProducto(
+                "✓ Productos seleccionados eliminados correctamente.",
+                "exito"
+            );
+
+        }
+    );
+
+}
+/* ======================================================
+SELECCIONAR / DESELECCIONAR TODOS
+====================================================== */
+
+if(seleccionarTodosProductos){
+
+    seleccionarTodosProductos.addEventListener(
+        "change",
+        function(){
+
+            const checkboxes =
+            document.querySelectorAll(
+                ".productoSeleccionado"
+            );
+
+            checkboxes.forEach(
+                function(checkbox){
+
+                    checkbox.checked =
+                    seleccionarTodosProductos.checked;
+
+                }
+            );
+
+        }
+    );
+
+}
+/* ======================================================
+GUARDAR PRODUCTO
+====================================================== */
+
+btnGuardarProducto.addEventListener(
+"click",
+function(){
+
+const nombreValor =
+nombreProducto.value.trim();
+
+
+const categoriaSeleccionada =
+categoriaProducto.value;
+
+
+let categoriaValor =
+categoriaSeleccionada;
+
+
+if(
+categoriaSeleccionada === "Otro"
+){
+
+categoriaValor =
+categoriaPersonalizada.value.trim();
+
+}
+
+
+const costoValor =
+Number(
+costoProducto.value
+) || 0;
+
+
+const precioVentaValor =
+Number(
+precioVenta.value
+) || 0;
+
+
+const cantidadValor =
+Number(
+cantidadProducto.value
+) || 0;
+
+
+const fechaValor =
+fechaProducto.value;
+
+
+/* VALIDACIONES */
+
+if(
+nombreValor === ""
+){
+
+mostrarMensajeProducto(
+"Debe ingresar el nombre del producto.",
+"error"
+);
+
+nombreProducto.focus();
+
+return;
+
+}
+
+
+if(
+categoriaSeleccionada === ""
+){
+
+mostrarMensajeProducto(
+"Debe seleccionar una categoría.",
+"error"
+);
+
+categoriaProducto.focus();
+
+return;
+
+}
+
+
+if(
+categoriaSeleccionada === "Otro" &&
+categoriaValor === ""
+){
+
+mostrarMensajeProducto(
+"Debe especificar la categoría.",
+"error"
+);
+
+categoriaPersonalizada.focus();
+
+return;
+
+}
+
+
+if(
+costoValor < 0
+){
+
+mostrarMensajeProducto(
+"El costo del producto no puede ser negativo.",
+"error"
+);
+
+costoProducto.focus();
+
+return;
+
+}
+
+
+if(
+precioVentaValor <= 0
+){
+
+mostrarMensajeProducto(
+"El precio de venta debe ser mayor que cero.",
+"error"
+);
+
+precioVenta.focus();
+
+return;
+
+}
+
+
+if(
+cantidadValor < 0
+){
+
+mostrarMensajeProducto(
+"La cantidad no puede ser negativa.",
+"error"
+);
+
+cantidadProducto.focus();
+
+return;
+
+}
+
+
+if(
+fechaValor === ""
+){
+
+mostrarMensajeProducto(
+"Debe seleccionar una fecha.",
+"error"
+);
+
+fechaProducto.focus();
+
+return;
+
+}
+
+
+/* ======================================================
+NUEVO PRODUCTO
+====================================================== */
+
+if(
+productoEditando === null
+){
+
+const productoExiste =
+productos.some(
+function(p){
+
+return String(
+p.nombre || ""
+)
+.toLowerCase()
+.trim() ===
+nombreValor.toLowerCase();
+
+}
+);
+
+
+if(
+productoExiste
+){
+
+mostrarMensajeProducto(
+"Ya existe un producto registrado con ese nombre.",
+"error"
+);
+
+nombreProducto.focus();
+
+return;
+
+}
+
+
+productos.push({
+
+id:
+"PRO-" +
+Date.now(),
+
+nombre:
+nombreValor,
+
+categoria:
+categoriaValor,
+
+costo:
+Number(
+costoValor.toFixed(2)
+),
+
+precioVenta:
+Number(
+precioVentaValor.toFixed(2)
+),
+
+cantidad:
+Math.floor(
+cantidadValor
+),
+
+fecha:
+fechaValor
+
+});
+
+
+mostrarMensajeProducto(
+"Producto registrado correctamente.",
+"exito"
+);
+
+}
+
+
+/* ======================================================
+ACTUALIZAR PRODUCTO
+====================================================== */
+
+else{
+
+const productoExiste =
+productos.some(
+function(p,index){
+
+return (
+index !== productoEditando &&
+String(
+p.nombre || ""
+)
+.toLowerCase()
+.trim() ===
+nombreValor.toLowerCase()
+);
+
+}
+);
+
+
+if(
+productoExiste
+){
+
+mostrarMensajeProducto(
+"Ya existe otro producto registrado con ese nombre.",
+"error"
+);
+
+nombreProducto.focus();
+
+return;
+
+}
+
+
+productos[productoEditando] = {
+
+...productos[productoEditando],
+
+nombre:
+nombreValor,
+
+categoria:
+categoriaValor,
+
+costo:
+Number(
+costoValor.toFixed(2)
+),
+
+precioVenta:
+Number(
+precioVentaValor.toFixed(2)
+),
+
+cantidad:
+Math.floor(
+cantidadValor
+),
+
+fecha:
+fechaValor
+
+};
+
+
+mostrarMensajeProducto(
+"Producto actualizado correctamente.",
+"exito"
+);
+
+}
+
+
+localStorage.setItem(
+"productos",
+JSON.stringify(productos)
+);
+
+
+actualizarTablaProductos();
+
+actualizarProductosReposicion();
+
+limpiarFormularioProducto();
+
+}
+);
+
+
+/* ======================================================
+GUARDAR REPOSICIÓN
+====================================================== */
+
+btnGuardarReposicion.addEventListener(
+"click",
+function(){
+
+if(
+reposicionProducto.value === ""
+){
+
+mostrarMensajeProducto(
+"Debe seleccionar un producto.",
+"error"
+);
+
+reposicionProducto.focus();
+
+return;
+
+}
+
+
+const index =
+Number(
+reposicionProducto.value
+);
+
+
+const producto =
+productos[index];
+
+
+if(
+!producto
+){
+
+mostrarMensajeProducto(
+"El producto seleccionado no existe.",
+"error"
+);
+
+return;
+
+}
+
+
+const cantidad =
+Number(
+reposicionCantidad.value
+) || 0;
+
+
+const costo =
+Number(
+reposicionCosto.value
+) || 0;
+
+
+const precioVenta =
+Number(
+reposicionPrecio.value
+) || 0;
+
+
+const fecha =
+reposicionFecha.value;
+
+
+if(
+cantidad <= 0
+){
+
+mostrarMensajeProducto(
+"La cantidad de reposición debe ser mayor que cero.",
+"error"
+);
+
+reposicionCantidad.focus();
+
+return;
+
+}
+
+
+if(
+costo < 0
+){
+
+mostrarMensajeProducto(
+"El costo no puede ser negativo.",
+"error"
+);
+
+reposicionCosto.focus();
+
+return;
+
+}
+
+
+if(
+precioVenta <= 0
+){
+
+mostrarMensajeProducto(
+"El precio de venta debe ser mayor que cero.",
+"error"
+);
+
+reposicionPrecio.focus();
+
+return;
+
+}
+
+
+if(
+fecha === ""
+){
+
+mostrarMensajeProducto(
+"Debe seleccionar una fecha.",
+"error"
+);
+
+reposicionFecha.focus();
+
+return;
+
+}
+
+
+/* ======================================================
+ACTUALIZAR INVENTARIO
+====================================================== */
+
+producto.categoria =
+reposicionCategoria.value ||
+producto.categoria ||
+"";
+
+
+producto.cantidad =
+Number(
+producto.cantidad || 0
+) +
+Math.floor(
+cantidad
+);
+
+
+/* ======================================================
+ACTUALIZAR COSTO Y PRECIO VIGENTES
+====================================================== */
+
+const fechaAnterior =
+producto.fecha || "";
+
+
+if(
+fecha >= fechaAnterior
+){
+
+producto.costo =
+Number(
+costo.toFixed(2)
+);
+
+producto.precioVenta =
+Number(
+precioVenta.toFixed(2)
+);
+
+producto.fecha =
+fecha;
+
+}
+
+
+/* ======================================================
+GUARDAR
+====================================================== */
+
+localStorage.setItem(
+"productos",
+JSON.stringify(productos)
+);
+
+
+mostrarMensajeProducto(
+"Reposición registrada correctamente. El inventario fue actualizado.",
+"exito"
+);
+
+
+reposicionCantidad.value =
+"";
+
+reposicionFecha.value =
+"";
+
+reposicionProducto.value =
+"";
+
+reposicionCategoria.value =
+"";
+
+reposicionCosto.value =
+"";
+
+reposicionPrecio.value =
+"";
+
+
+actualizarTablaProductos();
+
+actualizarProductosReposicion();
+
+}
+);
+
+/* FECHA DE HOY POR DEFECTO */
+
+if(fechaProducto){
+
+    fechaProducto.value =
+    new Date().toISOString().split("T")[0];
+
+}
+/* ======================================================
+INICIAR
+====================================================== */
+
+if(fechaProducto){
+
+    const hoy = new Date();
+
+    const año =
+    hoy.getFullYear();
+
+    const mes =
+    String(
+        hoy.getMonth() + 1
+    ).padStart(2,"0");
+
+    const dia =
+    String(
+        hoy.getDate()
+    ).padStart(2,"0");
+
+    fechaProducto.value =
+    año + "-" + mes + "-" + dia;
+
+}
+
+actualizarTablaProductos();
+
+actualizarProductosReposicion();
+
+</script>
+
+</body>
+
+</html>

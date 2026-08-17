@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CrediFlow | Reportes</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#edf2f7;
+color:#1f2937;
+}
+
+.wrapper{
+display:flex;
+min-height:100vh;
+}
+
+.sidebar{
+width:260px;
+background:#17375e;
+color:white;
+padding:25px 0;
+flex-shrink:0;
+}
+
+.logo{
+text-align:center;
+margin-bottom:35px;
+}
+
+.logo h1{
+font-size:30px;
+}
+
+.logo p{
+font-size:14px;
+opacity:.8;
+margin-top:5px;
+}
+
+.menu{
+display:flex;
+flex-direction:column;
+}
+
+.menu a{
+color:white;
+text-decoration:none;
+padding:15px 25px;
+transition:.3s;
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.menu a:hover{
+background:#285b9a;
+}
+
+.menu .activo{
+background:#285b9a;
+}
+
+.main{
+flex:1;
+padding:35px;
+min-width:0;
+}
+
+.topo{
+margin-bottom:25px;
+}
+
+.topo h2{
+color:#17375e;
+font-size:32px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+margin-bottom:25px;
+}
+
+.card h3{
+color:#17375e;
+margin-bottom:20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px;
+}
+
+.campo{
+display:flex;
+flex-direction:column;
+}
+
+.campo label{
+font-weight:bold;
+margin-bottom:8px;
+}
+
+.campo input,
+.campo select{
+width:100%;
+padding:12px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:15px;
+background:white;
+}
+
+.campo input:focus,
+.campo select:focus{
+outline:none;
+border-color:#285b9a;
+box-shadow:0 0 0 2px rgba(40,91,154,.12);
+}
+
+.botones{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+margin-top:20px;
+}
+
+.btnConsultar{
+background:#2563eb;
+color:white;
+border:none;
+padding:14px 24px;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.btnConsultar:hover{
+background:#1d4ed8;
+}
+
+.btnLimpiar{
+background:#6b7280;
+color:white;
+border:none;
+padding:14px 24px;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.btnLimpiar:hover{
+background:#4b5563;
+}
+
+.indicador{
+padding:22px;
+border-radius:10px;
+background:#f8fafc;
+border-left:5px solid #1d4ed8;
+}
+
+.indicador i{
+font-size:28px;
+color:#1d4ed8;
+}
+
+.indicador h4{
+margin-top:12px;
+color:#6b7280;
+font-size:14px;
+}
+
+.indicador h2{
+margin-top:6px;
+color:#17375e;
+font-size:26px;
+}
+
+.tabla-scroll{
+width:100%;
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+min-width:750px;
+}
+
+th{
+background:#17375e;
+color:white;
+padding:12px;
+white-space:nowrap;
+}
+
+td{
+padding:12px;
+border-bottom:1px solid #ddd;
+text-align:center;
+white-space:nowrap;
+}
+
+tbody tr:hover{
+background:#f8fafc;
+}
+
+.sinRegistros{
+color:#6b7280;
+padding:20px;
+}
+
+@media(max-width:800px){
+
+.sidebar{
+width:260px;
+}
+
+.main{
+padding:20px;
+}
+
+.topo h2{
+font-size:26px;
+}
+
+}
+
+@media(max-width:600px){
+
+.wrapper{
+display:block;
+}
+
+.sidebar{
+width:100%;
+padding:15px 0;
+}
+
+.logo{
+margin-bottom:15px;
+}
+
+.menu{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+}
+
+.menu a{
+padding:12px;
+font-size:14px;
+}
+
+.main{
+padding:15px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<aside class="sidebar">
+
+<div class="logo">
+
+<h1>CrediFlow</h1>
+
+<p>Sistema de Ventas a Crédito</p>
+
+</div>
+
+<div class="menu">
+
+<a href="index.html">
+
+<i class="fa-solid fa-house"></i>
+
+Inicio
+
+</a>
+
+<a href="clientes.html">
+
+<i class="fa-solid fa-users"></i>
+
+Clientes
+
+</a>
+
+<a href="productos.html">
+
+<i class="fa-solid fa-box"></i>
+
+Productos
+
+</a>
+
+<a href="creditos.html">
+
+<i class="fa-solid fa-file-invoice-dollar"></i>
+
+Créditos
+
+</a>
+
+<a href="reportes.html" class="activo">
+
+<i class="fa-solid fa-chart-line"></i>
+
+Reportes
+
+</a>
+
+</div>
+
+</aside>
+
+<main class="main">
+
+<div class="topo">
+
+<h2>Reportes</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Consultar período</h3>
+
+<div class="grid">
+
+<div class="campo">
+
+<label for="fechaDesde">
+Desde
+</label>
+
+<input
+type="date"
+id="fechaDesde"
+
+>
+
+</div>
+
+<div class="campo">
+
+<label for="fechaHasta">
+Hasta
+</label>
+
+<input
+type="date"
+id="fechaHasta"
+
+>
+
+</div>
+
+</div>
+
+<div class="botones">
+
+<button
+type="button"
+class="btnConsultar"
+id="btnConsultarReporte"
+
+>
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+Consultar reporte
+
+</button>
+
+<button
+type="button"
+class="btnLimpiar"
+id="btnLimpiarReporte"
+
+>
+
+<i class="fa-solid fa-eraser"></i>
+
+Limpiar
+
+</button>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>Resumen del período</h3>
+
+<div class="grid">
+
+<div class="indicador">
+
+<i class="fa-solid fa-cart-shopping"></i>
+
+<h4>Ventas</h4>
+
+<h2 id="totalVentas">
+0
+</h2>
+
+</div>
+
+<div class="indicador">
+
+<i class="fa-solid fa-money-bill-wave"></i>
+
+<h4>Ingresos</h4>
+
+<h2 id="totalIngresos">
+$0.00
+</h2>
+
+</div>
+
+<div class="indicador">
+
+<i class="fa-solid fa-chart-line"></i>
+
+<h4>Utilidad</h4>
+
+<h2 id="totalUtilidad">
+$0.00
+</h2>
+
+</div>
+
+<div class="indicador">
+
+<i class="fa-solid fa-boxes-stacked"></i>
+
+<h4>Unidades vendidas</h4>
+
+<h2 id="unidadesVendidas">
+0
+</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>Detalle de ventas</h3>
+
+<div class="tabla-scroll">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Fecha</th>
+<th>Cliente</th>
+<th>Producto</th>
+<th>Unidades</th>
+<th>Venta</th>
+<th>Costo</th>
+<th>Utilidad</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tablaReportes">
+
+<tr>
+
+<td colspan="7" class="sinRegistros">
+
+Seleccione un período para consultar.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+<script>
+
+const fechaDesde =
+document.getElementById("fechaDesde");
+
+const fechaHasta =
+document.getElementById("fechaHasta");
+
+const btnConsultarReporte =
+document.getElementById("btnConsultarReporte");
+
+const btnLimpiarReporte =
+document.getElementById("btnLimpiarReporte");
+
+const totalVentas =
+document.getElementById("totalVentas");
+
+const totalIngresos =
+document.getElementById("totalIngresos");
+
+const totalUtilidad =
+document.getElementById("totalUtilidad");
+
+const unidadesVendidas =
+document.getElementById("unidadesVendidas");
+
+const tablaReportes =
+document.getElementById("tablaReportes");
+
+
+const hoy =
+new Date();
+
+const fechaHoy =
+hoy.toISOString().split("T")[0];
+
+fechaDesde.value =
+fechaHoy;
+
+fechaHasta.value =
+fechaHoy;
+
+
+btnLimpiarReporte.addEventListener(
+"click",
+function(){
+
+fechaDesde.value =
+fechaHoy;
+
+fechaHasta.value =
+fechaHoy;
+
+totalVentas.textContent =
+"0";
+
+totalIngresos.textContent =
+"$0.00";
+
+totalUtilidad.textContent =
+"$0.00";
+
+unidadesVendidas.textContent =
+"0";
+
+tablaReportes.innerHTML =
+
+'<tr>' +
+'<td colspan="7" class="sinRegistros">' +
+'Seleccione un período para consultar.' +
+'</td>' +
+'</tr>';
+
+}
+);
+
+
+btnConsultarReporte.addEventListener(
+"click",
+function(){
+
+if(
+!fechaDesde.value ||
+!fechaHasta.value
+){
+
+alert(
+"Seleccione las fechas del período."
+);
+
+return;
+
+}
+
+if(
+fechaDesde.value >
+fechaHasta.value
+){
+
+alert(
+"La fecha inicial no puede ser posterior a la fecha final."
+);
+
+return;
+
+}
+
+alert(
+"El diseño del reporte está listo. En el siguiente paso conectaremos los datos reales de ventas, ingresos, utilidad y unidades vendidas."
+);
+
+}
+);
+
+</script>
+
+</body>
+
+</html>

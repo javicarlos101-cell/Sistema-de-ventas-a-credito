@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Clientes | CrediFlow</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#edf2f7;
+    color:#1f2937;
+}
+
+.wrapper{
+    display:flex;
+    min-height:100vh;
+}
+
+.sidebar{
+    width:260px;
+    background:#17375e;
+    color:#fff;
+    padding:25px 0;
+    flex-shrink:0;
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.logo h1{
+    font-size:30px;
+}
+
+.logo p{
+    font-size:14px;
+    opacity:.8;
+    margin-top:5px;
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+}
+
+.menu a{
+    color:#fff;
+    text-decoration:none;
+    padding:15px 25px;
+    transition:.3s;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.menu a:hover{
+    background:#285b9a;
+}
+
+.menu .activo{
+    background:#285b9a;
+}
+
+.main{
+    flex:1;
+    padding:35px;
+    min-width:0;
+}
+
+.topo{
+    margin-bottom:25px;
+}
+
+.topo h2{
+    color:#17375e;
+    font-size:32px;
+}
+
+/* PESTAÑAS */
+
+.pestanas{
+    display:flex;
+    gap:8px;
+    margin-bottom:0;
+}
+
+.pestana{
+    background:#dbe4ef;
+    color:#17375e;
+    border:none;
+    padding:13px 22px;
+    border-radius:8px 8px 0 0;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:bold;
+    transition:.2s;
+}
+
+.pestana:hover{
+    background:#cbd8e8;
+}
+
+.pestana.activa{
+    background:#fff;
+    color:#17375e;
+}
+
+/* CONTENIDO DE PESTAÑAS */
+
+.contenidoPestana{
+    display:none;
+}
+
+.contenidoPestana.activo{
+    display:block;
+}
+
+.card{
+    background:#fff;
+    padding:25px;
+    border-radius:0 12px 12px 12px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    margin-bottom:25px;
+}
+
+.card h3{
+    color:#17375e;
+    margin-bottom:20px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+}
+
+.campo{
+    display:flex;
+    flex-direction:column;
+}
+
+.campo label{
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.campo input,
+.campo select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+    background:#fff;
+}
+
+.campo input:focus,
+.campo select:focus{
+    outline:none;
+    border-color:#285b9a;
+    box-shadow:0 0 0 2px rgba(40,91,154,.12);
+}
+
+.botones{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.btnGuardar{
+    background:#16a34a;
+    color:#fff;
+    border:none;
+    padding:14px 24px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btnGuardar:hover{
+    background:#15803d;
+}
+
+.btnLimpiar{
+    background:#6b7280;
+    color:#fff;
+    border:none;
+    padding:14px 24px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btnLimpiar:hover{
+    background:#4b5563;
+}
+
+.btnEditar{
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    padding:8px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-right:5px;
+}
+
+.btnEliminar{
+    background:#f59e0b;
+    color:#fff;
+    border:none;
+    padding:8px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btnEditar:hover{
+    background:#1d4ed8;
+}
+
+.btnEliminar:hover{
+    background:#b91c1c;
+}
+.btnEliminarSeleccionados{
+    background:#f59e0b;
+    color:#fff;
+    border:none;
+    padding:10px 16px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.btnEliminarSeleccionados:hover{
+    background:#d97706;
+}
+
+.checkboxCliente{
+    width:18px;
+    height:18px;
+    cursor:pointer;
+}
+.mensaje{
+    display:none;
+    margin-bottom:20px;
+    padding:14px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.mensaje.exito{
+    display:block;
+    background:#dcfce7;
+    color:#166534;
+    border:1px solid #86efac;
+}
+
+.mensaje.error{
+    display:block;
+    background:#fee2e2;
+    color:#991b1b;
+    border:1px solid #fca5a5;
+}
+
+.tabla-scroll{
+    width:100%;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:750px;
+}
+
+th{
+    background:#17375e;
+    color:#fff;
+    padding:12px;
+    white-space:nowrap;
+}
+
+td{
+    padding:12px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+    white-space:nowrap;
+}
+
+tbody tr:hover{
+    background:#f8fafc;
+}
+
+.sinRegistros{
+    color:#6b7280;
+    padding:20px;
+}
+
+@media(max-width:800px){
+
+    .wrapper{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        padding:15px 0;
+    }
+
+    .logo{
+        margin-bottom:15px;
+    }
+
+    .menu{
+        flex-direction:row;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .menu a{
+        padding:10px 12px;
+        font-size:14px;
+    }
+
+    .main{
+        padding:20px;
+    }
+
+    .topo h2{
+        font-size:26px;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .pestanas{
+        flex-wrap:wrap;
+    }
+
+    .pestana{
+        flex:1;
+        min-width:150px;
+    }
+
+    .card{
+        border-radius:0 12px 12px 12px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<aside class="sidebar">
+
+<div class="logo">
+
+<h1>CrediFlow</h1>
+
+<p>Sistema de Ventas a Crédito</p>
+
+</div>
+
+<div class="menu">
+
+<a href="index.html">
+
+<i class="fa-solid fa-house"></i>
+
+Inicio
+
+</a>
+
+<a href="clientes.html" class="activo">
+
+<i class="fa-solid fa-users"></i>
+
+Clientes
+
+</a>
+
+<a href="productos.html">
+
+<i class="fa-solid fa-box"></i>
+
+Productos
+
+</a>
+
+<a href="creditos.html">
+
+<i class="fa-solid fa-file-invoice-dollar"></i>
+
+Créditos
+
+</a>
+
+<a href="reportes.html">
+
+<i class="fa-solid fa-chart-line"></i>
+
+Reportes
+
+</a>
+
+</div>
+
+</aside>
+
+<div class="main">
+
+<div class="topo">
+
+<h2>Gestión de Clientes</h2>
+
+</div>
+
+<div id="mensaje" class="mensaje"></div>
+
+<!-- PESTAÑAS -->
+
+<div class="pestanas">
+
+<button
+type="button"
+class="pestana activa"
+id="pestanaNuevoCliente">
+
+<i class="fa-solid fa-user-plus"></i>
+
+Nuevo Cliente
+
+</button>
+
+<button
+type="button"
+class="pestana"
+id="pestanaClientesRegistrados">
+
+<i class="fa-solid fa-users"></i>
+
+Clientes Registrados
+
+</button>
+
+</div>
+
+<!-- PESTAÑA NUEVO CLIENTE -->
+
+<div
+id="contenidoNuevoCliente"
+class="contenidoPestana activo">
+
+<div class="card">
+
+<h3 id="tituloFormulario">Nuevo Cliente</h3>
+
+<div class="grid">
+
+<div class="campo">
+
+<label for="nombre">
+Nombre completo
+</label>
+
+<input
+type="text"
+id="nombre"
+autocomplete="off"
+
+>
+
+</div>
+
+<div class="campo">
+
+<label for="documento">
+Cédula / Documento
+</label>
+
+<input
+type="text"
+id="documento"
+autocomplete="off"
+
+>
+
+</div>
+
+<div class="campo">
+
+<label for="telefono">
+Teléfono
+</label>
+
+<input
+type="text"
+id="telefono"
+autocomplete="off"
+
+>
+
+</div>
+
+<div class="campo">
+
+<label for="direccion">
+Dirección
+</label>
+
+<input
+type="text"
+id="direccion"
+autocomplete="off"
+
+>
+
+</div>
+
+<div class="campo">
+
+<label for="ciudad">
+Ciudad
+</label>
+
+<input
+type="text"
+id="ciudad"
+autocomplete="off"
+
+>
+
+</div>
+
+<div class="campo">
+
+<label for="estado">
+Estado
+</label>
+
+<select id="estado">
+
+<option value="">
+Seleccione el estado
+</option>
+
+<option value="Amazonas">Amazonas</option>
+<option value="Anzoátegui">Anzoátegui</option>
+<option value="Apure">Apure</option>
+<option value="Aragua">Aragua</option>
+<option value="Barinas">Barinas</option>
+<option value="Bolívar">Bolívar</option>
+<option value="Carabobo">Carabobo</option>
+<option value="Cojedes">Cojedes</option>
+<option value="Delta Amacuro">Delta Amacuro</option>
+<option value="Distrito Capital">Distrito Capital</option>
+<option value="Falcón">Falcón</option>
+<option value="Guárico">Guárico</option>
+<option value="La Guaira">La Guaira</option>
+<option value="Lara">Lara</option>
+<option value="Mérida">Mérida</option>
+<option value="Miranda">Miranda</option>
+<option value="Monagas">Monagas</option>
+<option value="Nueva Esparta">Nueva Esparta</option>
+<option value="Portuguesa">Portuguesa</option>
+<option value="Sucre">Sucre</option>
+<option value="Táchira">Táchira</option>
+<option value="Trujillo">Trujillo</option>
+<option value="Yaracuy">Yaracuy</option>
+<option value="Zulia">Zulia</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div class="botones">
+
+<button
+type="button"
+class="btnGuardar"
+id="btnGuardarCliente"
+
+>
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+Guardar Cliente
+
+</button>
+
+<button
+type="button"
+class="btnLimpiar"
+id="btnLimpiarCliente"
+
+>
+
+<i class="fa-solid fa-eraser"></i>
+
+Limpiar
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PESTAÑA CLIENTES REGISTRADOS -->
+
+<div
+id="contenidoClientesRegistrados"
+class="contenidoPestana">
+
+<div class="card">
+
+<h3>Clientes Registrados</h3>
+
+<button
+type="button"
+class="btnEliminarSeleccionados"
+id="btnEliminarSeleccionados">
+
+<i class="fa-solid fa-trash"></i>
+
+Eliminar seleccionados
+
+</button>
+
+<div class="tabla-scroll">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+<input
+type="checkbox"
+id="seleccionarTodosClientes"
+class="checkboxCliente">
+</th>
+
+<th>Nombre</th>
+<th>Documento</th>
+<th>Teléfono</th>
+<th>Dirección</th>
+<th>Ciudad</th>
+<th>Estado</th>
+<th>Acciones</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tablaClientes">
+
+<tr>
+
+<td colspan="7" class="sinRegistros">
+
+No hay clientes registrados.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let clientes =
+JSON.parse(
+localStorage.getItem("clientes")
+) || [];
+
+let clienteEditando = null;
+
+
+/* ======================================================
+REFERENCIAS
+====================================================== */
+
+const nombre =
+document.getElementById("nombre");
+
+const documento =
+document.getElementById("documento");
+
+const telefono =
+document.getElementById("telefono");
+
+const direccion =
+document.getElementById("direccion");
+
+const ciudad =
+document.getElementById("ciudad");
+
+const estado =
+document.getElementById("estado");
+
+const tablaClientes =
+document.getElementById("tablaClientes");
+
+const btnGuardarCliente =
+document.getElementById("btnGuardarCliente");
+
+const btnLimpiarCliente =
+document.getElementById("btnLimpiarCliente");
+const btnEliminarSeleccionados =
+document.getElementById(
+    "btnEliminarSeleccionados"
+);
+
+const seleccionarTodosClientes =
+document.getElementById(
+    "seleccionarTodosClientes"
+);
+const tituloFormulario =
+document.getElementById("tituloFormulario");
+
+const mensaje =
+document.getElementById("mensaje");
+
+const pestanaNuevoCliente =
+document.getElementById("pestanaNuevoCliente");
+
+const pestanaClientesRegistrados =
+document.getElementById("pestanaClientesRegistrados");
+
+const contenidoNuevoCliente =
+document.getElementById("contenidoNuevoCliente");
+
+const contenidoClientesRegistrados =
+document.getElementById("contenidoClientesRegistrados");
+
+
+/* ======================================================
+CAMBIO DE PESTAÑAS
+====================================================== */
+
+function mostrarPestana(nombrePestana){
+
+if(nombrePestana === "nuevo"){
+
+pestanaNuevoCliente.classList.add("activa");
+
+pestanaClientesRegistrados.classList.remove("activa");
+
+contenidoNuevoCliente.classList.add("activo");
+
+contenidoClientesRegistrados.classList.remove("activo");
+
+}else{
+
+pestanaNuevoCliente.classList.remove("activa");
+
+pestanaClientesRegistrados.classList.add("activa");
+
+contenidoNuevoCliente.classList.remove("activo");
+
+contenidoClientesRegistrados.classList.add("activo");
+
+actualizarTablaClientes();
+
+}
+
+}
+
+
+pestanaNuevoCliente.addEventListener(
+"click",
+function(){
+
+mostrarPestana("nuevo");
+
+}
+);
+
+
+pestanaClientesRegistrados.addEventListener(
+"click",
+function(){
+
+mostrarPestana("registrados");
+
+}
+);
+
+
+/* ======================================================
+MENSAJES
+====================================================== */
+
+function mostrarMensaje(texto,tipo){
+
+mensaje.textContent =
+texto;
+
+mensaje.className =
+"mensaje " + tipo;
+
+mensaje.style.display =
+"block";
+
+setTimeout(
+function(){
+
+mensaje.style.display =
+"none";
+
+mensaje.className =
+"mensaje";
+
+},
+3000
+);
+
+}
+
+
+/* ======================================================
+SEGURIDAD HTML
+====================================================== */
+
+function escaparHTML(valor){
+
+return String(
+valor || ""
+)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* ======================================================
+ACTUALIZAR TABLA
+====================================================== */
+
+function actualizarTablaClientes(){
+
+if(clientes.length === 0){
+
+tablaClientes.innerHTML =
+
+'<tr>' +
+
+'<td colspan="8" class="sinRegistros">' +
+
+'No hay clientes registrados.' +
+
+'</td>' +
+
+'</tr>';
+
+return;
+
+}
+
+
+/* ORDEN ALFABÉTICO */
+
+const clientesOrdenados =
+clientes
+.map(
+function(cliente,index){
+
+return {
+cliente:cliente,
+index:index
+};
+
+}
+)
+.sort(
+function(a,b){
+
+const nombreA =
+String(
+a.cliente.nombre || ""
+)
+.toLowerCase()
+.trim();
+
+const nombreB =
+String(
+b.cliente.nombre || ""
+)
+.toLowerCase()
+.trim();
+
+return nombreA.localeCompare(
+nombreB,
+"es",
+{
+sensitivity:"base"
+}
+);
+
+}
+);
+
+
+let html = "";
+
+clientesOrdenados.forEach(
+function(item){
+
+const c =
+item.cliente;
+
+const index =
+item.index;
+
+const estadoGeografico =
+c.estado || "";
+
+html +=
+
+"<tr>" +
+
+"<td>" +
+'<input ' +
+'type="checkbox" ' +
+'class="checkboxCliente clienteSeleccionado" ' +
+'data-index="' +
+index +
+'">' +
+"</td>" +
+
+"<td>" +
+escaparHTML(c.nombre) +
+"</td>" +
+
+"<td>" +
+escaparHTML(c.documento) +
+"</td>" +
+
+"<td>" +
+escaparHTML(c.telefono) +
+"</td>" +
+
+"<td>" +
+escaparHTML(c.direccion) +
+"</td>" +
+
+"<td>" +
+escaparHTML(c.ciudad) +
+"</td>" +
+
+"<td>" +
+escaparHTML(estadoGeografico) +
+"</td>" +
+
+"<td>" +
+
+'<button ' +
+'type="button" ' +
+'class="btnEditar" ' +
+'onclick="editarCliente(' +
+index +
+')">' +
+
+'<i class="fa-solid fa-pen"></i> ' +
+
+'Editar' +
+
+'</button>' +
+
+'<button ' +
+'type="button" ' +
+'class="btnEliminar" ' +
+'onclick="eliminarCliente(' +
+index +
+')">' +
+
+'<i class="fa-solid fa-trash"></i> ' +
+
+'Eliminar' +
+
+'</button>' +
+
+"</td>" +
+
+"</tr>";
+
+}
+);
+
+tablaClientes.innerHTML =
+html;
+
+}
+
+
+/* ======================================================
+LIMPIAR FORMULARIO
+====================================================== */
+
+function limpiarFormulario(){
+
+clienteEditando =
+null;
+
+nombre.value =
+"";
+
+documento.value =
+"";
+
+telefono.value =
+"";
+
+direccion.value =
+"";
+
+ciudad.value =
+"";
+
+estado.value =
+"";
+
+tituloFormulario.textContent =
+"Nuevo Cliente";
+
+btnGuardarCliente.innerHTML =
+'<i class="fa-solid fa-floppy-disk"></i> ' +
+'Guardar Cliente';
+
+}
+
+
+/* ======================================================
+EDITAR CLIENTE
+====================================================== */
+
+function editarCliente(index){
+
+const cliente =
+clientes[index];
+
+if(!cliente){
+return;
+}
+
+clienteEditando =
+index;
+
+nombre.value =
+cliente.nombre || "";
+
+documento.value =
+cliente.documento || "";
+
+telefono.value =
+cliente.telefono || "";
+
+direccion.value =
+cliente.direccion || "";
+
+ciudad.value =
+cliente.ciudad || "";
+
+estado.value =
+cliente.estado || "";
+
+tituloFormulario.textContent =
+"Editar Cliente";
+
+btnGuardarCliente.innerHTML =
+'<i class="fa-solid fa-rotate"></i> ' +
+'Actualizar Cliente';
+
+mostrarPestana("nuevo");
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+/* ======================================================
+ELIMINAR CLIENTE
+====================================================== */
+
+function eliminarCliente(index){
+
+const cliente =
+clientes[index];
+
+if(!cliente){
+return;
+}
+
+const confirmar =
+confirm(
+"¿Desea eliminar al cliente " +
+(cliente.nombre || "") +
+"?\n\nEsta acción eliminará el registro del cliente de la lista."
+);
+
+if(!confirmar){
+return;
+}
+
+clientes.splice(
+index,
+1
+);
+
+localStorage.setItem(
+"clientes",
+JSON.stringify(clientes)
+);
+
+actualizarTablaClientes();
+
+if(clienteEditando === index){
+
+limpiarFormulario();
+
+}
+
+mostrarMensaje(
+"Cliente eliminado correctamente.",
+"exito"
+);
+
+}
+/* ======================================================
+ELIMINAR CLIENTES SELECCIONADOS
+====================================================== */
+
+if(btnEliminarSeleccionados){
+
+btnEliminarSeleccionados.addEventListener(
+"click",
+function(){
+
+const seleccionados =
+Array.from(
+document.querySelectorAll(
+".clienteSeleccionado:checked"
+)
+)
+.map(
+function(checkbox){
+
+return Number(
+checkbox.dataset.index
+);
+
+}
+);
+
+if(seleccionados.length === 0){
+
+mostrarMensaje(
+"Seleccione al menos un cliente para eliminar.",
+"error"
+);
+
+return;
+
+}
+
+const confirmar =
+confirm(
+"¿Está seguro de que desea eliminar " +
+seleccionados.length +
+" cliente(s) seleccionados?"
+);
+
+if(!confirmar){
+return;
+}
+
+
+/* ELIMINAR DE MAYOR A MENOR */
+
+seleccionados
+.sort(
+function(a,b){
+return b - a;
+}
+)
+.forEach(
+function(index){
+
+clientes.splice(
+index,
+1
+);
+
+}
+);
+
+
+/* GUARDAR */
+
+localStorage.setItem(
+    "clientes",
+    JSON.stringify(
+        clientes
+    )
+);
+
+
+/* RECARGAR CLIENTES DESDE LOCALSTORAGE */
+
+clientes =
+JSON.parse(
+    localStorage.getItem("clientes")
+) || [];
+
+
+/* ACTUALIZAR TABLA */
+
+actualizarTablaClientes();
+
+
+/* LIMPIAR SELECCIÓN GENERAL */
+
+if(seleccionarTodosClientes){
+
+seleccionarTodosClientes.checked =
+false;
+
+}
+
+
+/* AVISO */
+
+mostrarMensaje(
+"✓ Clientes seleccionados eliminados correctamente.",
+"exito"
+);
+
+}
+);
+
+}
+/* ======================================================
+SELECCIONAR / DESELECCIONAR TODOS
+====================================================== */
+
+if(seleccionarTodosClientes){
+
+    seleccionarTodosClientes.addEventListener(
+        "change",
+        function(){
+
+            const checkboxes =
+            document.querySelectorAll(
+                ".clienteSeleccionado"
+            );
+
+            checkboxes.forEach(
+                function(checkbox){
+
+                    checkbox.checked =
+                    seleccionarTodosClientes.checked;
+
+                }
+            );
+
+        }
+    );
+
+}
+
+/* ======================================================
+GUARDAR / ACTUALIZAR CLIENTE
+====================================================== */
+
+btnGuardarCliente.addEventListener(
+"click",
+function(){
+
+const nombreValor =
+nombre.value.trim();
+
+const documentoValor =
+documento.value.trim();
+
+const telefonoValor =
+telefono.value.trim();
+
+const direccionValor =
+direccion.value.trim();
+
+const ciudadValor =
+ciudad.value.trim();
+
+const estadoValor =
+estado.value.trim();
+
+
+if(nombreValor === ""){
+
+mostrarMensaje(
+"Debe ingresar el nombre del cliente.",
+"error"
+);
+
+nombre.focus();
+
+return;
+
+}
+
+
+if(documentoValor === ""){
+
+mostrarMensaje(
+"Debe ingresar la cédula o documento del cliente.",
+"error"
+);
+
+documento.focus();
+
+return;
+
+}
+
+
+/* NUEVO CLIENTE */
+
+if(clienteEditando === null){
+
+const documentoExiste =
+clientes.some(
+function(c){
+
+return String(
+c.documento || ""
+)
+.toLowerCase()
+.trim() ===
+documentoValor.toLowerCase();
+
+}
+);
+
+if(documentoExiste){
+
+mostrarMensaje(
+"Ya existe un cliente registrado con ese documento.",
+"error"
+);
+
+documento.focus();
+
+return;
+
+}
+
+
+clientes.push({
+
+id:
+"CLI-" +
+Date.now(),
+
+nombre:
+nombreValor,
+
+documento:
+documentoValor,
+
+telefono:
+telefonoValor,
+
+direccion:
+direccionValor,
+
+ciudad:
+ciudadValor,
+
+estado:
+estadoValor
+
+});
+
+mostrarMensaje(
+"Cliente registrado correctamente.",
+"exito"
+);
+
+}
+
+
+/* ACTUALIZAR CLIENTE */
+
+else{
+
+const documentoExiste =
+clientes.some(
+function(c,index){
+
+return (
+index !== clienteEditando &&
+String(
+c.documento || ""
+)
+.toLowerCase()
+.trim() ===
+documentoValor.toLowerCase()
+);
+
+}
+);
+
+if(documentoExiste){
+
+mostrarMensaje(
+"Ya existe otro cliente registrado con ese documento.",
+"error"
+);
+
+documento.focus();
+
+return;
+
+}
+
+
+clientes[clienteEditando] = {
+
+...clientes[clienteEditando],
+
+nombre:
+nombreValor,
+
+documento:
+documentoValor,
+
+telefono:
+telefonoValor,
+
+direccion:
+direccionValor,
+
+ciudad:
+ciudadValor,
+
+estado:
+estadoValor
+
+};
+
+mostrarMensaje(
+"Cliente actualizado correctamente.",
+"exito"
+);
+
+}
+
+
+localStorage.setItem(
+"clientes",
+JSON.stringify(clientes)
+);
+
+actualizarTablaClientes();
+
+limpiarFormulario();
+
+}
+);
+
+
+/* ======================================================
+BOTÓN LIMPIAR
+====================================================== */
+
+btnLimpiarCliente.addEventListener(
+"click",
+function(){
+
+limpiarFormulario();
+
+}
+);
+
+
+/* ======================================================
+INICIAR
+====================================================== */
+
+actualizarTablaClientes();
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CrediFlow | Inicio</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#edf2f7;
+    color:#1f2937;
+}
+
+.wrapper{
+    display:flex;
+    min-height:100vh;
+}
+
+.sidebar{
+    width:260px;
+    background:#17375e;
+    color:#fff;
+    padding:25px 0;
+    flex-shrink:0;
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.logo h1{
+    font-size:30px;
+}
+
+.logo p{
+    font-size:14px;
+    opacity:.8;
+    margin-top:5px;
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+}
+
+.menu a{
+    color:#fff;
+    text-decoration:none;
+    padding:15px 25px;
+    transition:.3s;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.menu a:hover{
+    background:#285b9a;
+}
+
+.menu .activo{
+    background:#285b9a;
+}
+
+.main{
+    flex:1;
+    padding:35px;
+    min-width:0;
+}
+
+.topo{
+    margin-bottom:25px;
+}
+
+.topo h2{
+    color:#17375e;
+    font-size:32px;
+}
+
+.card{
+    background:#fff;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    margin-bottom:25px;
+}
+
+.card h2{
+    color:#17375e;
+    margin-bottom:20px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.indicador{
+    padding:25px;
+    border-radius:12px;
+    background:#f8fafc;
+    border-left:5px solid #1d4ed8;
+}
+
+.indicador i{
+    font-size:30px;
+    color:#1d4ed8;
+}
+
+.indicador h2{
+    margin-top:10px;
+    color:#17375e;
+}
+
+.indicador p{
+    color:#555;
+}
+
+.acceso{
+    text-decoration:none;
+    color:#17375e;
+    display:block;
+}
+
+.acceso .indicador{
+    height:100%;
+    transition:.2s;
+}
+
+.acceso:hover .indicador{
+    transform:translateY(-3px);
+    box-shadow:0 6px 15px rgba(0,0,0,.08);
+}
+
+.estado{
+    margin-top:8px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.estado-ok{
+    color:#16a34a;
+}
+
+.estado-alerta{
+    color:#dc2626;
+}
+
+@media(max-width:800px){
+
+    .wrapper{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        padding:15px 0;
+    }
+
+    .logo{
+        margin-bottom:15px;
+    }
+
+    .menu{
+        flex-direction:row;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .menu a{
+        padding:10px 12px;
+        font-size:14px;
+    }
+
+    .main{
+        padding:20px;
+    }
+
+    .topo h2{
+        font-size:26px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<aside class="sidebar">
+
+<div class="logo">
+
+<h1>CrediFlow</h1>
+
+<p>Sistema de Ventas a Crédito</p>
+
+</div>
+
+<div class="menu">
+
+<a href="index.html" class="activo">
+
+<i class="fa-solid fa-house"></i>
+
+Inicio
+
+</a>
+
+<a href="clientes.html">
+
+<i class="fa-solid fa-users"></i>
+
+Clientes
+
+</a>
+
+<a href="productos.html">
+
+<i class="fa-solid fa-box"></i>
+
+Productos
+
+</a>
+
+<a href="creditos.html">
+
+<i class="fa-solid fa-file-invoice-dollar"></i>
+
+Créditos
+
+</a>
+
+<a href="reportes.html">
+
+<i class="fa-solid fa-chart-line"></i>
+
+Reportes
+
+</a>
+
+</div>
+
+</aside>
+
+<main class="main">
+
+<div class="topo">
+
+<h2>Panel Principal</h2>
+
+</div>
+
+<div class="card">
+
+<h2>ACCESOS RÁPIDOS</h2>
+
+<div class="grid">
+
+<a href="#" class="acceso">
+
+<div class="indicador">
+
+<i class="fa-solid fa-calendar-days"></i>
+
+
+<h2>COBROS PARA HOY</h2>
+
+<p>Clientes con cuotas que vencen hoy.</p>
+
+</div>
+
+</a>
+
+<a href="#" class="acceso">
+
+<div class="indicador">
+
+<i class="fa-solid fa-calendar-days"></i>
+
+
+<h2>COBROS PARA MAÑANA</h2>
+
+<p>Clientes con cuotas que vencen mañana.</p>
+
+</div>
+
+</a>
+
+<a href="#" class="acceso">
+
+<div class="indicador">
+
+<i class="fa-solid fa-star"></i>
+
+<h2>CRÉDITOS PRE-APROBADOS</h2>
+
+<p>Clientes candidatos para nuevas ventas a crédito.</p>
+
+</div>
+
+</a>
+
+<a href="#" class="acceso">
+
+<div class="indicador">
+
+<i class="fa-solid fa-user-clock"></i>
+
+<h2>CLIENTES MOROSOS</h2>
+
+<p>Clientes con cuotas vencidas.</p>
+
+</div>
+
+</a>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+<script>
+
+/* ======================================================
+DATOS DEL SISTEMA
+====================================================== */
+
+const clientes =
+JSON.parse(
+localStorage.getItem("clientes")
+) || [];
+
+const creditos =
+JSON.parse(
+localStorage.getItem("creditos")
+) || [];
+
+const pagos =
+JSON.parse(
+localStorage.getItem("pagos")
+) || [];
+
+
+/* ======================================================
+INICIAR
+====================================================== */
+
+</script>
+
+</body>
+
+</html>

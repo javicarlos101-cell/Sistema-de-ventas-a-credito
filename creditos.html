@@ -1,0 +1,5800 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CrediFlow | Créditos</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#edf2f7;
+    color:#1f2937;
+}
+
+.wrapper{
+    display:flex;
+    min-height:100vh;
+}
+
+/* ======================================================
+MENU LATERAL
+SE CONSERVA EL MISMO PATRON VISUAL
+====================================================== */
+
+.sidebar{
+    width:260px;
+    background:#17375e;
+    color:#fff;
+    padding:25px 0;
+    flex-shrink:0;
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.logo h1{
+    font-size:30px;
+}
+
+.logo p{
+    font-size:14px;
+    opacity:.8;
+    margin-top:5px;
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+}
+
+.menu a{
+    color:#fff;
+    text-decoration:none;
+    padding:15px 25px;
+    transition:.3s;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.menu a:hover{
+    background:#285b9a;
+}
+
+.menu .activo{
+    background:#285b9a;
+}
+
+/* ======================================================
+CONTENIDO PRINCIPAL
+====================================================== */
+
+.main{
+    flex:1;
+    padding:35px;
+    min-width:0;
+}
+
+.topo{
+    margin-bottom:25px;
+}
+
+.topo h2{
+    color:#17375e;
+    font-size:32px;
+}
+
+/* ======================================================
+PESTAÑAS
+====================================================== */
+
+.pestanas{
+    display:flex;
+    gap:8px;
+    margin-bottom:0;
+    flex-wrap:nowrap;
+    width:100%;
+    overflow:visible;
+}
+
+.pestana{
+    background:#dbe4ef;
+    color:#17375e;
+    border:none;
+    padding:13px 20px;
+    border-radius:8px 8px 0 0;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:bold;
+    transition:.2s;
+    white-space:nowrap;
+    flex:0 0 auto;
+}
+
+.pestana:hover{
+    background:#cbd8e8;
+}
+
+.pestana.activa{
+    background:#fff;
+    color:#17375e;
+}
+
+/* ======================================================
+CONTENIDO DE PESTAÑAS
+====================================================== */
+
+.contenidoPestana{
+    display:none;
+}
+
+.contenidoPestana.activo{
+    display:block;
+}
+
+/* ======================================================
+RECUADROS
+====================================================== */
+
+.card{
+    background:#fff;
+    padding:25px;
+    border-radius:0 12px 12px 12px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    margin-bottom:25px;
+}
+
+.card h3{
+    color:#17375e;
+    margin-bottom:20px;
+}
+
+/* ======================================================
+FORMULARIOS
+====================================================== */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+}
+
+.campo{
+    display:flex;
+    flex-direction:column;
+}
+
+.campo label{
+    font-weight:bold;
+    margin-bottom:8px;
+    min-height:36px;
+    display:flex;
+    align-items:flex-start;
+}
+
+.campo input,
+.campo select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+    background:#fff;
+}
+
+.campo input:focus,
+.campo select:focus{
+    outline:none;
+    border-color:#285b9a;
+    box-shadow:0 0 0 2px rgba(40,91,154,.12);
+}
+
+.campo input[readonly]{
+    background:#fff;
+    color:#1f2937;
+}
+
+/* ======================================================
+AUTOCOMPLETE
+====================================================== */
+
+.autocomplete{
+    position:relative;
+}
+
+.listaSugerencias{
+    position:absolute;
+    top:100%;
+    left:0;
+    right:0;
+    background:#fff;
+    border:1px solid #d1d5db;
+    border-top:none;
+    border-radius:0 0 8px 8px;
+    box-shadow:0 6px 15px rgba(0,0,0,.10);
+    z-index:1000;
+    max-height:220px;
+    overflow-y:auto;
+    display:none;
+}
+
+.sugerencia{
+    padding:11px 12px;
+    cursor:pointer;
+    border-bottom:1px solid #f1f5f9;
+}
+
+.sugerencia:hover{
+    background:#f8fafc;
+}
+
+.sugerencia strong{
+    color:#17375e;
+}
+
+.sugerencia small{
+    display:block;
+    color:#6b7280;
+    margin-top:3px;
+}
+
+/* ======================================================
+BOTONES
+====================================================== */
+
+.botones{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.btnGuardar{
+    background:#16a34a;
+    color:#fff;
+    border:none;
+    padding:14px 24px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btnGuardar:hover{
+    background:#15803d;
+}
+
+.btnLimpiar{
+    background:#6b7280;
+    color:#fff;
+    border:none;
+    padding:14px 24px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btnLimpiar:hover{
+    background:#4b5563;
+}
+
+.btnBuscar{
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btnBuscar:hover{
+    background:#1d4ed8;
+}
+
+.btnEditar{
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    padding:8px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-right:5px;
+}
+
+.btnEditar:hover{
+    background:#1d4ed8;
+}
+
+.btnEliminar{
+    background:#f59e0b;
+    color:#fff;
+    border:none;
+    padding:8px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btnEliminar:hover{
+    background:#d97706;
+}
+
+.btnVer{
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    padding:8px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-right:5px;
+}
+.btnEditarCredito{
+    background:#16a34a;
+    color:#fff;
+    border:none;
+    padding:8px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-right:5px;
+}
+.btnEliminarCredito{
+    background:#f97316;
+    color:#fff;
+    border:none;
+    padding:8px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-right:5px;
+}
+
+.btnEliminarCredito:hover{
+    background:#ea580c;
+}
+.btnVer:hover{
+    background:#1d4ed8;
+}
+
+/* ======================================================
+MENSAJES
+====================================================== */
+
+.mensaje{
+    display:none;
+    margin-bottom:20px;
+    padding:14px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.mensaje.exito{
+    display:block;
+    background:#dcfce7;
+    color:#166534;
+    border:1px solid #86efac;
+}
+
+.mensaje.error{
+    display:block;
+    background:#fee2e2;
+    color:#991b1b;
+    border:1px solid #fca5a5;
+}
+
+/* ======================================================
+TABLAS
+====================================================== */
+
+.tabla-scroll{
+    width:100%;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:950px;
+}
+
+th{
+    background:#17375e;
+    color:#fff;
+    padding:12px;
+    white-space:nowrap;
+}
+
+td{
+    padding:12px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+    white-space:nowrap;
+}
+
+tbody tr:hover{
+    background:#f8fafc;
+}
+
+.estadoActivo{
+    color:#16a34a;
+    font-weight:bold;
+}
+
+.estadoInactivo{
+    color:#dc2626;
+    font-weight:bold;
+}
+
+.sinRegistros{
+    color:#6b7280;
+    padding:20px;
+}
+
+/* ======================================================
+BUSCADORES
+====================================================== */
+
+.buscador{
+    display:grid;
+    grid-template-columns:minmax(220px,1fr) auto auto;
+    gap:12px;
+    align-items:end;
+    margin-bottom:20px;
+}
+
+.buscador .campo{
+    min-width:0;
+}
+
+/* ======================================================
+RESUMEN ESTADO DE CUENTA
+====================================================== */
+
+.resumenCuenta{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.resumenItem{
+    background:#f8fafc;
+    border-left:5px solid #1d4ed8;
+    padding:16px;
+    border-radius:8px;
+}
+
+.resumenItem span{
+    display:block;
+    color:#6b7280;
+    font-size:13px;
+    margin-bottom:5px;
+}
+
+.resumenItem strong{
+    color:#17375e;
+    font-size:18px;
+}
+
+/* ======================================================
+MODALES
+====================================================== */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.55);
+    z-index:2000;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.visible{
+    display:flex;
+}
+
+.modalContenido{
+    background:#fff;
+    width:min(700px,100%);
+    max-height:90vh;
+    overflow-y:auto;
+    border-radius:12px;
+    box-shadow:0 15px 40px rgba(0,0,0,.20);
+    padding:25px;
+}
+
+.modalCabecera{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.modalCabecera h3{
+    color:#17375e;
+}
+
+.btnCerrarModal{
+    background:#e5e7eb;
+    color:#374151;
+    border:none;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.btnCerrarModal:hover{
+    background:#d1d5db;
+}
+
+.detalleGrid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:25px;
+}
+
+.detalleItem{
+    background:#f8fafc;
+    padding:13px;
+    border-radius:8px;
+}
+
+.detalleItem span{
+    display:block;
+    font-size:12px;
+    color:#6b7280;
+    margin-bottom:5px;
+}
+
+.detalleItem strong{
+    color:#17375e;
+    font-size:13px;
+    overflow-wrap:anywhere;
+    word-break:break-word;
+}
+.detalleItem.detalleId{
+    grid-column:1 / -1;
+    min-width:0;
+}
+
+.detalleItem.detalleId strong{
+    display:block;
+    width:100%;
+    min-width:0;
+    box-sizing:border-box;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    word-break:break-word;
+    font-size:14px;
+}
+
+/* ======================================================
+COBRANZA
+====================================================== */
+
+.cobranzaResultado{
+    margin-top:20px;
+}
+
+.cobranzaEstado{
+    padding:12px 15px;
+    border-radius:8px;
+    margin-bottom:12px;
+    font-weight:bold;
+}
+
+.cobranzaHoy{
+    background:#dbeafe;
+    color:#1e40af;
+}
+
+.cobranzaMora{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+/* ======================================================
+MERCANCIA RECUPERADA
+====================================================== */
+
+.observaciones{
+    min-height:100px;
+    resize:vertical;
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:15px;
+}
+
+/* ======================================================
+RESPONSIVE
+====================================================== */
+
+@media(max-width:800px){
+
+    .wrapper{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        padding:15px 0;
+    }
+
+    .logo{
+        margin-bottom:15px;
+    }
+
+    .menu{
+        flex-direction:row;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .menu a{
+        padding:10px 12px;
+        font-size:14px;
+    }
+
+    .main{
+        padding:20px;
+    }
+
+    .topo h2{
+        font-size:26px;
+    }
+
+    .buscador{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .pestanas{
+        flex-wrap:wrap;
+    }
+
+    .pestana{
+        flex:1;
+        min-width:150px;
+    }
+
+    .card{
+        border-radius:0 12px 12px 12px;
+    }
+
+        .detalleGrid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+/* ======================================================
+BARRA DE DESPLAZAMIENTO HORIZONTAL INFERIOR
+====================================================== */
+
+.barraDesplazamientoInferior{
+    width:100%;
+    height:18px;
+    margin-top:10px;
+    margin-bottom:0;
+    overflow-x:auto;
+    overflow-y:hidden;
+}
+
+.barraDesplazamientoContenido{
+    height:1px;
+    width:1400px;
+}
+.detalleId{
+    min-width:0;
+}
+
+.detalleId strong{
+    display:block;
+    width:100%;
+    box-sizing:border-box;
+    overflow-wrap:anywhere;
+    word-break:break-all;
+    white-space:normal;
+    font-size:13px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<aside class="sidebar">
+
+<div class="logo">
+
+<h1>CrediFlow</h1>
+
+<p>Sistema de Ventas a Crédito</p>
+
+</div>
+
+<div class="menu">
+
+<a href="index.html">
+
+<i class="fa-solid fa-house"></i>
+
+Inicio
+
+</a>
+
+<a href="clientes.html">
+
+<i class="fa-solid fa-users"></i>
+
+Clientes
+
+</a>
+
+<a href="productos.html">
+
+<i class="fa-solid fa-box"></i>
+
+Productos
+
+</a>
+
+<a href="creditos.html" class="activo">
+
+<i class="fa-solid fa-file-invoice-dollar"></i>
+
+Créditos
+
+</a>
+
+<a href="reportes.html">
+
+<i class="fa-solid fa-chart-line"></i>
+
+Reportes
+
+</a>
+
+</div>
+
+</aside>
+
+<main class="main">
+
+<div class="topo">
+
+<h2>Gestión de Créditos</h2>
+
+</div>
+
+<div id="mensajeCredito" class="mensaje"></div>
+
+<!-- ==================================================
+PESTAÑAS
+================================================== -->
+
+<div class="pestanas">
+
+<button
+type="button"
+class="pestana activa"
+id="pestanaNuevoCredito">
+
+<i class="fa-solid fa-file-circle-plus"></i>
+
+Nuevo Crédito
+
+</button>
+
+<button
+type="button"
+class="pestana"
+id="pestanaCreditosRegistrados">
+
+<i class="fa-solid fa-list-check"></i>
+
+Créditos Registrados
+
+</button>
+
+<button
+type="button"
+class="pestana"
+id="pestanaGestionPagos">
+
+<i class="fa-solid fa-money-bill-wave"></i>
+
+Gestión de Pagos
+
+</button>
+
+<button
+type="button"
+class="pestana"
+id="pestanaEstadoCuenta">
+
+<i class="fa-solid fa-file-lines"></i>
+
+Estado de Cuenta
+
+</button>
+
+<button
+type="button"
+class="pestana"
+id="pestanaCobranza">
+
+<i class="fa-solid fa-hand-holding-dollar"></i>
+
+Cobranza
+
+</button>
+
+<button
+type="button"
+class="pestana"
+id="pestanaMercanciaRecuperada">
+
+<i class="fa-solid fa-box-open"></i>
+
+Mercancía Recuperada
+
+</button>
+
+</div>
+
+<!-- ==================================================
+PESTAÑA NUEVO CREDITO
+================================================== -->
+
+<div
+id="contenidoNuevoCredito"
+class="contenidoPestana activo">
+
+<div class="card">
+
+<h3>Nuevo Crédito</h3>
+
+<div class="grid">
+
+<!-- CLIENTE -->
+
+<div class="campo autocomplete">
+
+<label for="clienteCredito">
+Cliente
+</label>
+
+<input
+type="text"
+id="clienteCredito"
+autocomplete="off"
+placeholder="Buscar cliente..."
+>
+
+<div
+id="sugerenciasClientes"
+class="listaSugerencias">
+</div>
+
+</div>
+
+<!-- ID -->
+
+<div class="campo">
+
+<label for="idCredito">
+ID del crédito
+</label>
+
+<input
+type="text"
+id="idCredito"
+readonly
+autocomplete="off"
+>
+
+</div>
+
+<!-- PRODUCTO -->
+
+<div class="campo autocomplete">
+
+<label for="productoCredito">
+Producto
+</label>
+
+<input
+type="text"
+id="productoCredito"
+autocomplete="off"
+placeholder="Buscar producto..."
+>
+
+<div
+id="sugerenciasProductos"
+class="listaSugerencias">
+</div>
+
+</div>
+
+<!-- FECHA -->
+
+<div class="campo">
+
+<label for="fechaCredito">
+Fecha del crédito
+</label>
+
+<input
+type="date"
+id="fechaCredito"
+>
+
+</div>
+
+<!-- PRECIO VENTA USD -->
+
+<div class="campo">
+
+<label for="precioVentaCredito">
+Precio de venta (USD)
+</label>
+
+<input
+type="number"
+id="precioVentaCredito"
+step="0.01"
+min="0"
+readonly
+>
+
+</div>
+
+<!-- INICIAL USD -->
+
+<div class="campo">
+
+<label for="inicialUSD">
+Inicial (USD)
+</label>
+
+<input
+type="number"
+id="inicialUSD"
+step="0.01"
+min="0"
+placeholder="Ingrese inicial"
+>
+
+</div>
+
+<!-- SALDO USD -->
+
+<div class="campo">
+
+<label for="saldoPendienteUSD">
+Saldo pendiente (USD)
+</label>
+
+<input
+type="number"
+id="saldoPendienteUSD"
+step="0.01"
+readonly
+>
+
+</div>
+
+<!-- TIPO TASA -->
+
+<div class="campo">
+
+<label for="tipoTasaCredito">
+Tipo de tasa
+</label>
+
+<select id="tipoTasaCredito">
+
+<option value="" selected>
+Seleccione una tasa
+</option>
+
+<option value="Euro">
+Euro
+</option>
+
+<option value="BCV">
+BCV
+</option>
+
+</select>
+
+</div>
+
+<!-- TASA CAMBIO -->
+
+<div class="campo">
+
+<label for="tasaCambioCredito">
+Tasa de cambio
+</label>
+
+<input
+type="number"
+id="tasaCambioCredito"
+step="0.0001"
+min="0"
+readonly
+>
+
+</div>
+
+<!-- INICIAL BS -->
+
+<div class="campo">
+
+<label for="inicialBs">
+Inicial (Bs)
+</label>
+
+<input
+type="number"
+id="inicialBs"
+step="0.01"
+readonly
+>
+
+</div>
+
+<!-- SALDO BS -->
+
+<div class="campo">
+
+<label for="saldoBs">
+Saldo (Bs)
+</label>
+
+<input
+type="number"
+id="saldoBs"
+step="0.01"
+readonly
+>
+
+</div>
+
+<!-- FRECUENCIA -->
+
+<div class="campo">
+
+<label for="frecuenciaPago">
+Frecuencia de pago
+</label>
+
+<select id="frecuenciaPago">
+
+<option value="" selected>
+Seleccione frecuencia
+</option>
+
+<option value="Semanal">
+Semanal
+</option>
+
+<option value="Quincenal">
+Quincenal
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div class="botones">
+
+<button
+type="button"
+class="btnGuardar"
+id="btnGuardarCredito"
+>
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+Guardar Crédito
+
+</button>
+
+<button
+type="button"
+class="btnLimpiar"
+id="btnLimpiarCredito"
+>
+
+<i class="fa-solid fa-eraser"></i>
+
+Limpiar
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==================================================
+PESTAÑA CREDITOS REGISTRADOS
+================================================== -->
+
+<div
+id="contenidoCreditosRegistrados"
+class="contenidoPestana">
+
+<div class="card">
+
+<h3>Créditos Registrados</h3>
+
+<div class="buscador">
+
+<div class="campo">
+
+<label for="buscarCreditos">
+Cliente / Cédula
+</label>
+
+<input
+type="text"
+id="buscarCreditos"
+autocomplete="off"
+placeholder="Buscar por nombre o cédula..."
+>
+
+</div>
+
+<button
+type="button"
+class="btnBuscar"
+id="btnBuscarCreditos"
+>
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+Buscar
+
+</button>
+
+<button
+type="button"
+class="btnLimpiar"
+id="btnLimpiarBusquedaCreditos"
+>
+
+<i class="fa-solid fa-eraser"></i>
+
+Limpiar
+
+</button>
+
+</div>
+
+<div class="tabla-scroll">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Cliente</th>
+<th>Producto</th>
+<th>Fecha</th>
+<th>Saldo (USD)</th>
+<th>Tasa</th>
+<th>Saldo (Bs)</th>
+<th>Frecuencia</th>
+<th>Estado</th>
+<th>Acciones</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tablaCreditosRegistrados">
+
+<tr>
+
+<td colspan="10" class="sinRegistros">
+
+Utilice el buscador para consultar los créditos.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==================================================
+PESTAÑA GESTION DE PAGOS
+================================================== -->
+
+<div
+id="contenidoGestionPagos"
+class="contenidoPestana">
+
+<div class="card">
+
+<h3>Gestión de Pagos</h3>
+
+<div class="buscador">
+
+<div class="campo">
+
+<label for="buscarPagos">
+Cliente / Cédula
+</label>
+
+<input
+type="text"
+id="buscarPagos"
+autocomplete="off"
+placeholder="Buscar por nombre o cédula..."
+>
+
+</div>
+
+<button
+type="button"
+class="btnBuscar"
+id="btnBuscarPagos"
+>
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+Buscar
+
+</button>
+
+<button
+type="button"
+class="btnLimpiar"
+id="btnLimpiarBusquedaPagos"
+>
+
+<i class="fa-solid fa-eraser"></i>
+
+Limpiar
+
+</button>
+
+</div>
+
+</div>
+
+<div
+id="contenedorRegistroPago"
+style="display:none;"
+>
+
+<div class="card">
+
+<h3>Registrar Pago</h3>
+
+<div class="grid">
+
+<div class="campo">
+
+<label for="clientePago">
+Cliente
+</label>
+
+<input
+type="text"
+id="clientePago"
+readonly
+>
+
+</div>
+
+<div class="campo">
+
+<label for="creditoPago">
+Crédito
+</label>
+
+<input
+type="text"
+id="creditoPago"
+readonly
+>
+
+</div>
+
+<div class="campo">
+
+<label for="saldoAntesPago">
+Saldo pendiente (USD) antes del abono
+</label>
+
+<input
+type="number"
+id="saldoAntesPago"
+step="0.01"
+readonly
+>
+
+</div>
+
+<div class="campo">
+
+<label for="montoPagoUSD">
+Monto del pago (USD)
+</label>
+
+<input
+type="number"
+id="montoPagoUSD"
+step="0.01"
+min="0"
+placeholder="Ingrese monto"
+>
+
+</div>
+
+<div class="campo">
+
+<label for="tipoTasaPago">
+Tipo de tasa
+</label>
+
+<select id="tipoTasaPago">
+
+<option value="" selected>
+Seleccione una tasa
+</option>
+
+<option value="Euro">
+Euro
+</option>
+
+<option value="BCV">
+BCV
+</option>
+
+</select>
+
+</div>
+
+<div class="campo">
+
+<label for="tasaCambioPago">
+Tasa de cambio
+</label>
+
+<input
+type="number"
+id="tasaCambioPago"
+step="0.0001"
+readonly
+>
+
+</div>
+
+<div class="campo">
+
+<label for="montoPagoBs">
+Monto del pago (Bs)
+</label>
+
+<input
+type="number"
+id="montoPagoBs"
+step="0.01"
+readonly
+>
+
+</div>
+
+<div class="campo">
+
+<label for="saldoDespuesPago">
+Saldo pendiente (USD) después del abono
+</label>
+
+<input
+type="number"
+id="saldoDespuesPago"
+step="0.01"
+readonly
+>
+
+</div>
+
+<div class="campo">
+
+<label for="fechaPago">
+Fecha de pago
+</label>
+
+<input
+type="date"
+id="fechaPago"
+>
+
+</div>
+
+<div class="campo">
+
+<label for="formaPago">
+Forma de pago
+</label>
+
+<select id="formaPago">
+
+<option value="" selected>
+Seleccione forma de pago
+</option>
+
+<option value="Efectivo">
+Efectivo
+</option>
+
+<option value="Pago móvil">
+Pago móvil
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div class="botones">
+
+<button
+type="button"
+class="btnGuardar"
+id="btnRegistrarPago"
+>
+
+<i class="fa-solid fa-money-bill-wave"></i>
+
+Registrar Pago
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==================================================
+PESTAÑA ESTADO DE CUENTA
+================================================== -->
+
+<div
+id="contenidoEstadoCuenta"
+class="contenidoPestana">
+
+<div class="card">
+
+<h3>Estado de Cuenta</h3>
+
+<div class="buscador">
+
+<div class="campo">
+
+<label for="buscarEstadoCuenta">
+Cliente / Cédula
+</label>
+
+<input
+type="text"
+id="buscarEstadoCuenta"
+autocomplete="off"
+placeholder="Buscar por nombre o cédula..."
+>
+
+</div>
+
+<button
+type="button"
+class="btnBuscar"
+id="btnBuscarEstadoCuenta"
+>
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+Buscar
+
+</button>
+
+<button
+type="button"
+class="btnLimpiar"
+id="btnLimpiarEstadoCuenta"
+>
+
+<i class="fa-solid fa-eraser"></i>
+
+Limpiar
+
+</button>
+
+</div>
+
+<div
+id="contenedorEstadoCuenta"
+style="display:none;"
+>
+
+<div class="resumenCuenta">
+
+<div class="resumenItem">
+
+<span>Cliente</span>
+
+<strong id="resumenCliente">
+-
+</strong>
+
+</div>
+
+<div class="resumenItem">
+
+<span>Total créditos</span>
+
+<strong id="resumenTotalCreditos">
+$0.00
+</strong>
+
+</div>
+
+<div class="resumenItem">
+
+<span>Total abonado</span>
+
+<strong id="resumenTotalAbonado">
+$0.00
+</strong>
+
+</div>
+
+<div class="resumenItem">
+
+<span>Saldo pendiente</span>
+
+<strong id="resumenSaldoPendiente">
+$0.00
+</strong>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="tabla-scroll">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Fecha</th>
+<th>Descripción</th>
+<th>Debe (USD)</th>
+<th>Haber (USD)</th>
+<th>Saldo (USD)</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tablaEstadoCuenta">
+
+<tr>
+
+<td colspan="5" class="sinRegistros">
+No hay movimientos registrados.
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==================================================
+PESTAÑA COBRANZA
+================================================== -->
+
+<div
+id="contenidoCobranza"
+class="contenidoPestana">
+
+<div class="card">
+
+<h3>Cobranza</h3>
+
+<div class="buscador">
+
+<div class="campo">
+
+<label for="fechaCobranza">
+Fecha de cobranza
+</label>
+
+<input
+type="date"
+id="fechaCobranza"
+>
+
+</div>
+
+<button
+type="button"
+class="btnBuscar"
+id="btnBuscarCobranza"
+>
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+Buscar
+
+</button>
+
+<button
+type="button"
+class="btnLimpiar"
+id="btnLimpiarCobranza"
+>
+
+<i class="fa-solid fa-eraser"></i>
+
+Limpiar
+
+</button>
+
+</div>
+
+<div id="resultadoCobranza">
+
+<div class="sinRegistros">
+
+Seleccione una fecha y presione Buscar.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==================================================
+PESTAÑA MERCANCIA RECUPERADA
+================================================== -->
+
+<div
+id="contenidoMercanciaRecuperada"
+class="contenidoPestana">
+
+<div class="card">
+
+<h3>Registrar Mercancía Recuperada</h3>
+
+<div class="grid">
+
+<div class="campo">
+
+<label for="clienteRecuperado">
+Cliente
+</label>
+
+<select id="clienteRecuperado">
+
+<option value="">
+Seleccione cliente
+</option>
+
+</select>
+
+</div>
+
+<div class="campo">
+
+<label for="productoRecuperado">
+Producto
+</label>
+
+<select id="productoRecuperado">
+
+<option value="">
+Seleccione producto
+</option>
+
+</select>
+
+</div>
+
+<div class="campo">
+
+<label for="creditoRecuperado">
+ID del crédito
+</label>
+
+<select id="creditoRecuperado">
+
+<option value="">
+Seleccione crédito
+</option>
+
+</select>
+
+</div>
+
+<div class="campo">
+
+<label for="fechaRecuperacion">
+Fecha de recuperación
+</label>
+
+<input
+type="date"
+id="fechaRecuperacion"
+>
+
+</div>
+
+<div class="campo">
+
+<label for="montoDevuelto">
+Monto devuelto al cliente (USD)
+</label>
+
+<input
+type="number"
+id="montoDevuelto"
+step="0.01"
+min="0"
+placeholder="Opcional"
+>
+
+</div>
+
+<div class="campo">
+
+<label for="descuentoRecuperacion">
+Descuento aplicado (USD)
+</label>
+
+<input
+type="number"
+id="descuentoRecuperacion"
+step="0.01"
+min="0"
+placeholder="Opcional"
+>
+
+</div>
+
+<div class="campo" style="grid-column:1/-1;">
+
+<label for="observacionesRecuperacion">
+Observaciones
+</label>
+
+<textarea
+id="observacionesRecuperacion"
+class="observaciones"
+placeholder="Indique cualquier observación relacionada con la recuperación..."
+></textarea>
+
+</div>
+
+</div>
+
+<div class="botones">
+
+<button
+type="button"
+class="btnGuardar"
+id="btnGuardarRecuperacion"
+>
+
+<i class="fa-solid fa-box-open"></i>
+
+Registrar Recuperación
+
+</button>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>Mercancía Recuperada</h3>
+
+<div class="botones" style="margin-top:0;margin-bottom:20px;">
+
+<button
+type="button"
+class="btnBuscar"
+id="btnMostrarRecuperados"
+>
+
+<i class="fa-solid fa-list"></i>
+
+Mostrar Recuperados
+
+</button>
+
+</div>
+
+<div class="tabla-scroll">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Cliente</th>
+<th>Producto</th>
+<th>ID Crédito</th>
+<th>Fecha</th>
+<th>Monto devuelto</th>
+<th>Descuento</th>
+<th>Observaciones</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tablaMercanciaRecuperada">
+
+<tr>
+
+<td colspan="7" class="sinRegistros">
+
+Presione "Mostrar Recuperados" para consultar.
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==================================================
+BARRA DE DESPLAZAMIENTO HORIZONTAL INFERIOR
+================================================== -->
+
+<div class="barraDesplazamientoInferior">
+
+    <div class="barraDesplazamientoContenido"></div>
+
+</div>
+
+</main>
+
+</div>
+
+<!-- ==================================================
+MODAL VER CREDITO
+================================================== -->
+
+<div
+id="modalCredito"
+class="modal">
+
+<div class="modalContenido">
+
+<div class="modalCabecera">
+
+<h3>Detalle del Crédito</h3>
+
+<button
+type="button"
+class="btnCerrarModal"
+id="btnCerrarModalCredito"
+>
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+</div>
+
+<div
+id="detalleCreditoModal"
+class="detalleGrid">
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* ======================================================
+DATOS DEL SISTEMA
+====================================================== */
+
+let clientes =
+JSON.parse(
+localStorage.getItem("clientes")
+) || [];
+
+let productos =
+JSON.parse(
+localStorage.getItem("productos")
+) || [];
+
+let creditos =
+JSON.parse(
+localStorage.getItem("creditos")
+) || [];
+
+let pagos =
+JSON.parse(
+localStorage.getItem("pagos")
+) || [];
+
+let mercanciaRecuperada =
+JSON.parse(
+localStorage.getItem("mercanciaRecuperada")
+) || [];
+
+let creditoSeleccionadoPago = null;
+
+
+/* ======================================================
+REFERENCIAS GENERALES
+====================================================== */
+
+const mensajeCredito =
+document.getElementById("mensajeCredito");
+
+const pestanas = {
+
+    nuevo:
+    document.getElementById("pestanaNuevoCredito"),
+
+    registrados:
+    document.getElementById("pestanaCreditosRegistrados"),
+
+    pagos:
+    document.getElementById("pestanaGestionPagos"),
+
+    estado:
+    document.getElementById("pestanaEstadoCuenta"),
+
+    cobranza:
+    document.getElementById("pestanaCobranza"),
+
+    recuperada:
+    document.getElementById("pestanaMercanciaRecuperada")
+
+};
+
+const contenidos = {
+
+    nuevo:
+    document.getElementById("contenidoNuevoCredito"),
+
+    registrados:
+    document.getElementById("contenidoCreditosRegistrados"),
+
+    pagos:
+    document.getElementById("contenidoGestionPagos"),
+
+    estado:
+    document.getElementById("contenidoEstadoCuenta"),
+
+    cobranza:
+    document.getElementById("contenidoCobranza"),
+
+    recuperada:
+    document.getElementById("contenidoMercanciaRecuperada")
+
+};
+
+
+/* ======================================================
+REFERENCIAS NUEVO CREDITO
+====================================================== */
+
+const clienteCredito =
+document.getElementById("clienteCredito");
+
+const sugerenciasClientes =
+document.getElementById("sugerenciasClientes");
+
+const idCredito =
+document.getElementById("idCredito");
+
+const productoCredito =
+document.getElementById("productoCredito");
+
+const sugerenciasProductos =
+document.getElementById("sugerenciasProductos");
+
+const fechaCredito =
+document.getElementById("fechaCredito");
+
+const precioVentaCredito =
+document.getElementById("precioVentaCredito");
+
+const inicialUSD =
+document.getElementById("inicialUSD");
+
+const saldoPendienteUSD =
+document.getElementById("saldoPendienteUSD");
+
+const tipoTasaCredito =
+document.getElementById("tipoTasaCredito");
+
+const tasaCambioCredito =
+document.getElementById("tasaCambioCredito");
+
+const inicialBs =
+document.getElementById("inicialBs");
+
+const saldoBs =
+document.getElementById("saldoBs");
+
+const frecuenciaPago =
+document.getElementById("frecuenciaPago");
+
+const btnGuardarCredito =
+document.getElementById("btnGuardarCredito");
+
+const btnLimpiarCredito =
+document.getElementById("btnLimpiarCredito");
+
+
+/* ======================================================
+REFERENCIAS CREDITOS REGISTRADOS
+====================================================== */
+
+const buscarCreditos =
+document.getElementById("buscarCreditos");
+
+const btnBuscarCreditos =
+document.getElementById("btnBuscarCreditos");
+
+const btnLimpiarBusquedaCreditos =
+document.getElementById("btnLimpiarBusquedaCreditos");
+
+const tablaCreditosRegistrados =
+document.getElementById("tablaCreditosRegistrados");
+
+
+/* ======================================================
+REFERENCIAS GESTION DE PAGOS
+====================================================== */
+
+const buscarPagos =
+document.getElementById("buscarPagos");
+
+const btnBuscarPagos =
+document.getElementById("btnBuscarPagos");
+
+const btnLimpiarBusquedaPagos =
+document.getElementById("btnLimpiarBusquedaPagos");
+
+const contenedorRegistroPago =
+document.getElementById("contenedorRegistroPago");
+
+const clientePago =
+document.getElementById("clientePago");
+
+const creditoPago =
+document.getElementById("creditoPago");
+
+const saldoAntesPago =
+document.getElementById("saldoAntesPago");
+
+const montoPagoUSD =
+document.getElementById("montoPagoUSD");
+
+const tipoTasaPago =
+document.getElementById("tipoTasaPago");
+
+const tasaCambioPago =
+document.getElementById("tasaCambioPago");
+
+const montoPagoBs =
+document.getElementById("montoPagoBs");
+
+const saldoDespuesPago =
+document.getElementById("saldoDespuesPago");
+
+const fechaPago =
+document.getElementById("fechaPago");
+
+const formaPago =
+document.getElementById("formaPago");
+
+const btnRegistrarPago =
+document.getElementById("btnRegistrarPago");
+
+
+/* ======================================================
+REFERENCIAS ESTADO DE CUENTA
+====================================================== */
+
+const buscarEstadoCuenta =
+document.getElementById("buscarEstadoCuenta");
+
+const btnBuscarEstadoCuenta =
+document.getElementById("btnBuscarEstadoCuenta");
+
+const btnLimpiarEstadoCuenta =
+document.getElementById("btnLimpiarEstadoCuenta");
+
+const contenedorEstadoCuenta =
+document.getElementById("contenedorEstadoCuenta");
+
+const resumenCliente =
+document.getElementById("resumenCliente");
+
+const resumenTotalCreditos =
+document.getElementById("resumenTotalCreditos");
+
+const resumenTotalAbonado =
+document.getElementById("resumenTotalAbonado");
+
+const resumenSaldoPendiente =
+document.getElementById("resumenSaldoPendiente");
+
+const tablaEstadoCuenta =
+document.getElementById("tablaEstadoCuenta");
+
+
+/* ======================================================
+REFERENCIAS COBRANZA
+====================================================== */
+
+const fechaCobranza =
+document.getElementById("fechaCobranza");
+
+const btnBuscarCobranza =
+document.getElementById("btnBuscarCobranza");
+
+const btnLimpiarCobranza =
+document.getElementById("btnLimpiarCobranza");
+
+const resultadoCobranza =
+document.getElementById("resultadoCobranza");
+
+
+/* ======================================================
+REFERENCIAS MERCANCIA RECUPERADA
+====================================================== */
+
+const clienteRecuperado =
+document.getElementById("clienteRecuperado");
+
+const productoRecuperado =
+document.getElementById("productoRecuperado");
+
+const creditoRecuperado =
+document.getElementById("creditoRecuperado");
+
+const fechaRecuperacion =
+document.getElementById("fechaRecuperacion");
+
+const montoDevuelto =
+document.getElementById("montoDevuelto");
+
+const descuentoRecuperacion =
+document.getElementById("descuentoRecuperacion");
+
+const observacionesRecuperacion =
+document.getElementById("observacionesRecuperacion");
+
+const btnGuardarRecuperacion =
+document.getElementById("btnGuardarRecuperacion");
+
+const btnMostrarRecuperados =
+document.getElementById("btnMostrarRecuperados");
+
+const tablaMercanciaRecuperada =
+document.getElementById("tablaMercanciaRecuperada");
+
+
+/* ======================================================
+MODAL
+====================================================== */
+
+const modalCredito =
+document.getElementById("modalCredito");
+
+const btnCerrarModalCredito =
+document.getElementById("btnCerrarModalCredito");
+
+const detalleCreditoModal =
+document.getElementById("detalleCreditoModal");
+
+
+/* ======================================================
+CAMBIO DE PESTAÑAS
+====================================================== */
+
+function mostrarPestana(nombre){
+if(mensajeCredito){
+
+    mensajeCredito.style.display =
+    "none";
+
+    mensajeCredito.className =
+    "mensaje";
+
+}
+
+    Object.keys(pestanas).forEach(
+        function(clave){
+
+            if(pestanas[clave]){
+                pestanas[clave]
+                .classList
+                .remove("activa");
+            }
+
+            if(contenidos[clave]){
+                contenidos[clave]
+                .classList
+                .remove("activo");
+            }
+
+        }
+    );
+
+    if(pestanas[nombre]){
+        pestanas[nombre]
+        .classList
+        .add("activa");
+    }
+
+    if(contenidos[nombre]){
+        contenidos[nombre]
+        .classList
+        .add("activo");
+    }
+
+}
+
+
+Object.keys(pestanas).forEach(
+    function(nombre){
+
+        if(pestanas[nombre]){
+
+         pestanas[nombre].addEventListener(
+    "click",
+    function(){
+
+        if(mensajeCredito){
+
+            mensajeCredito.style.display =
+            "none";
+
+            mensajeCredito.className =
+            "mensaje";
+
+        }
+
+        mostrarPestana(nombre);
+
+    }
+); 
+
+        }
+
+    }
+);
+
+
+/* ======================================================
+UTILIDADES
+====================================================== */
+
+function fechaHoy(){
+
+    const ahora =
+    new Date();
+
+    const offset =
+    ahora.getTimezoneOffset();
+
+    const local =
+    new Date(
+        ahora.getTime() -
+        offset * 60000
+    );
+
+    return local
+    .toISOString()
+    .split("T")[0];
+
+}
+
+
+function generarIdCredito(){
+
+    const caracteres =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    let resultado =
+    "CR-";
+
+    for(
+        let i = 0;
+        i < 14;
+        i++
+    ){
+
+        resultado +=
+        caracteres.charAt(
+            Math.floor(
+                Math.random() *
+                caracteres.length
+            )
+        );
+
+    }
+
+    return resultado;
+
+}
+
+
+function escaparHTML(valor){
+
+    return String(
+        valor ?? ""
+    )
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function numero(valor){
+
+    return Number(valor) || 0;
+
+}
+
+
+function formatearUSD(valor){
+
+    return "$" +
+    numero(valor).toFixed(2);
+
+}
+
+
+function formatearBs(valor){
+
+    return numero(valor).toFixed(2) +
+    " Bs";
+
+}
+
+
+/* ======================================================
+MENSAJES
+====================================================== */
+
+function mostrarMensaje(
+    texto,
+    tipo
+){
+
+    if(!mensajeCredito){
+        return;
+    }
+
+    mensajeCredito.textContent =
+    texto;
+
+    mensajeCredito.className =
+    "mensaje " + tipo;
+
+    mensajeCredito.style.display =
+    "block";
+
+    setTimeout(
+        function(){
+
+            mensajeCredito.style.display =
+            "none";
+
+            mensajeCredito.className =
+            "mensaje";
+
+        },
+        3000
+    );
+
+}
+
+
+/* ======================================================
+INICIALIZAR FORMULARIO
+====================================================== */
+
+function inicializarFormularioCredito(){
+
+    if(idCredito){
+        idCredito.value =
+        generarIdCredito();
+    }
+
+    if(fechaCredito){
+        fechaCredito.value =
+        fechaHoy();
+    }
+
+    if(fechaPago){
+        fechaPago.value =
+        fechaHoy();
+    }
+
+    if(fechaCobranza){
+        fechaCobranza.value =
+        fechaHoy();
+    }
+
+    if(fechaRecuperacion){
+        fechaRecuperacion.value =
+        fechaHoy();
+    }
+
+    if(inicialUSD){
+        inicialUSD.value =
+        "";
+    }
+
+    if(saldoPendienteUSD){
+        saldoPendienteUSD.value =
+        "";
+    }
+
+    if(tasaCambioCredito){
+        tasaCambioCredito.value =
+        "";
+    }
+
+    if(inicialBs){
+        inicialBs.value =
+        "";
+    }
+
+    if(saldoBs){
+        saldoBs.value =
+        "";
+    }
+
+    if(precioVentaCredito){
+        precioVentaCredito.value =
+        "";
+    }
+
+    if(tipoTasaCredito){
+        tipoTasaCredito.value =
+        "";
+    }
+
+    if(frecuenciaPago){
+        frecuenciaPago.value =
+        "";
+    }
+
+    if(clienteCredito){
+        clienteCredito.value =
+        "";
+    }
+
+    if(productoCredito){
+        productoCredito.value =
+        "";
+    }
+
+}
+
+
+/* ======================================================
+AUTOCOMPLETE CLIENTES
+====================================================== */
+
+if(clienteCredito){
+
+    clienteCredito.addEventListener(
+        "input",
+        function(){
+
+            const texto =
+            clienteCredito.value
+            .toLowerCase()
+            .trim();
+
+            if(!sugerenciasClientes){
+                return;
+            }
+
+            sugerenciasClientes.innerHTML =
+            "";
+
+            if(texto === ""){
+
+                sugerenciasClientes.style.display =
+                "none";
+
+                return;
+
+            }
+
+            const coincidencias =
+            clientes.filter(
+                function(cliente){
+
+                    const nombre =
+                    String(
+                        cliente.nombre || ""
+                    )
+                    .toLowerCase();
+
+                    const documento =
+                    String(
+                        cliente.documento || ""
+                    )
+                    .toLowerCase();
+
+                    return (
+                        nombre.includes(texto) ||
+                        documento.includes(texto)
+                    );
+
+                }
+            );
+
+            if(coincidencias.length === 0){
+
+                sugerenciasClientes.style.display =
+                "none";
+
+                return;
+
+            }
+
+            coincidencias
+            .slice(0,8)
+            .forEach(
+                function(cliente){
+
+                    const div =
+                    document.createElement(
+                        "div"
+                    );
+
+                    div.className =
+                    "sugerencia";
+
+                    div.innerHTML =
+                    "<strong>" +
+                    escaparHTML(
+                        cliente.nombre
+                    ) +
+                    "</strong>" +
+                    "<small>" +
+                    escaparHTML(
+                        cliente.documento || ""
+                    ) +
+                    "</small>";
+
+                    div.addEventListener(
+                        "click",
+                        function(){
+
+                            clienteCredito.value =
+                            cliente.nombre;
+
+                            sugerenciasClientes.style.display =
+                            "none";
+
+                        }
+                    );
+
+                    sugerenciasClientes.appendChild(
+                        div
+                    );
+
+                }
+            );
+
+            sugerenciasClientes.style.display =
+            "block";
+
+        }
+    );
+
+}
+
+
+/* ======================================================
+AUTOCOMPLETE PRODUCTOS
+====================================================== */
+
+if(productoCredito){
+
+    productoCredito.addEventListener(
+        "input",
+        function(){
+
+            const texto =
+            productoCredito.value
+            .toLowerCase()
+            .trim();
+
+            if(!sugerenciasProductos){
+                return;
+            }
+
+            sugerenciasProductos.innerHTML =
+            "";
+
+            if(precioVentaCredito){
+                precioVentaCredito.value =
+                "";
+            }
+
+            if(texto === ""){
+
+                sugerenciasProductos.style.display =
+                "none";
+
+                return;
+
+            }
+
+            const coincidencias =
+            productos.filter(
+                function(producto){
+
+                    const nombre =
+                    String(
+                        producto.nombre || ""
+                    )
+                    .toLowerCase();
+
+                    return nombre.includes(texto);
+
+                }
+            );
+
+            if(coincidencias.length === 0){
+
+                sugerenciasProductos.style.display =
+                "none";
+
+                return;
+
+            }
+
+            coincidencias
+            .slice(0,8)
+            .forEach(
+                function(producto){
+
+                    const div =
+                    document.createElement(
+                        "div"
+                    );
+
+                    div.className =
+                    "sugerencia";
+
+                    div.innerHTML =
+                    "<strong>" +
+                    escaparHTML(
+                        producto.nombre
+                    ) +
+                    "</strong>" +
+                    "<small>" +
+                    "Precio: " +
+                    formatearUSD(
+                        producto.precioVenta
+                    ) +
+                    " | Disponible: " +
+                    numero(
+                        producto.cantidad
+                    ) +
+                    "</small>";
+
+                    div.addEventListener(
+                        "click",
+                        function(){
+
+                            productoCredito.value =
+                            producto.nombre;
+
+                            precioVentaCredito.value =
+                            numero(
+                                producto.precioVenta
+                            ).toFixed(2);
+
+                            sugerenciasProductos.style.display =
+                            "none";
+
+                            calcularSaldoCredito();
+
+                        }
+                    );
+
+                    sugerenciasProductos.appendChild(
+                        div
+                    );
+
+                }
+            );
+
+            sugerenciasProductos.style.display =
+            "block";
+
+        }
+    );
+
+}
+
+
+/* ======================================================
+CERRAR SUGERENCIAS AL HACER CLIC AFUERA
+====================================================== */
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            clienteCredito &&
+            sugerenciasClientes &&
+            !clienteCredito.contains(event.target) &&
+            !sugerenciasClientes.contains(event.target)
+        ){
+
+            sugerenciasClientes.style.display =
+            "none";
+
+        }
+
+        if(
+            productoCredito &&
+            sugerenciasProductos &&
+            !productoCredito.contains(event.target) &&
+            !sugerenciasProductos.contains(event.target)
+        ){
+
+            sugerenciasProductos.style.display =
+            "none";
+
+        }
+
+    }
+);
+
+
+/* ======================================================
+CALCULAR SALDO DEL CREDITO
+====================================================== */
+
+function calcularSaldoCredito(){
+
+    const precio =
+    numero(
+        precioVentaCredito ?
+        precioVentaCredito.value :
+        0
+    );
+
+    const inicial =
+    numero(
+        inicialUSD ?
+        inicialUSD.value :
+        0
+    );
+
+    const saldo =
+    Math.max(
+        precio - inicial,
+        0
+    );
+
+    if(saldoPendienteUSD){
+
+        saldoPendienteUSD.value =
+        saldo.toFixed(2);
+
+    }
+
+    calcularConversionCredito();
+
+}
+
+
+if(inicialUSD){
+
+    inicialUSD.addEventListener(
+        "input",
+        calcularSaldoCredito
+    );
+
+}
+
+
+/* ======================================================
+TASAS DE CAMBIO
+====================================================== */
+
+async function consultarTasa(tipo){
+
+    const tasasGuardadas =
+    JSON.parse(
+        localStorage.getItem("tasasCambio")
+    ) || {};
+
+    if(
+        tasasGuardadas &&
+        tasasGuardadas[tipo] !== undefined
+    ){
+
+        return numero(
+            tasasGuardadas[tipo]
+        );
+
+    }
+
+    const clave =
+    tipo === "Euro"
+    ? "tasaEuro"
+    : "tasaBCV";
+
+    const tasaLocal =
+    localStorage.getItem(clave);
+
+    if(tasaLocal !== null){
+
+        return numero(
+            tasaLocal
+        );
+
+    }
+
+    return 0;
+
+}
+
+
+async function actualizarTasaCredito(){
+
+    if(!tipoTasaCredito){
+        return;
+    }
+
+    const tipo =
+    tipoTasaCredito.value;
+
+    if(tipo === ""){
+
+        if(tasaCambioCredito){
+            tasaCambioCredito.value =
+            "";
+        }
+
+        if(inicialBs){
+            inicialBs.value =
+            "";
+        }
+
+        if(saldoBs){
+            saldoBs.value =
+            "";
+        }
+
+        return;
+
+    }
+
+    const tasa =
+    await consultarTasa(tipo);
+
+    if(tasa <= 0){
+
+        if(tasaCambioCredito){
+            tasaCambioCredito.value =
+            "";
+        }
+
+        if(inicialBs){
+            inicialBs.value =
+            "";
+        }
+
+        if(saldoBs){
+            saldoBs.value =
+            "";
+        }
+
+        mostrarMensaje(
+            "No existe una tasa " +
+            tipo +
+            " configurada actualmente.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    if(tasaCambioCredito){
+
+        tasaCambioCredito.value =
+        tasa.toFixed(4);
+
+    }
+
+    calcularConversionCredito();
+
+}
+
+
+async function actualizarTasaPago(){
+
+    if(!tipoTasaPago){
+        return;
+    }
+
+    const tipo =
+    tipoTasaPago.value;
+
+    if(tipo === ""){
+
+        if(tasaCambioPago){
+            tasaCambioPago.value =
+            "";
+        }
+
+        if(montoPagoBs){
+            montoPagoBs.value =
+            "";
+        }
+
+        return;
+
+    }
+
+    const tasa =
+    await consultarTasa(tipo);
+
+    if(tasa <= 0){
+
+        if(tasaCambioPago){
+            tasaCambioPago.value =
+            "";
+        }
+
+        if(montoPagoBs){
+            montoPagoBs.value =
+            "";
+        }
+
+        mostrarMensaje(
+            "No existe una tasa " +
+            tipo +
+            " configurada actualmente.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    if(tasaCambioPago){
+
+        tasaCambioPago.value =
+        tasa.toFixed(4);
+
+    }
+
+    calcularPagoBs();
+
+}
+
+
+if(tipoTasaCredito){
+
+    tipoTasaCredito.addEventListener(
+        "change",
+        actualizarTasaCredito
+    );
+
+}
+
+if(tipoTasaPago){
+
+    tipoTasaPago.addEventListener(
+        "change",
+        actualizarTasaPago
+    );
+
+}
+
+
+/* ======================================================
+CONVERSION CREDITO USD → BS
+====================================================== */
+
+function calcularConversionCredito(){
+
+    const tasa =
+    numero(
+        tasaCambioCredito ?
+        tasaCambioCredito.value :
+        0
+    );
+
+    const inicial =
+    numero(
+        inicialUSD ?
+        inicialUSD.value :
+        0
+    );
+
+    const saldo =
+    numero(
+        saldoPendienteUSD ?
+        saldoPendienteUSD.value :
+        0
+    );
+
+    if(tasa <= 0){
+
+        if(inicialBs){
+            inicialBs.value =
+            "";
+        }
+
+        if(saldoBs){
+            saldoBs.value =
+            "";
+        }
+
+        return;
+
+    }
+
+    if(inicialBs){
+
+        inicialBs.value =
+        (
+            inicial * tasa
+        ).toFixed(2);
+
+    }
+
+    if(saldoBs){
+
+        saldoBs.value =
+        (
+            saldo * tasa
+        ).toFixed(2);
+
+    }
+
+}
+
+
+/* ======================================================
+ACTUALIZAR CONVERSION AL CAMBIAR CAMPOS
+====================================================== */
+
+if(inicialUSD){
+
+    inicialUSD.addEventListener(
+        "input",
+        function(){
+
+            calcularSaldoCredito();
+
+        }
+    );
+
+}
+/* ======================================================
+CALCULAR PAGO AUTOMÁTICAMENTE
+====================================================== */
+
+function calcularPagoBs(){
+
+    const montoUSD =
+    numero(
+        montoPagoUSD ?
+        montoPagoUSD.value :
+        0
+    );
+
+    const tasa =
+    numero(
+        tasaCambioPago ?
+        tasaCambioPago.value :
+        0
+    );
+
+    const saldoAntes =
+    numero(
+        saldoAntesPago ?
+        saldoAntesPago.value :
+        0
+    );
+
+    /* Monto del pago en Bs */
+
+    if(montoPagoBs){
+
+        if(
+            montoUSD > 0 &&
+            tasa > 0
+        ){
+
+            montoPagoBs.value =
+            (
+                montoUSD * tasa
+            ).toFixed(2);
+
+        }else{
+
+            montoPagoBs.value =
+            "";
+
+        }
+
+    }
+
+    /* Saldo después del abono */
+
+    if(saldoDespuesPago){
+
+        if(
+            saldoAntes > 0 ||
+            montoUSD > 0
+        ){
+
+            saldoDespuesPago.value =
+            Math.max(
+                saldoAntes - montoUSD,
+                0
+            ).toFixed(2);
+
+        }else{
+
+            saldoDespuesPago.value =
+            "";
+
+        }
+
+    }
+
+}
+
+
+/* ======================================================
+ACTUALIZAR PAGO AL ESCRIBIR EL ABONO
+====================================================== */
+
+if(montoPagoUSD){
+
+    montoPagoUSD.addEventListener(
+        "input",
+        calcularPagoBs
+    );
+
+}
+/* ======================================================
+BOTON GUARDAR / ACTUALIZAR CREDITO
+====================================================== */
+
+if(btnGuardarCredito){
+
+    btnGuardarCredito.addEventListener(
+        "click",
+        function(){
+
+            const cliente =
+            clienteCredito
+            ? clienteCredito.value.trim()
+            : "";
+
+            const producto =
+            productoCredito
+            ? productoCredito.value.trim()
+            : "";
+
+            const precioVenta =
+            numero(
+                precioVentaCredito
+                ? precioVentaCredito.value
+                : 0
+            );
+
+            const inicial =
+            numero(
+                inicialUSD
+                ? inicialUSD.value
+                : 0
+            );
+
+
+            /* VALIDAR CLIENTE */
+
+            if(cliente === ""){
+
+                mostrarMensaje(
+                    "Debe seleccionar un cliente.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            /* VALIDAR PRODUCTO */
+
+            if(producto === ""){
+
+                mostrarMensaje(
+                    "Debe seleccionar un producto.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            /* VALIDAR PRECIO */
+
+            if(precioVenta <= 0){
+
+                mostrarMensaje(
+                    "Debe ingresar un precio de venta válido.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            /* VALIDAR INICIAL */
+
+            if(inicial < 0){
+
+                mostrarMensaje(
+                    "La inicial no puede ser negativa.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if(inicial > precioVenta){
+
+                mostrarMensaje(
+                    "La inicial no puede ser mayor que el precio de venta.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            /* CALCULAR SALDO */
+
+            const saldoPendiente =
+            Math.max(
+                precioVenta - inicial,
+                0
+            );
+
+
+            /* TASA DE CAMBIO */
+
+            const tasaCambio =
+            numero(
+                tasaCambioCredito
+                ? tasaCambioCredito.value
+                : 0
+            );
+
+
+            /* CONVERSION A BS */
+
+            const inicialBolivares =
+            tasaCambio > 0
+            ? inicial * tasaCambio
+            : 0;
+
+            const saldoBolivares =
+            tasaCambio > 0
+            ? saldoPendiente * tasaCambio
+            : 0;
+
+
+            /* CREAR DATOS DEL CREDITO */
+
+            const datosCredito = {
+
+                cliente:
+                cliente,
+
+                producto:
+                producto,
+
+                fecha:
+                fechaCredito
+                ? fechaCredito.value
+                : fechaHoy(),
+
+                precioVenta:
+                precioVenta,
+
+                precioVentaCredito:
+                precioVenta,
+
+                inicialUSD:
+                inicial,
+
+                inicialBs:
+                inicialBolivares,
+
+                saldoPendienteUSD:
+                saldoPendiente,
+
+                saldoUSD:
+                saldoPendiente,
+
+                saldo:
+                saldoPendiente,
+
+                tipoTasa:
+                tipoTasaCredito
+                ? tipoTasaCredito.value
+                : "",
+
+                tasaCambio:
+                tasaCambio,
+
+                saldoBs:
+                saldoBolivares,
+
+                frecuencia:
+                frecuenciaPago
+                ? frecuenciaPago.value
+                : "",
+
+                frecuenciaPago:
+                frecuenciaPago
+                ? frecuenciaPago.value
+                : ""
+
+            };
+
+
+            /* ==================================================
+            MODO EDICION
+            ================================================== */
+
+            if(window.creditoEnEdicion){
+
+                const idCreditoEditar =
+                String(
+                    window.creditoEnEdicion.id ||
+                    window.creditoEnEdicion.idCredito ||
+                    ""
+                );
+
+
+                const indiceCredito =
+                creditos.findIndex(
+                    function(credito){
+
+                        return String(
+                            credito.id ||
+                            credito.idCredito ||
+                            ""
+                        ) ===
+                        idCreditoEditar;
+
+                    }
+                );
+
+
+                if(indiceCredito === -1){
+
+                    mostrarMensaje(
+                        "No se encontró el crédito que se está editando.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                /* CONSERVAR EL ID ORIGINAL */
+
+                datosCredito.id =
+                window.creditoEnEdicion.id ||
+                window.creditoEnEdicion.idCredito;
+
+
+                /* ACTUALIZAR REGISTRO */
+
+                creditos[indiceCredito] = {
+
+                    ...creditos[indiceCredito],
+
+                    ...datosCredito
+
+                };
+
+
+                localStorage.setItem(
+                    "creditos",
+                    JSON.stringify(
+                        creditos
+                    )
+                );
+
+
+                mostrarMensaje(
+                    "✓ Crédito actualizado correctamente.",
+                    "exito"
+                );
+
+
+                /* SALIR DEL MODO EDICION */
+
+                window.creditoEnEdicion =
+                null;
+
+
+                if(btnGuardarCredito){
+
+                    btnGuardarCredito.textContent =
+                    "Guardar Crédito";
+
+                }
+
+
+            }else{
+
+
+                /* ==================================================
+                CREDITO NUEVO
+                ================================================== */
+
+                datosCredito.id =
+                idCredito
+                ? idCredito.value
+                : generarIdCredito();
+
+
+                creditos.push(
+                    datosCredito
+                );
+
+
+                localStorage.setItem(
+                    "creditos",
+                    JSON.stringify(
+                        creditos
+                    )
+                );
+
+
+                mostrarMensaje(
+                    "✓ Crédito guardado correctamente.",
+                    "exito"
+                );
+
+            }
+
+
+            /* ==================================================
+            LIMPIAR FORMULARIO
+            ================================================== */
+
+            setTimeout(
+                function(){
+
+                    inicializarFormularioCredito();
+
+                },
+                1200
+            );
+
+        }
+    );
+
+}
+/* ======================================================
+BOTON LIMPIAR NUEVO CREDITO
+====================================================== */
+
+if(btnLimpiarCredito){
+
+    btnLimpiarCredito.addEventListener(
+        "click",
+        function(){
+
+            inicializarFormularioCredito();
+
+            if(sugerenciasClientes){
+                sugerenciasClientes.innerHTML =
+                "";
+
+                sugerenciasClientes.style.display =
+                "none";
+            }
+
+            if(sugerenciasProductos){
+                sugerenciasProductos.innerHTML =
+                "";
+
+                sugerenciasProductos.style.display =
+                "none";
+            }
+
+        }
+    );
+
+}
+
+/* ======================================================
+BUSCADORES DE CLIENTES
+CRÉDITOS REGISTRADOS / GESTIÓN DE PAGOS / ESTADO DE CUENTA
+====================================================== */
+
+
+/* ======================================================
+UTILIDAD: OBTENER CLIENTES COINCIDENTES
+====================================================== */
+
+function buscarCoincidenciasClientes(texto){
+
+    const termino =
+    String(texto || "")
+    .toLowerCase()
+    .trim();
+
+    if(termino === ""){
+        return [];
+    }
+
+    return clientes
+    .filter(function(cliente){
+
+        const nombre =
+        String(cliente.nombre || "")
+        .toLowerCase();
+
+        const documento =
+        String(cliente.documento || "")
+        .toLowerCase();
+
+        return (
+            nombre.includes(termino) ||
+            documento.includes(termino)
+        );
+
+    })
+    .slice(0,8);
+
+}
+
+
+/* ======================================================
+CREAR LISTA DE SUGERENCIAS
+====================================================== */
+
+function crearListaSugerenciasBuscador(input){
+
+    if(!input){
+        return null;
+    }
+
+    let lista =
+    document.getElementById(
+        input.id + "Sugerencias"
+    );
+
+    if(lista){
+        return lista;
+    }
+
+    lista =
+    document.createElement("div");
+
+    lista.id =
+    input.id + "Sugerencias";
+
+    lista.className =
+    "listaSugerencias";
+
+    input.parentElement.classList.add(
+        "autocomplete"
+    );
+
+    input.parentElement.appendChild(
+        lista
+    );
+
+    return lista;
+
+}
+
+
+/* ======================================================
+MOSTRAR SUGERENCIAS
+====================================================== */
+
+function mostrarSugerenciasBuscador(
+    input,
+    callback
+){
+
+    if(!input){
+        return;
+    }
+
+    const lista =
+    crearListaSugerenciasBuscador(
+        input
+    );
+
+    if(!lista){
+        return;
+    }
+
+    const coincidencias =
+    buscarCoincidenciasClientes(
+        input.value
+    );
+
+    lista.innerHTML =
+    "";
+
+    if(coincidencias.length === 0){
+
+        lista.style.display =
+        "none";
+
+        return;
+
+    }
+
+    coincidencias.forEach(
+        function(cliente){
+
+            const opcion =
+            document.createElement("div");
+
+            opcion.className =
+            "sugerencia";
+
+            opcion.innerHTML =
+            "<strong>" +
+            escaparHTML(
+                cliente.nombre || ""
+            ) +
+            "</strong>" +
+            "<small>" +
+            escaparHTML(
+                cliente.documento || ""
+            ) +
+            "</small>";
+
+            opcion.addEventListener(
+                "click",
+                function(event){
+
+                    event.stopPropagation();
+
+                    input.value =
+                    cliente.nombre || "";
+
+                    input.dataset.clienteId =
+                    cliente.documento || "";
+
+                    input.dataset.clienteNombre =
+                    cliente.nombre || "";
+
+                    lista.style.display =
+                    "none";
+
+                    if(callback){
+
+                        callback(cliente);
+
+                    }
+
+                }
+            );
+
+            lista.appendChild(
+                opcion
+            );
+
+        }
+    );
+
+    lista.style.display =
+    "block";
+
+}
+
+
+/* ======================================================
+CRÉDITOS REGISTRADOS
+====================================================== */
+
+if(buscarCreditos){
+
+    buscarCreditos.addEventListener(
+        "input",
+        function(){
+
+            mostrarSugerenciasBuscador(
+                buscarCreditos
+            );
+
+        }
+    );
+
+}
+
+
+/* ======================================================
+OBTENER NOMBRE DEL CLIENTE DE UN CRÉDITO
+====================================================== */
+
+function obtenerNombreClienteCredito(
+    credito
+){
+
+    return String(
+        credito.cliente ||
+        credito.nombreCliente ||
+        credito.clienteNombre ||
+        ""
+    );
+
+}
+
+
+/* ======================================================
+OBTENER CÉDULA DEL CLIENTE DE UN CRÉDITO
+====================================================== */
+
+function obtenerCedulaClienteCredito(
+    credito
+){
+
+    return String(
+        credito.documento ||
+        credito.cedula ||
+        credito.cedulaCliente ||
+        ""
+    );
+
+}
+
+
+/* ======================================================
+BUSCAR CRÉDITOS DEL CLIENTE
+====================================================== */
+
+function obtenerCreditosCliente(
+    cliente
+){
+
+    if(!cliente){
+        return [];
+    }
+
+    const nombre =
+    String(
+        cliente.nombre || ""
+    )
+    .toLowerCase();
+
+    const documento =
+    String(
+        cliente.documento || ""
+    )
+    .toLowerCase();
+
+    return creditos.filter(
+        function(credito){
+
+            const nombreCredito =
+            obtenerNombreClienteCredito(
+                credito
+            )
+            .toLowerCase();
+
+            const documentoCredito =
+            obtenerCedulaClienteCredito(
+                credito
+            )
+            .toLowerCase();
+
+            return (
+                (
+                    nombre !== "" &&
+                    nombreCredito === nombre
+                ) ||
+                (
+                    documento !== "" &&
+                    documentoCredito === documento
+                )
+            );
+
+        }
+    );
+
+}
+
+
+/* ======================================================
+MOSTRAR CRÉDITOS REGISTRADOS
+====================================================== */
+
+function mostrarCreditosRegistrados(
+    listaCreditos
+){
+
+    if(!tablaCreditosRegistrados){
+        return;
+    }
+
+    tablaCreditosRegistrados.innerHTML =
+    "";
+
+    if(!listaCreditos ||
+       listaCreditos.length === 0){
+
+        tablaCreditosRegistrados.innerHTML =
+        '<tr>' +
+        '<td colspan="10" class="sinRegistros">' +
+        'No existen créditos registrados para este cliente.' +
+        '</td>' +
+        '</tr>';
+
+        return;
+
+    }
+
+    listaCreditos.forEach(
+        function(credito){
+
+            const fila =
+            document.createElement("tr");
+
+            const saldoUSD =
+            numero(
+                credito.saldoPendienteUSD ??
+                credito.saldoUSD ??
+                credito.saldo ??
+                0
+            );
+
+            const tasa =
+            numero(
+                credito.tasaCambio ??
+                credito.tasa ??
+                0
+            );
+
+            const saldoCreditoBs =
+            numero(
+                credito.saldoBs ??
+                (saldoUSD * tasa)
+            );
+
+            const estado =
+            saldoUSD > 0
+            ? "Activo"
+            : "Pagado";
+
+            fila.innerHTML =
+
+            "<td>" +
+            escaparHTML(
+                credito.id ||
+                credito.idCredito ||
+                ""
+            ) +
+            "</td>" +
+
+            "<td>" +
+            escaparHTML(
+                obtenerNombreClienteCredito(
+                    credito
+                )
+            ) +
+            "</td>" +
+
+            "<td>" +
+            escaparHTML(
+                credito.producto ||
+                credito.nombreProducto ||
+                ""
+            ) +
+            "</td>" +
+
+            "<td>" +
+            escaparHTML(
+                credito.fecha ||
+                credito.fechaCredito ||
+                ""
+            ) +
+            "</td>" +
+
+            "<td>" +
+            formatearUSD(
+                saldoUSD
+            ) +
+            "</td>" +
+
+            "<td>" +
+            (tasa > 0
+                ? tasa.toFixed(4)
+                : "-") +
+            "</td>" +
+
+            "<td>" +
+            formatearBs(
+                saldoCreditoBs
+            ) +
+            "</td>" +
+
+            "<td>" +
+            escaparHTML(
+                credito.frecuencia ||
+                credito.frecuenciaPago ||
+                ""
+            ) +
+            "</td>" +
+
+            "<td>" +
+            escaparHTML(
+                estado
+            ) +
+            "</td>" +
+
+       "<td>" +
+
+'<button type="button" class="btnVer">' +
+'<i class="fa-solid fa-eye"></i> Ver' +
+'</button>' +
+
+'<button type="button" class="btnEditarCredito">' +
+'<i class="fa-solid fa-pen-to-square"></i> Editar' +
+'</button>' +
+
+'<button type="button" class="btnEliminarCredito">' +
+'<i class="fa-solid fa-trash"></i> Eliminar' +
+'</button>' +
+
+"</td>";   
+
+            tablaCreditosRegistrados.appendChild(
+                fila
+            );
+const botonVer =
+fila.querySelector(".btnVer");
+
+if(botonVer){
+
+    botonVer.addEventListener(
+        "click",
+        function(){
+
+            mostrarDetalleCredito(
+                credito
+            );
+
+        }
+    );
+
+}
+const botonEditar =
+fila.querySelector(".btnEditarCredito");
+
+if(botonEditar){
+
+    botonEditar.addEventListener(
+        "click",
+        function(){
+
+            editarCredito(
+                credito
+            );
+
+        }
+    );
+
+}
+const botonEliminar =
+fila.querySelector(".btnEliminarCredito");
+
+if(botonEliminar){
+
+    botonEliminar.addEventListener(
+        "click",
+        function(){
+
+            eliminarCredito(
+                credito
+            );
+
+        }
+    );
+
+}
+        }
+    );
+
+}
+
+/* ======================================================
+EDITAR CRÉDITO
+====================================================== */
+
+function editarCredito(credito){
+
+    if(!credito){
+        return;
+    }
+
+    /* GUARDAR EL CRÉDITO QUE SE ESTÁ EDITANDO */
+
+    window.creditoEnEdicion =
+    credito;
+
+
+    /* CAMBIAR A NUEVO CRÉDITO */
+
+    mostrarPestana("nuevo");
+
+
+    /* ==================================================
+    CARGAR DATOS DEL CRÉDITO
+    ================================================== */
+
+    if(idCredito){
+
+        idCredito.value =
+        credito.id ||
+        credito.idCredito ||
+        "";
+
+    }
+
+    if(clienteCredito){
+
+        clienteCredito.value =
+        credito.cliente ||
+        credito.nombreCliente ||
+        credito.clienteNombre ||
+        "";
+
+    }
+
+    if(productoCredito){
+
+        productoCredito.value =
+        credito.producto ||
+        credito.nombreProducto ||
+        "";
+
+    }
+
+    if(fechaCredito){
+
+        fechaCredito.value =
+        credito.fecha ||
+        credito.fechaCredito ||
+        fechaHoy();
+
+    }
+
+    if(precioVentaCredito){
+
+        precioVentaCredito.value =
+        numero(
+            credito.precioVentaCredito ??
+            credito.precioVenta ??
+            credito.precio ??
+            credito.monto ??
+            credito.total ??
+            0
+        ).toFixed(2);
+
+    }
+
+    if(inicialUSD){
+
+        inicialUSD.value =
+        numero(
+            credito.inicialUSD ??
+            credito.inicial ??
+            0
+        ).toFixed(2);
+
+    }
+
+    if(saldoPendienteUSD){
+
+        saldoPendienteUSD.value =
+        numero(
+            credito.saldoPendienteUSD ??
+            credito.saldoUSD ??
+            credito.saldo ??
+            0
+        ).toFixed(2);
+
+    }
+
+    if(tipoTasaCredito){
+
+        tipoTasaCredito.value =
+        credito.tipoTasa ||
+        "";
+
+    }
+
+    if(tasaCambioCredito){
+
+        tasaCambioCredito.value =
+        numero(
+            credito.tasaCambio ??
+            credito.tasa ??
+            0
+        ).toFixed(4);
+
+    }
+
+    if(inicialBs){
+
+        inicialBs.value =
+        numero(
+            credito.inicialBs ??
+            0
+        ).toFixed(2);
+
+    }
+
+    if(saldoBs){
+
+        saldoBs.value =
+        numero(
+            credito.saldoBs ??
+            0
+        ).toFixed(2);
+
+    }
+
+    if(frecuenciaPago){
+
+        frecuenciaPago.value =
+        credito.frecuencia ||
+        credito.frecuenciaPago ||
+        "";
+
+    }
+
+
+    /* ==================================================
+    CAMBIAR BOTÓN GUARDAR
+    ================================================== */
+
+    if(btnGuardarCredito){
+
+        btnGuardarCredito.textContent =
+        "Actualizar Crédito";
+
+    }
+
+
+    /* ==================================================
+    MENSAJE
+    ================================================== */
+
+    mostrarMensaje(
+        "Crédito cargado para edición.",
+        "exito"
+    );
+
+}
+/* ======================================================
+ELIMINAR CRÉDITO
+====================================================== */
+
+function eliminarCredito(credito){
+
+    if(!credito){
+        return;
+    }
+
+    const idCreditoEliminar =
+    String(
+        credito.id ||
+        credito.idCredito ||
+        ""
+    );
+
+    if(idCreditoEliminar === ""){
+        return;
+    }
+
+    const confirmar =
+    confirm(
+        "¿Está seguro de que desea eliminar este crédito?"
+    );
+
+    if(!confirmar){
+        return;
+    }
+
+    const indice =
+    creditos.findIndex(
+        function(item){
+
+            return String(
+                item.id ||
+                item.idCredito ||
+                ""
+            ) === idCreditoEliminar;
+
+        }
+    );
+
+    if(indice === -1){
+
+        mostrarMensaje(
+            "No se encontró el crédito.",
+            "error"
+        );
+
+        return;
+    }
+
+    creditos.splice(
+        indice,
+        1
+    );
+
+    localStorage.setItem(
+    "creditos",
+    JSON.stringify(
+        creditos
+    )
+);
+
+
+/* ACTUALIZAR LA TABLA INMEDIATAMENTE */
+
+if(buscarCreditos){
+
+    const texto =
+    buscarCreditos.value.trim();
+
+    if(texto !== ""){
+
+        const coincidencias =
+        buscarCoincidenciasClientes(
+            texto
+        );
+
+        if(coincidencias.length > 0){
+
+            mostrarCreditosRegistrados(
+                obtenerCreditosCliente(
+                    coincidencias[0]
+                )
+            );
+
+        }else{
+
+            mostrarCreditosRegistrados(
+                []
+            );
+
+        }
+
+    }
+
+}
+
+
+mostrarMensaje(
+    "✓ Crédito eliminado correctamente.",
+    "exito"
+);
+
+}
+/* ======================================================
+BOTÓN BUSCAR CRÉDITOS
+====================================================== */
+
+if(btnBuscarCreditos){
+
+    btnBuscarCreditos.addEventListener(
+        "click",
+        function(){
+
+            const texto =
+            buscarCreditos
+            ? buscarCreditos.value.trim()
+            : "";
+
+            if(texto === ""){
+
+                mostrarCreditosRegistrados(
+                    []
+                );
+
+                return;
+
+            }
+
+            const coincidencias =
+            buscarCoincidenciasClientes(
+                texto
+            );
+
+            if(
+                coincidencias.length === 0
+            ){
+
+                mostrarCreditosRegistrados(
+                    []
+                );
+
+                return;
+
+            }
+
+            const cliente =
+            coincidencias[0];
+
+            buscarCreditos.dataset.clienteId =
+            cliente.documento || "";
+
+            buscarCreditos.dataset.clienteNombre =
+            cliente.nombre || "";
+
+            mostrarCreditosRegistrados(
+                obtenerCreditosCliente(
+                    cliente
+                )
+            );
+
+        }
+    );
+
+}
+
+
+/* ======================================================
+BOTÓN LIMPIAR CRÉDITOS
+====================================================== */
+
+if(btnLimpiarBusquedaCreditos){
+
+    btnLimpiarBusquedaCreditos.addEventListener(
+        "click",
+        function(){
+
+            buscarCreditos.value =
+            "";
+
+            delete buscarCreditos.dataset.clienteId;
+
+            delete buscarCreditos.dataset.clienteNombre;
+
+            const lista =
+            document.getElementById(
+                "buscarCreditosSugerencias"
+            );
+
+            if(lista){
+                lista.style.display =
+                "none";
+            }
+
+            if(tablaCreditosRegistrados){
+
+                tablaCreditosRegistrados.innerHTML =
+                '<tr>' +
+                '<td colspan="10" class="sinRegistros">' +
+                'Utilice el buscador para consultar los créditos.' +
+                '</td>' +
+                '</tr>';
+
+            }
+
+        }
+    );
+
+}
+
+/* ======================================================
+VER DETALLE DEL CRÉDITO
+====================================================== */
+
+function mostrarDetalleCredito(credito){
+
+    if(!credito || !modalCredito || !detalleCreditoModal){
+        return;
+    }
+
+    detalleCreditoModal.innerHTML =
+
+    "<div class='detalleGrid'>" +
+
+    "<div class='detalleItem'>" +
+    "<span>ID del crédito</span>" +
+    "<strong>" +
+    escaparHTML(
+        credito.id ||
+        credito.idCredito ||
+        "-"
+    ) +
+    "</strong>" +
+    "</div>" +
+
+    "<div class='detalleItem'>" +
+    "<span>Cliente</span>" +
+    "<strong>" +
+    escaparHTML(
+        credito.cliente ||
+        credito.nombreCliente ||
+        credito.clienteNombre ||
+        "-"
+    ) +
+    "</strong>" +
+    "</div>" +
+
+    "<div class='detalleItem'>" +
+    "<span>Producto</span>" +
+    "<strong>" +
+    escaparHTML(
+        credito.producto ||
+        credito.nombreProducto ||
+        "-"
+    ) +
+    "</strong>" +
+    "</div>" +
+
+    "<div class='detalleItem'>" +
+    "<span>Fecha</span>" +
+    "<strong>" +
+    escaparHTML(
+        credito.fecha ||
+        credito.fechaCredito ||
+        "-"
+    ) +
+    "</strong>" +
+    "</div>" +
+
+   "<div class='detalleItem'>" +
+"<span>Precio de venta</span>" +
+"<strong>" +
+formatearUSD(
+    credito.precioVentaCredito ||
+    credito.precioVenta ||
+    credito.precio ||
+    credito.montoVenta ||
+    credito.valorVenta ||
+    credito.monto ||
+    credito.total ||
+    0
+) +
+"</strong>" +
+"</div>" +
+
+    "<div class='detalleItem'>" +
+    "<span>Inicial</span>" +
+    "<strong>" +
+    formatearUSD(
+        credito.inicialUSD ||
+        credito.inicial ||
+        0
+    ) +
+    "</strong>" +
+    "</div>" +
+
+    "<div class='detalleItem'>" +
+    "<span>Saldo pendiente</span>" +
+    "<strong>" +
+    formatearUSD(
+        credito.saldoPendienteUSD ||
+        credito.saldoUSD ||
+        credito.saldo ||
+        0
+    ) +
+    "</strong>" +
+    "</div>" +
+
+    "<div class='detalleItem'>" +
+    "<span>Frecuencia de pago</span>" +
+    "<strong>" +
+    escaparHTML(
+        credito.frecuencia ||
+        credito.frecuenciaPago ||
+        "-"
+    ) +
+    "</strong>" +
+    "</div>" +
+
+    "</div>";
+
+    modalCredito.classList.add(
+        "visible"
+    );
+
+}
+
+
+/* ======================================================
+CERRAR MODAL
+====================================================== */
+
+if(btnCerrarModalCredito){
+
+    btnCerrarModalCredito.addEventListener(
+        "click",
+        function(){
+
+            modalCredito.classList.remove(
+                "visible"
+            );
+
+        }
+    );
+
+}
+
+
+/* ======================================================
+CERRAR MODAL AL HACER CLIC FUERA
+====================================================== */
+
+if(modalCredito){
+
+    modalCredito.addEventListener(
+        "click",
+        function(event){
+
+            if(
+                event.target ===
+                modalCredito
+            ){
+
+                modalCredito.classList.remove(
+                    "visible"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+/* ======================================================
+GESTIÓN DE PAGOS
+====================================================== */
+
+if(buscarPagos){
+
+    buscarPagos.addEventListener(
+        "input",
+        function(){
+if(mensajeCredito){
+
+    mensajeCredito.style.display = "none";
+    mensajeCredito.className = "mensaje";
+
+}
+            mostrarSugerenciasBuscador(
+                buscarPagos,
+                function(cliente){
+
+                    buscarPagos.dataset.clienteNombre =
+                    cliente.nombre || "";
+
+                    buscarPagos.dataset.clienteId =
+                    cliente.documento || "";
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* ======================================================
+SELECCIONAR CRÉDITO PARA PAGO
+====================================================== */
+
+function prepararCreditoParaPago(
+    credito,
+    cliente
+){
+
+    if(!credito){
+        return;
+    }
+
+    creditoSeleccionadoPago =
+    credito;
+
+    if(clientePago){
+
+        clientePago.value =
+        cliente.nombre || "";
+
+    }
+
+    if(creditoPago){
+
+        creditoPago.value =
+        credito.id ||
+        credito.idCredito ||
+        "";
+
+    }
+
+    if(saldoAntesPago){
+
+        saldoAntesPago.value =
+        numero(
+            credito.saldoPendienteUSD ??
+            credito.saldoUSD ??
+            credito.saldo ??
+            0
+        ).toFixed(2);
+
+    }
+
+    if(saldoDespuesPago){
+
+        saldoDespuesPago.value =
+        "";
+
+    }
+
+    if(montoPagoUSD){
+
+        montoPagoUSD.value =
+        "";
+
+    }
+
+    if(montoPagoBs){
+
+        montoPagoBs.value =
+        "";
+
+    }
+
+    if(tasaCambioPago){
+
+        tasaCambioPago.value =
+        "";
+
+    }
+
+    if(contenedorRegistroPago){
+
+        contenedorRegistroPago.style.display =
+        "block";
+
+    }
+
+}
+
+
+/* ======================================================
+BOTÓN BUSCAR PAGOS
+====================================================== */
+
+if(btnBuscarPagos){
+
+    btnBuscarPagos.addEventListener(
+        "click",
+        function(){
+
+            const texto =
+            buscarPagos
+            ? buscarPagos.value.trim()
+            : "";
+
+            if(texto === ""){
+
+                if(contenedorRegistroPago){
+
+                    contenedorRegistroPago.style.display =
+                    "none";
+
+                }
+
+                creditoSeleccionadoPago =
+                null;
+
+                return;
+
+            }
+
+            const coincidencias =
+            buscarCoincidenciasClientes(
+                texto
+            );
+
+            if(
+    coincidencias.length === 0
+){
+
+    if(contenedorRegistroPago){
+
+        contenedorRegistroPago.style.display =
+        "none";
+
+    }
+
+    creditoSeleccionadoPago =
+    null;
+
+    mostrarMensaje(
+        "No existen pagos registrados para este cliente.",
+        "error"
+    );
+
+    return;
+
+}
+
+            const cliente =
+            coincidencias[0];
+
+            const creditosCliente =
+            obtenerCreditosCliente(
+                cliente
+            );
+
+            const creditoActivo =
+            creditosCliente.find(
+                function(credito){
+
+                    return numero(
+                        credito.saldoPendienteUSD ??
+                        credito.saldoUSD ??
+                        credito.saldo ??
+                        0
+                    ) > 0;
+
+                }
+            );
+
+            if(!creditoActivo){
+
+                if(contenedorRegistroPago){
+
+                    contenedorRegistroPago.style.display =
+                    "none";
+
+                }
+
+                mostrarMensaje(
+                    "El cliente no tiene créditos con saldo pendiente.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+            prepararCreditoParaPago(
+                creditoActivo,
+                cliente
+            );
+
+        }
+    );
+
+}
+
+
+/* ======================================================
+BOTÓN LIMPIAR PAGOS
+====================================================== */
+
+if(btnLimpiarBusquedaPagos){
+
+    btnLimpiarBusquedaPagos.addEventListener(
+        "click",
+        function(){
+
+            buscarPagos.value =
+            "";
+
+            delete buscarPagos.dataset.clienteId;
+
+            delete buscarPagos.dataset.clienteNombre;
+
+            creditoSeleccionadoPago =
+            null;
+
+            if(clientePago){
+                clientePago.value =
+                "";
+            }
+
+            if(creditoPago){
+                creditoPago.value =
+                "";
+            }
+
+            if(saldoAntesPago){
+                saldoAntesPago.value =
+                "";
+            }
+
+            if(montoPagoUSD){
+                montoPagoUSD.value =
+                "";
+            }
+
+            if(montoPagoBs){
+                montoPagoBs.value =
+                "";
+            }
+
+            if(saldoDespuesPago){
+                saldoDespuesPago.value =
+                "";
+            }
+
+            if(tasaCambioPago){
+                tasaCambioPago.value =
+                "";
+            }
+
+            if(contenedorRegistroPago){
+
+                contenedorRegistroPago.style.display =
+                "none";
+
+            }
+
+            const lista =
+            document.getElementById(
+                "buscarPagosSugerencias"
+            );
+
+            if(lista){
+                lista.style.display =
+                "none";
+            }
+
+        }
+    );
+
+}
+
+
+/* ======================================================
+ESTADO DE CUENTA
+====================================================== */
+
+if(buscarEstadoCuenta){
+
+    buscarEstadoCuenta.addEventListener(
+        "input",
+        function(){
+
+            mostrarSugerenciasBuscador(
+                buscarEstadoCuenta,
+                function(cliente){
+
+                    buscarEstadoCuenta.dataset.clienteNombre =
+                    cliente.nombre || "";
+
+                    buscarEstadoCuenta.dataset.clienteId =
+                    cliente.documento || "";
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* ======================================================
+CALCULAR ESTADO DE CUENTA
+====================================================== */
+
+function mostrarEstadoCuentaCliente(
+    cliente
+){
+
+    if(!cliente){
+        return;
+    }
+
+    const creditosCliente =
+    obtenerCreditosCliente(
+        cliente
+    );
+
+    const creditosIds =
+    creditosCliente.map(
+        function(credito){
+
+            return String(
+                credito.id ||
+                credito.idCredito ||
+                ""
+            );
+
+        }
+    );
+
+    const movimientos =
+    pagos.filter(
+        function(pago){
+
+            const idPago =
+            String(
+                pago.credito ||
+                pago.idCredito ||
+                pago.creditoId ||
+                ""
+            );
+
+            return creditosIds.includes(
+                idPago
+            );
+
+        }
+    );
+
+    const totalCreditos =
+    creditosCliente.reduce(
+        function(total, credito){
+
+            return total +
+            numero(
+                credito.precioVenta ??
+                credito.monto ??
+                credito.total ??
+                0
+            );
+
+        },
+        0
+    );
+
+    const totalAbonado =
+    movimientos.reduce(
+        function(total, pago){
+
+            return total +
+            numero(
+                pago.montoPagoUSD ??
+                pago.montoUSD ??
+                pago.monto ??
+                0
+            );
+
+        },
+        0
+    );
+
+    const saldoPendiente =
+    creditosCliente.reduce(
+        function(total, credito){
+
+            return total +
+            numero(
+                credito.saldoPendienteUSD ??
+                credito.saldoUSD ??
+                credito.saldo ??
+                0
+            );
+
+        },
+        0
+    );
+
+    if(resumenCliente){
+
+        resumenCliente.textContent =
+        cliente.nombre || "-";
+
+    }
+
+    if(resumenTotalCreditos){
+
+        resumenTotalCreditos.textContent =
+        formatearUSD(
+            totalCreditos
+        );
+
+    }
+
+    if(resumenTotalAbonado){
+
+        resumenTotalAbonado.textContent =
+        formatearUSD(
+            totalAbonado
+        );
+
+    }
+
+    if(resumenSaldoPendiente){
+
+        resumenSaldoPendiente.textContent =
+        formatearUSD(
+            saldoPendiente
+        );
+
+    }
+
+    if(tablaEstadoCuenta){
+
+        tablaEstadoCuenta.innerHTML =
+        "";
+
+        if(
+            movimientos.length === 0 &&
+            creditosCliente.length === 0
+        ){
+
+            tablaEstadoCuenta.innerHTML =
+            '<tr>' +
+            '<td colspan="5" class="sinRegistros">' +
+            'No hay movimientos registrados.' +
+            '</td>' +
+            '</tr>';
+
+        }else{
+
+            let saldo =
+            0;
+
+            creditosCliente.forEach(
+                function(credito){
+
+                    const monto =
+                    numero(
+                        credito.precioVenta ??
+                        credito.monto ??
+                        credito.total ??
+                        0
+                    );
+
+                    saldo +=
+                    monto;
+
+                    const fila =
+                    document.createElement("tr");
+
+                    fila.innerHTML =
+                    "<td>" +
+                    escaparHTML(
+                        credito.fecha ||
+                        credito.fechaCredito ||
+                        ""
+                    ) +
+                    "</td>" +
+
+                    "<td>Crédito " +
+                    escaparHTML(
+                        credito.id ||
+                        credito.idCredito ||
+                        ""
+                    ) +
+                    "</td>" +
+
+                    "<td>" +
+                    formatearUSD(
+                        monto
+                    ) +
+                    "</td>" +
+
+                    "<td>$0.00</td>" +
+
+                    "<td>" +
+                    formatearUSD(
+                        saldo
+                    ) +
+                    "</td>";
+
+                    tablaEstadoCuenta.appendChild(
+                        fila
+                    );
+
+                }
+            );
+
+            movimientos.forEach(
+                function(pago){
+
+                    const monto =
+                    numero(
+                        pago.montoPagoUSD ??
+                        pago.montoUSD ??
+                        pago.monto ??
+                        0
+                    );
+
+                    saldo =
+                    Math.max(
+                        saldo - monto,
+                        0
+                    );
+
+                    const fila =
+                    document.createElement("tr");
+
+                    fila.innerHTML =
+                    "<td>" +
+                    escaparHTML(
+                        pago.fecha ||
+                        pago.fechaPago ||
+                        ""
+                    ) +
+                    "</td>" +
+
+                    "<td>Abono</td>" +
+
+                    "<td>$0.00</td>" +
+
+                    "<td>" +
+                    formatearUSD(
+                        monto
+                    ) +
+                    "</td>" +
+
+                    "<td>" +
+                    formatearUSD(
+                        saldo
+                    ) +
+                    "</td>";
+
+                    tablaEstadoCuenta.appendChild(
+                        fila
+                    );
+
+                }
+            );
+
+        }
+
+    }
+
+    if(contenedorEstadoCuenta){
+
+        contenedorEstadoCuenta.style.display =
+        "block";
+
+    }
+
+}
+
+
+/* ======================================================
+BOTÓN BUSCAR ESTADO DE CUENTA
+====================================================== */
+
+if(btnBuscarEstadoCuenta){
+
+    btnBuscarEstadoCuenta.addEventListener(
+        "click",
+        function(){
+
+            const texto =
+            buscarEstadoCuenta
+            ? buscarEstadoCuenta.value.trim()
+            : "";
+
+            if(texto === ""){
+
+                if(contenedorEstadoCuenta){
+
+                    contenedorEstadoCuenta.style.display =
+                    "none";
+
+                }
+
+                return;
+
+            }
+
+            const coincidencias =
+            buscarCoincidenciasClientes(
+                texto
+            );
+
+           if(
+    coincidencias.length === 0
+){
+
+    if(contenedorEstadoCuenta){
+
+        contenedorEstadoCuenta.style.display =
+        "none";
+
+    }
+
+    mostrarMensaje(
+        "No existen estados de cuenta registrados para este cliente.",
+        "error"
+    );
+
+    return;
+
+}
+
+            const cliente =
+            coincidencias[0];
+
+            mostrarEstadoCuentaCliente(
+                cliente
+            );
+
+        }
+    );
+
+}
+
+
+/* ======================================================
+BOTÓN LIMPIAR ESTADO DE CUENTA
+====================================================== */
+
+if(btnLimpiarEstadoCuenta){
+
+    btnLimpiarEstadoCuenta.addEventListener(
+        "click",
+        function(){
+
+            buscarEstadoCuenta.value =
+            "";
+
+            delete buscarEstadoCuenta.dataset.clienteId;
+
+            delete buscarEstadoCuenta.dataset.clienteNombre;
+
+            if(contenedorEstadoCuenta){
+
+                contenedorEstadoCuenta.style.display =
+                "none";
+
+            }
+
+            if(resumenCliente){
+
+                resumenCliente.textContent =
+                "-";
+
+            }
+
+            if(resumenTotalCreditos){
+
+                resumenTotalCreditos.textContent =
+                "$0.00";
+
+            }
+
+            if(resumenTotalAbonado){
+
+                resumenTotalAbonado.textContent =
+                "$0.00";
+
+            }
+
+            if(resumenSaldoPendiente){
+
+                resumenSaldoPendiente.textContent =
+                "$0.00";
+
+            }
+
+            if(tablaEstadoCuenta){
+
+                tablaEstadoCuenta.innerHTML =
+                '<tr>' +
+                '<td colspan="5" class="sinRegistros">' +
+                'No hay movimientos registrados.' +
+                '</td>' +
+                '</tr>';
+
+            }
+
+            const lista =
+            document.getElementById(
+                "buscarEstadoCuentaSugerencias"
+            );
+
+            if(lista){
+                lista.style.display =
+                "none";
+            }
+
+        }
+    );
+
+}
+
+
+/* ======================================================
+CERRAR SUGERENCIAS DE LOS TRES BUSCADORES
+====================================================== */
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        [
+            buscarCreditos,
+            buscarPagos,
+            buscarEstadoCuenta
+        ]
+        .forEach(
+            function(input){
+
+                if(!input){
+                    return;
+                }
+
+                const lista =
+                document.getElementById(
+                    input.id +
+                    "Sugerencias"
+                );
+
+                if(
+                    lista &&
+                    !input.contains(event.target) &&
+                    !lista.contains(event.target)
+                ){
+
+                    lista.style.display =
+                    "none";
+
+                }
+
+            }
+        );
+
+    }
+);
+/* ======================================================
+REGISTRAR PAGO
+====================================================== */
+
+if(btnRegistrarPago){
+
+    btnRegistrarPago.addEventListener(
+        "click",
+        function(){
+
+            if(!creditoSeleccionadoPago){
+
+                mostrarMensaje(
+                    "Debe seleccionar un crédito antes de registrar el pago.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+            const saldoAntes =
+            numero(
+                creditoSeleccionadoPago.saldoPendienteUSD ??
+                creditoSeleccionadoPago.saldoUSD ??
+                creditoSeleccionadoPago.saldo ??
+                0
+            );
+
+            const monto =
+            numero(
+                montoPagoUSD
+                ? montoPagoUSD.value
+                : 0
+            );
+
+            if(monto <= 0){
+
+                mostrarMensaje(
+                    "Ingrese un monto de pago válido.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+            if(monto > saldoAntes){
+
+                mostrarMensaje(
+                    "El monto del pago no puede ser mayor al saldo pendiente.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+            const tasa =
+            numero(
+                tasaCambioPago
+                ? tasaCambioPago.value
+                : 0
+            );
+
+            const montoBs =
+            tasa > 0
+            ? monto * tasa
+            : 0;
+
+            const saldoDespues =
+            Math.max(
+                saldoAntes - monto,
+                0
+            );
+
+            const idCredito =
+            creditoSeleccionadoPago.id ||
+            creditoSeleccionadoPago.idCredito ||
+            "";
+
+            const pago = {
+
+                idPago:
+                "PG-" +
+                Date.now(),
+
+                credito:
+                idCredito,
+
+                idCredito:
+                idCredito,
+
+                cliente:
+                clientePago
+                ? clientePago.value
+                : "",
+
+                montoPagoUSD:
+                monto,
+
+                montoPagoBs:
+                montoBs,
+
+                tipoTasa:
+                tipoTasaPago
+                ? tipoTasaPago.value
+                : "",
+
+                tasaCambio:
+                tasa,
+
+                fechaPago:
+                fechaPago
+                ? fechaPago.value
+                : fechaHoy(),
+
+                formaPago:
+                formaPago
+                ? formaPago.value
+                : ""
+
+            };
+
+
+            /* GUARDAR PAGO */
+
+            pagos.push(
+                pago
+            );
+
+            localStorage.setItem(
+                "pagos",
+                JSON.stringify(
+                    pagos
+                )
+            );
+
+
+            /* ACTUALIZAR CRÉDITO */
+
+            creditoSeleccionadoPago.saldoPendienteUSD =
+            saldoDespues;
+
+            creditoSeleccionadoPago.saldoUSD =
+            saldoDespues;
+
+            creditoSeleccionadoPago.saldo =
+            saldoDespues;
+
+
+            /* ACTUALIZAR ARRAY DE CRÉDITOS */
+
+            const indiceCredito =
+            creditos.findIndex(
+                function(credito){
+
+                    return String(
+                        credito.id ||
+                        credito.idCredito ||
+                        ""
+                    ) ===
+                    String(
+                        idCredito
+                    );
+
+                }
+            );
+
+            if(indiceCredito !== -1){
+
+                creditos[indiceCredito]
+                .saldoPendienteUSD =
+                saldoDespues;
+
+                creditos[indiceCredito]
+                .saldoUSD =
+                saldoDespues;
+
+                creditos[indiceCredito]
+                .saldo =
+                saldoDespues;
+
+            }
+
+
+            localStorage.setItem(
+                "creditos",
+                JSON.stringify(
+                    creditos
+                )
+            );
+
+
+            /* MOSTRAR SALDO ACTUALIZADO */
+
+            if(saldoDespuesPago){
+
+                saldoDespuesPago.value =
+                saldoDespues.toFixed(2);
+
+            }
+
+            if(montoPagoBs){
+
+                montoPagoBs.value =
+                montoBs.toFixed(2);
+
+            }
+
+
+if(mensajeCredito){
+
+    mensajeCredito.textContent =
+    "✓ Pago registrado correctamente.";
+
+    mensajeCredito.className =
+    "mensaje exito";
+
+    mensajeCredito.style.display =
+    "block";
+
+    mensajeCredito.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+}
+
+/* LIMPIAR BUSCADOR DE PAGOS */
+
+if(buscarPagos){
+
+    buscarPagos.value = "";
+
+    delete buscarPagos.dataset.clienteId;
+    delete buscarPagos.dataset.clienteNombre;
+
+}
+
+const listaPagos =
+document.getElementById(
+    "buscarPagosSugerencias"
+);
+
+if(listaPagos){
+
+    listaPagos.style.display = "none";
+
+}
+/* OCULTAR FORMULARIO DE REGISTRO DE PAGO */
+
+if(contenedorRegistroPago){
+
+    contenedorRegistroPago.style.display =
+    "none";
+
+}
+            /* LIMPIAR DATOS DEL PAGO */
+
+            setTimeout(
+                function(){
+
+                    if(montoPagoUSD){
+                        montoPagoUSD.value =
+                        "";
+                    }
+
+                    if(montoPagoBs){
+                        montoPagoBs.value =
+                        "";
+                    }
+
+                    if(tasaCambioPago){
+                        tasaCambioPago.value =
+                        "";
+                    }
+
+                    if(saldoAntesPago){
+                        saldoAntesPago.value =
+                        saldoDespues.toFixed(2);
+                    }
+
+                    if(saldoDespuesPago){
+                        saldoDespuesPago.value =
+                        "";
+                    }
+
+                    if(tipoTasaPago){
+                        tipoTasaPago.value =
+                        "";
+                    }
+
+                    if(formaPago){
+                        formaPago.value =
+                        "";
+                    }
+
+                    creditoSeleccionadoPago =
+                    null;
+
+                },
+                800
+            );
+
+        }
+    );
+
+}
+/* ======================================================
+INICIALIZACION FINAL
+====================================================== */
+
+inicializarFormularioCredito();
+
+mostrarPestana("nuevo");
+
+
+/* ======================================================
+AQUI TERMINA EL SCRIPT
+====================================================== */
+
+</script>
+
+</body>
+</html>
