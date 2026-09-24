@@ -36,6 +36,7 @@ body{
     color:#fff;
     padding:25px 0;
     flex-shrink:0;
+    position:relative;
 }
 
 .logo{
@@ -76,6 +77,31 @@ body{
     background:#285b9a;
 }
 
+/* ======================================================
+CONFIGURACION
+====================================================== */
+
+.menuConfiguracion{
+    position:absolute;
+    left:0;
+    top:500px;
+    width:100%;
+}
+
+.menuConfiguracion a{
+    color:#fff;
+    text-decoration:none;
+    padding:15px 25px;
+    transition:.3s;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.menuConfiguracion a:hover{
+    background:#285b9a;
+}
+
 .main{
     flex:1;
     padding:35px;
@@ -91,7 +117,9 @@ body{
     font-size:32px;
 }
 
-/* PESTAÑAS */
+/* ======================================================
+PESTAÑAS
+====================================================== */
 
 .pestanas{
     display:flex;
@@ -119,8 +147,6 @@ body{
     background:#fff;
     color:#17375e;
 }
-
-/* CONTENIDO DE PESTAÑAS */
 
 .contenidoPestana{
     display:none;
@@ -174,6 +200,21 @@ body{
     outline:none;
     border-color:#285b9a;
     box-shadow:0 0 0 2px rgba(40,91,154,.12);
+}
+
+/* ======================================================
+TELEFONO
+====================================================== */
+
+.telefonoControl{
+    display:grid;
+    grid-template-columns:95px minmax(0,1fr);
+    gap:8px;
+}
+
+.telefonoControl select,
+.telefonoControl input{
+    width:100%;
 }
 
 .botones{
@@ -237,17 +278,56 @@ body{
 }
 
 .btnEliminar:hover{
-    background:#b91c1c;
+    background:#d97706;
 }
+
+.btnBuscarClientes{
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btnBuscarClientes:hover{
+    background:#1d4ed8;
+}
+
+.btnMostrarTodosClientes{
+    background:#17375e;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:background .3s;
+}
+
+.btnMostrarTodosClientes:hover{
+    background:#285b9a;
+}
+
+.btnLimpiarBusquedaClientes{
+    background:#6b7280;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btnLimpiarBusquedaClientes:hover{
+    background:#4b5563;
+}
+
 .btnEliminarSeleccionados{
     background:#f59e0b;
     color:#fff;
     border:none;
-    padding:10px 16px;
-    border-radius:6px;
+    border-radius:8px;
     cursor:pointer;
     font-weight:bold;
-    margin-bottom:15px;
 }
 
 .btnEliminarSeleccionados:hover{
@@ -259,6 +339,7 @@ body{
     height:18px;
     cursor:pointer;
 }
+
 .mensaje{
     display:none;
     margin-bottom:20px;
@@ -310,46 +391,438 @@ tbody tr:hover{
     background:#f8fafc;
 }
 
-.sinRegistros{
-    color:#6b7280;
-    padding:20px;
+.autocomplete{
+    position:relative;
 }
+
+.listaSugerencias{
+    position:absolute;
+    top:100%;
+    left:0;
+    right:0;
+    background:#fff;
+    border:1px solid #d1d5db;
+    border-radius:0 0 8px 8px;
+    box-shadow:0 6px 15px rgba(0,0,0,.10);
+    z-index:1000;
+    max-height:280px;
+    overflow-y:auto;
+    display:none;
+}
+
+.sugerenciaCliente{
+    padding:11px 12px;
+    cursor:pointer;
+    border-bottom:1px solid #eef2f7;
+}
+
+.sugerenciaCliente:hover{
+    background:#f8fafc;
+}
+
+.sugerenciaCliente strong{
+    display:block;
+    color:#17375e;
+}
+
+.sugerenciaCliente small{
+    display:block;
+    color:#6b7280;
+    margin-top:3px;
+}
+
+/* ======================================================
+BUSCADOR CLIENTES REGISTRADOS
+====================================================== */
+
+.buscadorClientes{
+    display:grid;
+    grid-template-columns:minmax(260px,1fr) 140px 155px 140px 140px;
+    gap:12px;
+    align-items:end;
+}
+
+.buscadorClientes .campo{
+    min-width:0;
+}
+
+.buscadorClientes button{
+    width:100%;
+    height:44px;
+    padding:0 12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+}
+
+#contenedorTablaClientes{
+    display:none;
+    margin-top:25px;
+}
+
+.btnMenuMovil{
+    display:none;
+}
+
+@media(max-width:1100px){
+
+    .buscadorClientes{
+        grid-template-columns:minmax(240px,1fr) 130px 145px;
+    }
+
+}
+
+
+/* ======================================================
+VISTA CELULAR
+====================================================== */
 
 @media(max-width:800px){
 
     .wrapper{
         flex-direction:column;
+        min-height:100vh;
     }
 
     .sidebar{
         width:100%;
-        padding:15px 0;
+        padding:20px 16px 30px;
+        position:relative;
+        min-height:122px;
     }
 
     .logo{
-        margin-bottom:15px;
+        margin-bottom:0;
+        text-align:left;
+        padding-right:65px;
+    }
+
+    .logo h1{
+        font-size:27px;
+        line-height:1.15;
+    }
+
+    .logo p{
+        font-size:13px;
+        margin-top:6px;
+    }
+
+    .btnMenuMovil{
+        display:flex;
+        position:absolute;
+        top:20px;
+        right:16px;
+        width:48px;
+        height:48px;
+        align-items:center;
+        justify-content:center;
+        border:none;
+        border-radius:10px;
+        background:#285b9a;
+        color:#fff;
+        font-size:23px;
+        cursor:pointer;
+    }
+
+    .btnMenuMovil:active{
+        background:#1d4d85;
     }
 
     .menu{
-        flex-direction:row;
-        flex-wrap:wrap;
-        justify-content:center;
+        display:none;
+        margin-top:18px;
+        width:100%;
+    }
+
+    .menuConfiguracion{
+        display:none;
+        position:static;
+        width:100%;
+        margin-top:6px;
+    }
+
+    .sidebar.menuMovilAbierto{
+        min-height:auto;
+        padding-bottom:20px;
+    }
+
+    .sidebar.menuMovilAbierto .menu{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:6px;
+    }
+
+    .sidebar.menuMovilAbierto .menuConfiguracion{
+        display:block;
     }
 
     .menu a{
-        padding:10px 12px;
+        min-height:44px;
+        padding:10px 8px;
+        justify-content:flex-start;
+        border-radius:7px;
         font-size:14px;
+        gap:8px;
+    }
+
+    .menu a i{
+        width:20px;
+        text-align:center;
+        font-size:15px;
+    }
+
+    .menuConfiguracion a{
+        width:100%;
+        min-height:44px;
+        padding:10px 8px;
+        justify-content:flex-start;
+        border-radius:7px;
+        font-size:14px;
+        gap:8px;
+    }
+
+    .menuConfiguracion a i{
+        width:20px;
+        text-align:center;
     }
 
     .main{
-        padding:20px;
+        width:100%;
+        padding:16px 14px 24px;
+    }
+
+    .topo{
+        margin-bottom:14px;
     }
 
     .topo h2{
-        font-size:26px;
+        font-size:23px;
+        line-height:1.2;
+    }
+
+
+    /* ==================================================
+    CLIENTES REGISTRADOS
+    BUSCADOR + BOTONES 2 X 2
+    ================================================== */
+
+    .buscadorClientes{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:10px;
+        align-items:stretch;
+    }
+
+    .buscadorClientes .campo{
+        grid-column:1 / -1;
+        width:100%;
+        margin-bottom:2px;
+    }
+
+    .buscadorClientes button{
+        width:100%;
+        height:42px;
+        min-width:0;
+        padding:0 7px;
+        font-size:12px;
+        border-radius:8px;
+        white-space:nowrap;
+    }
+
+
+    /* ==================================================
+    CLIENTES REGISTRADOS
+    TABLA VERTICAL EN CELULAR
+    ================================================== */
+
+    #contenedorTablaClientes{
+        margin-top:20px;
+    }
+
+    #contenedorTablaClientes .tabla-scroll{
+        overflow:visible;
+        width:100%;
+    }
+
+    #contenedorTablaClientes table{
+        display:block;
+        width:100%;
+        min-width:0;
+        border-collapse:separate;
+    }
+
+    #contenedorTablaClientes thead{
+        display:block;
+        width:100%;
+        margin-bottom:10px;
+    }
+
+    #contenedorTablaClientes thead tr{
+        display:block;
+        width:100%;
+    }
+
+    #contenedorTablaClientes thead th{
+        display:none;
+    }
+
+    #contenedorTablaClientes thead th:first-child{
+        display:flex;
+        align-items:center;
+        gap:9px;
+        width:100%;
+        background:#17375e;
+        border-radius:8px;
+        padding:11px 13px;
+        text-align:left;
+    }
+
+    #contenedorTablaClientes thead th:first-child::after{
+        content:"Seleccionar todos";
+        color:#fff;
+        font-size:13px;
+        font-weight:bold;
+    }
+
+    #contenedorTablaClientes tbody{
+        display:block;
+        width:100%;
+    }
+
+    #contenedorTablaClientes tbody tr{
+        display:block;
+        width:100%;
+        background:#f8fafc;
+        border-left:5px solid #1d4ed8;
+        border-radius:11px;
+        margin-bottom:14px;
+        padding:10px 12px;
+        box-shadow:0 3px 10px rgba(0,0,0,.05);
+    }
+
+    #contenedorTablaClientes tbody tr:hover{
+        background:#f8fafc;
+    }
+
+    #contenedorTablaClientes tbody td{
+        display:grid;
+        grid-template-columns:105px minmax(0,1fr);
+        gap:10px;
+        align-items:start;
+        width:100%;
+        padding:8px 3px;
+        border-bottom:1px solid #e5e7eb;
+        text-align:left;
+        white-space:normal;
+        overflow-wrap:anywhere;
+        line-height:1.35;
+        font-size:13px;
+    }
+
+    #contenedorTablaClientes tbody td:first-child{
+        display:flex;
+        align-items:center;
+        padding:5px 3px 10px;
+    }
+
+    #contenedorTablaClientes tbody td:first-child::before{
+        content:"Seleccionar";
+        color:#17375e;
+        font-weight:bold;
+        width:105px;
+        flex-shrink:0;
+    }
+
+    #contenedorTablaClientes tbody td:nth-child(2)::before{
+        content:"Nombre";
+    }
+
+    #contenedorTablaClientes tbody td:nth-child(3)::before{
+        content:"Documento";
+    }
+
+    #contenedorTablaClientes tbody td:nth-child(4)::before{
+        content:"Teléfono";
+    }
+
+    #contenedorTablaClientes tbody td:nth-child(5)::before{
+        content:"Dirección";
+    }
+
+    #contenedorTablaClientes tbody td:nth-child(6)::before{
+        content:"Ciudad";
+    }
+
+    #contenedorTablaClientes tbody td:nth-child(7)::before{
+        content:"Estado";
+    }
+
+    #contenedorTablaClientes tbody td:nth-child(8)::before{
+        content:"Acciones";
+    }
+
+    #contenedorTablaClientes tbody td:nth-child(n+2)::before{
+        color:#17375e;
+        font-weight:bold;
+        text-align:left;
+    }
+
+#contenedorTablaClientes tbody td:last-child{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    width:100%;
+    padding:8px 3px 4px;
+    border-bottom:none;
+}
+
+#contenedorTablaClientes tbody td:last-child::before{
+    content:"Acciones";
+    flex:0 0 82px;
+    align-self:center;
+}
+
+#contenedorTablaClientes tbody td:last-child .btnEditar,
+#contenedorTablaClientes tbody td:last-child .btnEliminar{
+    width:auto;
+    min-width:0;
+    height:34px;
+    margin:0;
+    padding:4px 9px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    white-space:nowrap;
+    font-size:11px;
+}
+
+#contenedorTablaClientes tbody td:last-child .btnEditar{
+    flex:0.9 1 0;
+}
+
+#contenedorTablaClientes tbody td:last-child .btnEliminar{
+    flex:1.1 1 0;
+}
+
+#contenedorTablaClientes tbody td:last-child .btnEditar i,
+#contenedorTablaClientes tbody td:last-child .btnEliminar i{
+    font-size:11px;
+}
+
+    #contenedorTablaClientes .sinRegistros{
+        display:block;
+        padding:15px;
+        text-align:center;
     }
 
 }
+
+
+/* ======================================================
+VISTA CELULAR PEQUEÑA
+====================================================== */
 
 @media(max-width:600px){
 
@@ -362,13 +835,74 @@ tbody tr:hover{
         min-width:150px;
     }
 
-    .card{
-        border-radius:0 12px 12px 12px;
+    .telefonoControl{
+        grid-template-columns:90px minmax(0,1fr);
+    }
+
+}
+
+
+@media(max-width:420px){
+
+    .sidebar{
+        padding:19px 13px 29px;
+        min-height:120px;
+    }
+
+    .logo h1{
+        font-size:25px;
+    }
+
+    .logo p{
+        font-size:12px;
+    }
+
+    .btnMenuMovil{
+        top:18px;
+        right:13px;
+        width:46px;
+        height:46px;
+        font-size:21px;
+    }
+
+    .sidebar.menuMovilAbierto .menu{
+        grid-template-columns:1fr;
+    }
+
+    .main{
+        padding:14px 10px 22px;
+    }
+
+    .topo h2{
+        font-size:21px;
+    }
+
+    .buscadorClientes{
+        gap:9px;
+    }
+
+    .buscadorClientes button{
+        height:40px;
+        font-size:11px;
+        padding:0 5px;
+    }
+
+    #contenedorTablaClientes tbody td{
+        grid-template-columns:92px minmax(0,1fr);
+        gap:8px;
+        font-size:12px;
+    }
+
+    #contenedorTablaClientes tbody td:first-child::before{
+        width:92px;
     }
 
 }
 
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js?v=2"></script>
 
 </head>
 
@@ -385,6 +919,18 @@ tbody tr:hover{
 <p>Sistema de Ventas a Crédito</p>
 
 </div>
+
+<button
+type="button"
+id="btnMenuMovil"
+class="btnMenuMovil"
+aria-label="Abrir menú"
+aria-expanded="false"
+>
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
 
 <div class="menu">
 
@@ -430,6 +976,26 @@ Reportes
 
 </div>
 
+<div class="menuConfiguracion">
+
+<a href="configuracion.html">
+
+<i class="fa-solid fa-gear"></i>
+
+Configuración
+
+</a>
+
+<a
+href="#"
+id="btnSalirCrediFlow"
+>
+<i class="fa-solid fa-right-from-bracket"></i>
+Salir
+</a>
+
+</div>
+
 </aside>
 
 <div class="main">
@@ -441,8 +1007,6 @@ Reportes
 </div>
 
 <div id="mensaje" class="mensaje"></div>
-
-<!-- PESTAÑAS -->
 
 <div class="pestanas">
 
@@ -470,15 +1034,15 @@ Clientes Registrados
 
 </div>
 
-<!-- PESTAÑA NUEVO CLIENTE -->
-
 <div
 id="contenidoNuevoCliente"
 class="contenidoPestana activo">
 
 <div class="card">
 
-<h3 id="tituloFormulario">Nuevo Cliente</h3>
+<h3 id="tituloFormulario">
+Nuevo Cliente
+</h3>
 
 <div class="grid">
 
@@ -492,7 +1056,6 @@ Nombre completo
 type="text"
 id="nombre"
 autocomplete="off"
-
 >
 
 </div>
@@ -507,23 +1070,41 @@ Cédula / Documento
 type="text"
 id="documento"
 autocomplete="off"
-
 >
 
 </div>
 
 <div class="campo">
 
-<label for="telefono">
+<label for="telefonoNumero">
 Teléfono
 </label>
 
+<div class="telefonoControl">
+
+<select id="telefonoPrefijo">
+
+<option value="">
+Prefijo
+</option>
+
+<option value="0414">0414</option>
+<option value="0424">0424</option>
+<option value="0416">0416</option>
+<option value="0426">0426</option>
+<option value="0412">0412</option>
+
+</select>
+
 <input
 type="text"
-id="telefono"
+id="telefonoNumero"
 autocomplete="off"
-
+inputmode="numeric"
+maxlength="7"
 >
+
+</div>
 
 </div>
 
@@ -537,7 +1118,6 @@ Dirección
 type="text"
 id="direccion"
 autocomplete="off"
-
 >
 
 </div>
@@ -552,7 +1132,6 @@ Ciudad
 type="text"
 id="ciudad"
 autocomplete="off"
-
 >
 
 </div>
@@ -605,9 +1184,7 @@ Seleccione el estado
 <button
 type="button"
 class="btnGuardar"
-id="btnGuardarCliente"
-
->
+id="btnGuardarCliente">
 
 <i class="fa-solid fa-floppy-disk"></i>
 
@@ -618,9 +1195,7 @@ Guardar Cliente
 <button
 type="button"
 class="btnLimpiar"
-id="btnLimpiarCliente"
-
->
+id="btnLimpiarCliente">
 
 <i class="fa-solid fa-eraser"></i>
 
@@ -634,15 +1209,70 @@ Limpiar
 
 </div>
 
-<!-- PESTAÑA CLIENTES REGISTRADOS -->
-
 <div
 id="contenidoClientesRegistrados"
 class="contenidoPestana">
 
 <div class="card">
 
-<h3>Clientes Registrados</h3>
+<h3>
+Clientes Registrados
+</h3>
+
+<div class="buscadorClientes">
+
+<div class="campo autocomplete">
+
+<label for="buscarClientesRegistrados">
+Cliente / Documento
+</label>
+
+<input
+type="text"
+id="buscarClientesRegistrados"
+autocomplete="off"
+placeholder="Buscar por nombre o documento..."
+>
+
+<div
+id="sugerenciasClientesRegistrados"
+class="listaSugerencias">
+</div>
+
+</div>
+
+<button
+type="button"
+class="btnBuscarClientes"
+id="btnBuscarClientes">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+Buscar
+
+</button>
+
+<button
+type="button"
+class="btnMostrarTodosClientes"
+id="btnMostrarTodosClientes">
+
+<i class="fa-solid fa-list"></i>
+
+Mostrar todos
+
+</button>
+
+<button
+type="button"
+class="btnLimpiarBusquedaClientes"
+id="btnLimpiarBusquedaClientes">
+
+<i class="fa-solid fa-eraser"></i>
+
+Limpiar
+
+</button>
 
 <button
 type="button"
@@ -651,9 +1281,13 @@ id="btnEliminarSeleccionados">
 
 <i class="fa-solid fa-trash"></i>
 
-Eliminar seleccionados
+Eliminar
 
 </button>
+
+</div>
+
+<div id="contenedorTablaClientes">
 
 <div class="tabla-scroll">
 
@@ -686,7 +1320,7 @@ class="checkboxCliente">
 
 <tr>
 
-<td colspan="7" class="sinRegistros">
+<td colspan="8" class="sinRegistros">
 
 No hay clientes registrados.
 
@@ -697,6 +1331,8 @@ No hay clientes registrados.
 </tbody>
 
 </table>
+
+</div>
 
 </div>
 
@@ -719,6 +1355,47 @@ let clienteEditando = null;
 
 
 /* ======================================================
+CARGAR CLIENTES DESDE SUPABASE
+====================================================== */
+
+async function sincronizarClientesDesdeSupabase(){
+
+    const clientesSupabase =
+    await cargarClientesSupabaseCrediFlow();
+
+
+    if(
+        Array.isArray(
+            clientesSupabase
+        )
+    ){
+
+        clientes =
+        clientesSupabase;
+
+
+        localStorage.setItem(
+            "clientes",
+            JSON.stringify(
+                clientes
+            )
+        );
+
+
+        actualizarTablaClientes();
+
+
+        console.log(
+            "CLIENTES CARGADOS DESDE SUPABASE:",
+            clientes
+        );
+
+    }
+
+}
+
+
+/* ======================================================
 REFERENCIAS
 ====================================================== */
 
@@ -728,8 +1405,11 @@ document.getElementById("nombre");
 const documento =
 document.getElementById("documento");
 
-const telefono =
-document.getElementById("telefono");
+const telefonoPrefijo =
+document.getElementById("telefonoPrefijo");
+
+const telefonoNumero =
+document.getElementById("telefonoNumero");
 
 const direccion =
 document.getElementById("direccion");
@@ -748,15 +1428,13 @@ document.getElementById("btnGuardarCliente");
 
 const btnLimpiarCliente =
 document.getElementById("btnLimpiarCliente");
+
 const btnEliminarSeleccionados =
-document.getElementById(
-    "btnEliminarSeleccionados"
-);
+document.getElementById("btnEliminarSeleccionados");
 
 const seleccionarTodosClientes =
-document.getElementById(
-    "seleccionarTodosClientes"
-);
+document.getElementById("seleccionarTodosClientes");
+
 const tituloFormulario =
 document.getElementById("tituloFormulario");
 
@@ -775,6 +1453,178 @@ document.getElementById("contenidoNuevoCliente");
 const contenidoClientesRegistrados =
 document.getElementById("contenidoClientesRegistrados");
 
+const buscarClientesRegistrados =
+document.getElementById("buscarClientesRegistrados");
+
+const sugerenciasClientesRegistrados =
+document.getElementById("sugerenciasClientesRegistrados");
+
+const btnBuscarClientes =
+document.getElementById("btnBuscarClientes");
+
+const btnMostrarTodosClientes =
+document.getElementById("btnMostrarTodosClientes");
+
+const btnLimpiarBusquedaClientes =
+document.getElementById("btnLimpiarBusquedaClientes");
+
+const contenedorTablaClientes =
+document.getElementById("contenedorTablaClientes");
+
+
+/* ======================================================
+UTILIDADES
+====================================================== */
+
+function normalizar(valor){
+
+    return String(
+        valor || ""
+    )
+    .toLowerCase()
+    .trim();
+
+}
+
+
+function separarTelefono(telefonoCompleto){
+
+    const limpio =
+    String(
+        telefonoCompleto || ""
+    )
+    .replace(
+        /\D/g,
+        ""
+    );
+
+    const prefijosPermitidos = [
+        "0414",
+        "0424",
+        "0416",
+        "0426",
+        "0412"
+    ];
+
+    const prefijo =
+    prefijosPermitidos.find(
+        function(item){
+
+            return limpio.startsWith(
+                item
+            );
+
+        }
+    ) || "";
+
+    const numero =
+    prefijo
+    ? limpio.substring(
+        4,
+        11
+    )
+    : "";
+
+    return {
+        prefijo:prefijo,
+        numero:numero
+    };
+
+}
+
+
+/* ======================================================
+VALIDACION DEL NUMERO DE TELEFONO
+====================================================== */
+
+telefonoNumero.addEventListener(
+    "input",
+    function(){
+
+        this.value =
+        this.value
+        .replace(
+            /\D/g,
+            ""
+        )
+        .slice(
+            0,
+            7
+        );
+
+    }
+);
+
+
+/* ======================================================
+VALIDAR DOCUMENTO DUPLICADO AL SALIR DEL CAMPO
+====================================================== */
+
+documento.addEventListener(
+    "blur",
+    function(){
+
+        const documentoValor =
+        documento.value
+        .trim()
+        .toLowerCase();
+
+        if(
+            documentoValor ===
+            ""
+        ){
+            return;
+        }
+
+        clientes =
+        JSON.parse(
+            localStorage.getItem(
+                "clientes"
+            )
+        ) || [];
+
+        const existe =
+        clientes.some(
+            function(cliente,index){
+
+                if(
+                    clienteEditando !==
+                    null &&
+                    index ===
+                    clienteEditando
+                ){
+
+                    return false;
+
+                }
+
+                return String(
+                    cliente.documento ||
+                    ""
+                )
+                .trim()
+                .toLowerCase() ===
+                documentoValor;
+
+            }
+        );
+
+        if(
+            existe
+        ){
+
+            alert(
+                "La cédula o documento ya se encuentra registrado. No se puede registrar nuevamente este cliente."
+            );
+
+            documento.value =
+            "";
+
+        }
+
+    }
+);
+
 
 /* ======================================================
 CAMBIO DE PESTAÑAS
@@ -782,50 +1632,83 @@ CAMBIO DE PESTAÑAS
 
 function mostrarPestana(nombrePestana){
 
-if(nombrePestana === "nuevo"){
+    if(
+        nombrePestana ===
+        "nuevo"
+    ){
 
-pestanaNuevoCliente.classList.add("activa");
+        pestanaNuevoCliente.classList.add(
+            "activa"
+        );
 
-pestanaClientesRegistrados.classList.remove("activa");
+        pestanaClientesRegistrados.classList.remove(
+            "activa"
+        );
 
-contenidoNuevoCliente.classList.add("activo");
+        contenidoNuevoCliente.classList.add(
+            "activo"
+        );
 
-contenidoClientesRegistrados.classList.remove("activo");
+        contenidoClientesRegistrados.classList.remove(
+            "activo"
+        );
 
-}else{
+    }else{
 
-pestanaNuevoCliente.classList.remove("activa");
+        pestanaNuevoCliente.classList.remove(
+            "activa"
+        );
 
-pestanaClientesRegistrados.classList.add("activa");
+        pestanaClientesRegistrados.classList.add(
+            "activa"
+        );
 
-contenidoNuevoCliente.classList.remove("activo");
+        contenidoNuevoCliente.classList.remove(
+            "activo"
+        );
 
-contenidoClientesRegistrados.classList.add("activo");
+        contenidoClientesRegistrados.classList.add(
+            "activo"
+        );
 
-actualizarTablaClientes();
+        buscarClientesRegistrados.value =
+        "";
 
-}
+        seleccionarTodosClientes.checked =
+        false;
+
+        tablaClientes.innerHTML =
+        "";
+
+        contenedorTablaClientes.style.display =
+        "none";
+
+    }
 
 }
 
 
 pestanaNuevoCliente.addEventListener(
-"click",
-function(){
+    "click",
+    function(){
 
-mostrarPestana("nuevo");
+        mostrarPestana(
+            "nuevo"
+        );
 
-}
+    }
 );
 
 
 pestanaClientesRegistrados.addEventListener(
-"click",
-function(){
+    "click",
+    function(){
 
-mostrarPestana("registrados");
+        mostrarPestana(
+            "registrados"
+        );
 
-}
+    }
 );
 
 
@@ -833,29 +1716,59 @@ mostrarPestana("registrados");
 MENSAJES
 ====================================================== */
 
-function mostrarMensaje(texto,tipo){
+function mostrarMensaje(
+    texto,
+    tipo
+){
 
-mensaje.textContent =
-texto;
+    mensaje.textContent =
+    texto;
 
-mensaje.className =
-"mensaje " + tipo;
+    mensaje.className =
+    "mensaje " +
+    tipo;
 
-mensaje.style.display =
-"block";
+    mensaje.style.display =
+    "block";
 
-setTimeout(
-function(){
 
-mensaje.style.display =
-"none";
+    /* ==================================================
+    VISTA CELULAR
+    LLEVAR AUTOMATICAMENTE A LA NOTIFICACION
+    ================================================== */
 
-mensaje.className =
-"mensaje";
+    if(
+        window.innerWidth <=
+        800
+    ){
 
-},
-3000
-);
+        setTimeout(
+            function(){
+
+                mensaje.scrollIntoView({
+                    behavior:"smooth",
+                    block:"center"
+                });
+
+            },
+            50
+        );
+
+    }
+
+
+    setTimeout(
+        function(){
+
+            mensaje.style.display =
+            "none";
+
+            mensaje.className =
+            "mensaje";
+
+        },
+        3000
+    );
 
 }
 
@@ -866,14 +1779,162 @@ SEGURIDAD HTML
 
 function escaparHTML(valor){
 
-return String(
-valor || ""
-)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+    return String(
+        valor || ""
+    )
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* ======================================================
+MOSTRAR TABLA
+====================================================== */
+
+function mostrarTablaClientes(lista){
+
+    if(
+        lista.length ===
+        0
+    ){
+
+        tablaClientes.innerHTML =
+        '<tr>' +
+        '<td colspan="8" class="sinRegistros">' +
+        'No hay clientes para mostrar.' +
+        '</td>' +
+        '</tr>';
+
+        return;
+
+    }
+
+    const clientesOrdenados =
+    lista
+    .map(
+        function(cliente){
+
+            return {
+                cliente:cliente,
+                index:clientes.indexOf(
+                    cliente
+                )
+            };
+
+        }
+    )
+    .sort(
+        function(a,b){
+
+            const nombreA =
+            String(
+                a.cliente.nombre ||
+                ""
+            )
+            .toLowerCase()
+            .trim();
+
+            const nombreB =
+            String(
+                b.cliente.nombre ||
+                ""
+            )
+            .toLowerCase()
+            .trim();
+
+            return nombreA.localeCompare(
+                nombreB,
+                "es",
+                {
+                    sensitivity:"base"
+                }
+            );
+
+        }
+    );
+
+    let html =
+    "";
+
+    clientesOrdenados.forEach(
+        function(item){
+
+            const c =
+            item.cliente;
+
+            const index =
+            item.index;
+
+            html +=
+
+            "<tr>" +
+
+            "<td>" +
+            '<input ' +
+            'type="checkbox" ' +
+            'class="checkboxCliente clienteSeleccionado" ' +
+            'data-index="' +
+            index +
+            '">' +
+            "</td>" +
+
+            "<td>" +
+            escaparHTML(c.nombre) +
+            "</td>" +
+
+            "<td>" +
+            escaparHTML(c.documento) +
+            "</td>" +
+
+            "<td>" +
+            escaparHTML(c.telefono) +
+            "</td>" +
+
+            "<td>" +
+            escaparHTML(c.direccion) +
+            "</td>" +
+
+            "<td>" +
+            escaparHTML(c.ciudad) +
+            "</td>" +
+
+            "<td>" +
+            escaparHTML(
+                c.estado || ""
+            ) +
+            "</td>" +
+
+            "<td>" +
+
+            '<button type="button" class="btnEditar" onclick="editarCliente(' +
+            index +
+            ')">' +
+
+            '<i class="fa-solid fa-pen"></i> Editar' +
+
+            '</button>' +
+
+            '<button type="button" class="btnEliminar" onclick="eliminarCliente(' +
+            index +
+            ')">' +
+
+            '<i class="fa-solid fa-trash"></i> Eliminar' +
+
+            '</button>' +
+
+            "</td>" +
+
+            "</tr>";
+
+        }
+    );
+
+    tablaClientes.innerHTML =
+    html;
 
 }
 
@@ -884,158 +1945,332 @@ ACTUALIZAR TABLA
 
 function actualizarTablaClientes(){
 
-if(clientes.length === 0){
+    clientes =
+    JSON.parse(
+        localStorage.getItem(
+            "clientes"
+        )
+    ) || [];
 
-tablaClientes.innerHTML =
-
-'<tr>' +
-
-'<td colspan="8" class="sinRegistros">' +
-
-'No hay clientes registrados.' +
-
-'</td>' +
-
-'</tr>';
-
-return;
+    mostrarTablaClientes(
+        clientes
+    );
 
 }
 
 
-/* ORDEN ALFABÉTICO */
+/* ======================================================
+BUSCAR CLIENTES REGISTRADOS
+====================================================== */
 
-const clientesOrdenados =
-clientes
-.map(
-function(cliente,index){
+function mostrarSugerenciasClientesRegistrados(){
 
-return {
-cliente:cliente,
-index:index
-};
+    clientes =
+    JSON.parse(
+        localStorage.getItem(
+            "clientes"
+        )
+    ) || [];
+
+    const termino =
+    normalizar(
+        buscarClientesRegistrados.value
+    );
+
+    sugerenciasClientesRegistrados.innerHTML =
+    "";
+
+    if(
+        !termino
+    ){
+
+        sugerenciasClientesRegistrados.style.display =
+        "none";
+
+        return;
+
+    }
+
+    const coincidencias =
+    clientes
+    .filter(
+        function(cliente){
+
+            return (
+                normalizar(
+                    cliente.nombre
+                )
+                .includes(
+                    termino
+                ) ||
+                normalizar(
+                    cliente.documento
+                )
+                .includes(
+                    termino
+                )
+            );
+
+        }
+    )
+    .slice(
+        0,
+        10
+    );
+
+    if(
+        !coincidencias.length
+    ){
+
+        sugerenciasClientesRegistrados.style.display =
+        "none";
+
+        return;
+
+    }
+
+    coincidencias.forEach(
+        function(cliente){
+
+            const div =
+            document.createElement(
+                "div"
+            );
+
+            div.className =
+            "sugerenciaCliente";
+
+            div.innerHTML =
+            "<strong>" +
+            escaparHTML(
+                cliente.nombre
+            ) +
+            "</strong>" +
+            "<small>" +
+            escaparHTML(
+                cliente.documento ||
+                ""
+            ) +
+            "</small>";
+
+            div.addEventListener(
+                "click",
+                function(){
+
+                    buscarClientesRegistrados.value =
+                    cliente.nombre;
+
+                    sugerenciasClientesRegistrados.style.display =
+                    "none";
+
+                }
+            );
+
+            sugerenciasClientesRegistrados.appendChild(
+                div
+            );
+
+        }
+    );
+
+    sugerenciasClientesRegistrados.style.display =
+    "block";
 
 }
-)
-.sort(
-function(a,b){
 
-const nombreA =
-String(
-a.cliente.nombre || ""
-)
-.toLowerCase()
-.trim();
 
-const nombreB =
-String(
-b.cliente.nombre || ""
-)
-.toLowerCase()
-.trim();
-
-return nombreA.localeCompare(
-nombreB,
-"es",
-{
-sensitivity:"base"
-}
+buscarClientesRegistrados.addEventListener(
+    "input",
+    mostrarSugerenciasClientesRegistrados
 );
 
-}
+
+buscarClientesRegistrados.addEventListener(
+    "focus",
+    mostrarSugerenciasClientesRegistrados
 );
 
 
-let html = "";
+document.addEventListener(
+    "click",
+    function(event){
 
-clientesOrdenados.forEach(
-function(item){
+        if(
+            !event.target.closest(
+                ".autocomplete"
+            )
+        ){
 
-const c =
-item.cliente;
+            sugerenciasClientesRegistrados.style.display =
+            "none";
 
-const index =
-item.index;
+        }
 
-const estadoGeografico =
-c.estado || "";
-
-html +=
-
-"<tr>" +
-
-"<td>" +
-'<input ' +
-'type="checkbox" ' +
-'class="checkboxCliente clienteSeleccionado" ' +
-'data-index="' +
-index +
-'">' +
-"</td>" +
-
-"<td>" +
-escaparHTML(c.nombre) +
-"</td>" +
-
-"<td>" +
-escaparHTML(c.documento) +
-"</td>" +
-
-"<td>" +
-escaparHTML(c.telefono) +
-"</td>" +
-
-"<td>" +
-escaparHTML(c.direccion) +
-"</td>" +
-
-"<td>" +
-escaparHTML(c.ciudad) +
-"</td>" +
-
-"<td>" +
-escaparHTML(estadoGeografico) +
-"</td>" +
-
-"<td>" +
-
-'<button ' +
-'type="button" ' +
-'class="btnEditar" ' +
-'onclick="editarCliente(' +
-index +
-')">' +
-
-'<i class="fa-solid fa-pen"></i> ' +
-
-'Editar' +
-
-'</button>' +
-
-'<button ' +
-'type="button" ' +
-'class="btnEliminar" ' +
-'onclick="eliminarCliente(' +
-index +
-')">' +
-
-'<i class="fa-solid fa-trash"></i> ' +
-
-'Eliminar' +
-
-'</button>' +
-
-"</td>" +
-
-"</tr>";
-
-}
+    }
 );
 
-tablaClientes.innerHTML =
-html;
 
-}
+btnBuscarClientes.addEventListener(
+    "click",
+    function(){
+
+        clientes =
+        JSON.parse(
+            localStorage.getItem(
+                "clientes"
+            )
+        ) || [];
+
+        const termino =
+        normalizar(
+            buscarClientesRegistrados.value
+        );
+
+        seleccionarTodosClientes.checked =
+        false;
+
+        if(
+            !termino
+        ){
+
+            tablaClientes.innerHTML =
+            "";
+
+            contenedorTablaClientes.style.display =
+            "none";
+
+            mostrarMensaje(
+                "Debe ingresar un nombre o documento para realizar la búsqueda.",
+                "error"
+            );
+
+            return;
+
+        }
+
+        const lista =
+        clientes.filter(
+            function(cliente){
+
+                return (
+                    normalizar(
+                        cliente.nombre
+                    )
+                    .includes(
+                        termino
+                    ) ||
+                    normalizar(
+                        cliente.documento
+                    )
+                    .includes(
+                        termino
+                    )
+                );
+
+            }
+        );
+
+        contenedorTablaClientes.style.display =
+        "block";
+
+        mostrarTablaClientes(
+            lista
+        );
+
+        if(
+            window.innerWidth <= 800
+        ){
+
+            setTimeout(
+                function(){
+
+                    contenedorTablaClientes.scrollIntoView({
+                        behavior:"smooth",
+                        block:"start"
+                    });
+
+                },
+                150
+            );
+
+        }
+
+    }
+);
+
+
+/* ======================================================
+MOSTRAR TODOS
+====================================================== */
+
+btnMostrarTodosClientes.addEventListener(
+    "click",
+    function(){
+
+        clientes =
+        JSON.parse(
+            localStorage.getItem(
+                "clientes"
+            )
+        ) || [];
+
+        buscarClientesRegistrados.value =
+        "";
+
+        seleccionarTodosClientes.checked =
+        false;
+
+        contenedorTablaClientes.style.display =
+        "block";
+
+        mostrarTablaClientes(
+            clientes
+        );
+
+        if(
+            window.innerWidth <= 800
+        ){
+
+            setTimeout(
+                function(){
+
+                    contenedorTablaClientes.scrollIntoView({
+                        behavior:"smooth",
+                        block:"start"
+                    });
+
+                },
+                150
+            );
+
+        }
+
+    }
+);
+
+
+/* ======================================================
+LIMPIAR BUSQUEDA
+====================================================== */
+
+btnLimpiarBusquedaClientes.addEventListener(
+    "click",
+    function(){
+
+        buscarClientesRegistrados.value =
+        "";
+
+        seleccionarTodosClientes.checked =
+        false;
+
+        tablaClientes.innerHTML =
+        "";
+
+        contenedorTablaClientes.style.display =
+        "none";
+
+    }
+);
 
 
 /* ======================================================
@@ -1044,33 +2279,36 @@ LIMPIAR FORMULARIO
 
 function limpiarFormulario(){
 
-clienteEditando =
-null;
+    clienteEditando =
+    null;
 
-nombre.value =
-"";
+    nombre.value =
+    "";
 
-documento.value =
-"";
+    documento.value =
+    "";
 
-telefono.value =
-"";
+    telefonoPrefijo.value =
+    "";
 
-direccion.value =
-"";
+    telefonoNumero.value =
+    "";
 
-ciudad.value =
-"";
+    direccion.value =
+    "";
 
-estado.value =
-"";
+    ciudad.value =
+    "";
 
-tituloFormulario.textContent =
-"Nuevo Cliente";
+    estado.value =
+    "";
 
-btnGuardarCliente.innerHTML =
-'<i class="fa-solid fa-floppy-disk"></i> ' +
-'Guardar Cliente';
+    tituloFormulario.textContent =
+    "Nuevo Cliente";
+
+    btnGuardarCliente.innerHTML =
+    '<i class="fa-solid fa-floppy-disk"></i> ' +
+    'Guardar Cliente';
 
 }
 
@@ -1081,47 +2319,64 @@ EDITAR CLIENTE
 
 function editarCliente(index){
 
-const cliente =
-clientes[index];
+    const cliente =
+    clientes[index];
 
-if(!cliente){
-return;
-}
+    if(
+        !cliente
+    ){
+        return;
+    }
 
-clienteEditando =
-index;
+    clienteEditando =
+    index;
 
-nombre.value =
-cliente.nombre || "";
+    nombre.value =
+    cliente.nombre ||
+    "";
 
-documento.value =
-cliente.documento || "";
+    documento.value =
+    cliente.documento ||
+    "";
 
-telefono.value =
-cliente.telefono || "";
+    const datosTelefono =
+    separarTelefono(
+        cliente.telefono
+    );
 
-direccion.value =
-cliente.direccion || "";
+    telefonoPrefijo.value =
+    datosTelefono.prefijo;
 
-ciudad.value =
-cliente.ciudad || "";
+    telefonoNumero.value =
+    datosTelefono.numero;
 
-estado.value =
-cliente.estado || "";
+    direccion.value =
+    cliente.direccion ||
+    "";
 
-tituloFormulario.textContent =
-"Editar Cliente";
+    ciudad.value =
+    cliente.ciudad ||
+    "";
 
-btnGuardarCliente.innerHTML =
-'<i class="fa-solid fa-rotate"></i> ' +
-'Actualizar Cliente';
+    estado.value =
+    cliente.estado ||
+    "";
 
-mostrarPestana("nuevo");
+    tituloFormulario.textContent =
+    "Editar Cliente";
 
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
+    btnGuardarCliente.innerHTML =
+    '<i class="fa-solid fa-rotate"></i> ' +
+    'Actualizar Cliente';
+
+    mostrarPestana(
+        "nuevo"
+    );
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 
 }
 
@@ -1132,166 +2387,179 @@ ELIMINAR CLIENTE
 
 function eliminarCliente(index){
 
-const cliente =
-clientes[index];
+    const cliente =
+    clientes[index];
 
-if(!cliente){
-return;
+    if(
+        !cliente
+    ){
+        return;
+    }
+
+    const confirmar =
+    confirm(
+        "¿Desea eliminar al cliente " +
+        (
+            cliente.nombre ||
+            ""
+        ) +
+        "?\n\nEsta acción eliminará el registro del cliente de la lista."
+    );
+
+    if(
+        !confirmar
+    ){
+        return;
+    }
+
+    clientes.splice(
+        index,
+        1
+    );
+
+    localStorage.setItem(
+        "clientes",
+        JSON.stringify(
+            clientes
+        )
+    );
+
+    actualizarTablaClientes();
+
+    contenedorTablaClientes.style.display =
+    "block";
+
+    if(
+        clienteEditando ===
+        index
+    ){
+
+        limpiarFormulario();
+
+    }
+
+    mostrarMensaje(
+        "Cliente eliminado correctamente.",
+        "exito"
+    );
+
 }
 
-const confirmar =
-confirm(
-"¿Desea eliminar al cliente " +
-(cliente.nombre || "") +
-"?\n\nEsta acción eliminará el registro del cliente de la lista."
-);
 
-if(!confirmar){
-return;
-}
-
-clientes.splice(
-index,
-1
-);
-
-localStorage.setItem(
-"clientes",
-JSON.stringify(clientes)
-);
-
-actualizarTablaClientes();
-
-if(clienteEditando === index){
-
-limpiarFormulario();
-
-}
-
-mostrarMensaje(
-"Cliente eliminado correctamente.",
-"exito"
-);
-
-}
 /* ======================================================
 ELIMINAR CLIENTES SELECCIONADOS
 ====================================================== */
 
-if(btnEliminarSeleccionados){
+if(
+    btnEliminarSeleccionados
+){
 
-btnEliminarSeleccionados.addEventListener(
-"click",
-function(){
+    btnEliminarSeleccionados.addEventListener(
+        "click",
+        function(){
 
-const seleccionados =
-Array.from(
-document.querySelectorAll(
-".clienteSeleccionado:checked"
-)
-)
-.map(
-function(checkbox){
+            const seleccionados =
+            Array.from(
+                document.querySelectorAll(
+                    ".clienteSeleccionado:checked"
+                )
+            )
+            .map(
+                function(checkbox){
 
-return Number(
-checkbox.dataset.index
-);
+                    return Number(
+                        checkbox.dataset.index
+                    );
 
-}
-);
+                }
+            );
 
-if(seleccionados.length === 0){
+            if(
+                seleccionados.length ===
+                0
+            ){
 
-mostrarMensaje(
-"Seleccione al menos un cliente para eliminar.",
-"error"
-);
+                mostrarMensaje(
+                    "Seleccione al menos un cliente para eliminar.",
+                    "error"
+                );
 
-return;
+                return;
 
-}
+            }
 
-const confirmar =
-confirm(
-"¿Está seguro de que desea eliminar " +
-seleccionados.length +
-" cliente(s) seleccionados?"
-);
+            const confirmar =
+            confirm(
+                "¿Está seguro de que desea eliminar " +
+                seleccionados.length +
+                " cliente(s) seleccionado(s)?"
+            );
 
-if(!confirmar){
-return;
-}
+            if(
+                !confirmar
+            ){
+                return;
+            }
 
+            seleccionados
+            .sort(
+                function(a,b){
 
-/* ELIMINAR DE MAYOR A MENOR */
+                    return b - a;
 
-seleccionados
-.sort(
-function(a,b){
-return b - a;
-}
-)
-.forEach(
-function(index){
+                }
+            )
+            .forEach(
+                function(index){
 
-clientes.splice(
-index,
-1
-);
+                    clientes.splice(
+                        index,
+                        1
+                    );
 
-}
-);
+                }
+            );
 
+            localStorage.setItem(
+                "clientes",
+                JSON.stringify(
+                    clientes
+                )
+            );
 
-/* GUARDAR */
+            clientes =
+            JSON.parse(
+                localStorage.getItem(
+                    "clientes"
+                )
+            ) || [];
 
-localStorage.setItem(
-    "clientes",
-    JSON.stringify(
-        clientes
-    )
-);
+            seleccionarTodosClientes.checked =
+            false;
 
+            actualizarTablaClientes();
 
-/* RECARGAR CLIENTES DESDE LOCALSTORAGE */
+            contenedorTablaClientes.style.display =
+            "block";
 
-clientes =
-JSON.parse(
-    localStorage.getItem("clientes")
-) || [];
+            mostrarMensaje(
+                "✓ Clientes seleccionados eliminados correctamente.",
+                "exito"
+            );
 
-
-/* ACTUALIZAR TABLA */
-
-actualizarTablaClientes();
-
-
-/* LIMPIAR SELECCIÓN GENERAL */
-
-if(seleccionarTodosClientes){
-
-seleccionarTodosClientes.checked =
-false;
-
-}
-
-
-/* AVISO */
-
-mostrarMensaje(
-"✓ Clientes seleccionados eliminados correctamente.",
-"exito"
-);
+        }
+    );
 
 }
-);
 
-}
+
 /* ======================================================
 SELECCIONAR / DESELECCIONAR TODOS
 ====================================================== */
 
-if(seleccionarTodosClientes){
+if(
+    seleccionarTodosClientes
+){
 
     seleccionarTodosClientes.addEventListener(
         "change",
@@ -1316,204 +2584,381 @@ if(seleccionarTodosClientes){
 
 }
 
+
 /* ======================================================
 GUARDAR / ACTUALIZAR CLIENTE
+TODOS LOS CAMPOS SON OBLIGATORIOS
 ====================================================== */
 
 btnGuardarCliente.addEventListener(
-"click",
-function(){
+    "click",
+    async function(){
 
-const nombreValor =
-nombre.value.trim();
+        const nombreValor =
+        nombre.value.trim();
 
-const documentoValor =
-documento.value.trim();
+        const documentoValor =
+        documento.value.trim();
 
-const telefonoValor =
-telefono.value.trim();
+        const telefonoPrefijoValor =
+        telefonoPrefijo.value.trim();
 
-const direccionValor =
-direccion.value.trim();
+        const telefonoNumeroValor =
+        telefonoNumero.value.trim();
 
-const ciudadValor =
-ciudad.value.trim();
+        const direccionValor =
+        direccion.value.trim();
 
-const estadoValor =
-estado.value.trim();
+        const ciudadValor =
+        ciudad.value.trim();
 
+        const estadoValor =
+        estado.value.trim();
 
-if(nombreValor === ""){
 
-mostrarMensaje(
-"Debe ingresar el nombre del cliente.",
-"error"
-);
+        if(
+            nombreValor ===
+            ""
+        ){
 
-nombre.focus();
+            mostrarMensaje(
+                "Debe ingresar el nombre del cliente.",
+                "error"
+            );
 
-return;
+            nombre.focus();
 
-}
+            return;
 
+        }
 
-if(documentoValor === ""){
 
-mostrarMensaje(
-"Debe ingresar la cédula o documento del cliente.",
-"error"
-);
+        if(
+            documentoValor ===
+            ""
+        ){
 
-documento.focus();
+            mostrarMensaje(
+                "Debe ingresar la cédula o documento del cliente.",
+                "error"
+            );
 
-return;
+            documento.focus();
 
-}
+            return;
 
+        }
 
-/* NUEVO CLIENTE */
 
-if(clienteEditando === null){
+        if(
+            telefonoPrefijoValor ===
+            ""
+        ){
 
-const documentoExiste =
-clientes.some(
-function(c){
+            mostrarMensaje(
+                "Debe seleccionar el prefijo del teléfono.",
+                "error"
+            );
 
-return String(
-c.documento || ""
-)
-.toLowerCase()
-.trim() ===
-documentoValor.toLowerCase();
+            telefonoPrefijo.focus();
 
-}
-);
+            return;
 
-if(documentoExiste){
+        }
 
-mostrarMensaje(
-"Ya existe un cliente registrado con ese documento.",
-"error"
-);
 
-documento.focus();
+        if(
+            telefonoNumeroValor ===
+            ""
+        ){
 
-return;
+            mostrarMensaje(
+                "Debe ingresar el número de teléfono.",
+                "error"
+            );
 
-}
+            telefonoNumero.focus();
 
+            return;
 
-clientes.push({
+        }
 
-id:
-"CLI-" +
-Date.now(),
 
-nombre:
-nombreValor,
+        if(
+            !/^\d{7}$/.test(
+                telefonoNumeroValor
+            )
+        ){
 
-documento:
-documentoValor,
+            mostrarMensaje(
+                "El número de teléfono debe contener exactamente 7 dígitos.",
+                "error"
+            );
 
-telefono:
-telefonoValor,
+            telefonoNumero.focus();
 
-direccion:
-direccionValor,
+            return;
 
-ciudad:
-ciudadValor,
+        }
 
-estado:
-estadoValor
 
-});
+        if(
+            direccionValor ===
+            ""
+        ){
 
-mostrarMensaje(
-"Cliente registrado correctamente.",
-"exito"
-);
+            mostrarMensaje(
+                "Debe ingresar la dirección del cliente.",
+                "error"
+            );
 
-}
+            direccion.focus();
 
+            return;
 
-/* ACTUALIZAR CLIENTE */
+        }
 
-else{
 
-const documentoExiste =
-clientes.some(
-function(c,index){
+        if(
+            ciudadValor ===
+            ""
+        ){
 
-return (
-index !== clienteEditando &&
-String(
-c.documento || ""
-)
-.toLowerCase()
-.trim() ===
-documentoValor.toLowerCase()
-);
+            mostrarMensaje(
+                "Debe ingresar la ciudad del cliente.",
+                "error"
+            );
 
-}
-);
+            ciudad.focus();
 
-if(documentoExiste){
+            return;
 
-mostrarMensaje(
-"Ya existe otro cliente registrado con ese documento.",
-"error"
-);
+        }
 
-documento.focus();
 
-return;
+        if(
+            estadoValor ===
+            ""
+        ){
 
-}
+            mostrarMensaje(
+                "Debe seleccionar el estado.",
+                "error"
+            );
 
+            estado.focus();
 
-clientes[clienteEditando] = {
+            return;
 
-...clientes[clienteEditando],
+        }
 
-nombre:
-nombreValor,
 
-documento:
-documentoValor,
+        const telefonoValor =
+        telefonoPrefijoValor +
+        "-" +
+        telefonoNumeroValor;
 
-telefono:
-telefonoValor,
 
-direccion:
-direccionValor,
+        if(
+            clienteEditando ===
+            null
+        ){
 
-ciudad:
-ciudadValor,
+            clientes =
+            JSON.parse(
+                localStorage.getItem(
+                    "clientes"
+                )
+            ) || [];
 
-estado:
-estadoValor
+            const documentoExiste =
+            clientes.some(
+                function(c){
 
-};
+                    return String(
+                        c.documento ||
+                        ""
+                    )
+                    .toLowerCase()
+                    .trim() ===
+                    documentoValor
+                    .toLowerCase();
 
-mostrarMensaje(
-"Cliente actualizado correctamente.",
-"exito"
-);
+                }
+            );
 
-}
+            if(
+                documentoExiste
+            ){
 
+                alert(
+                    "La cédula o documento ya se encuentra registrado. No se puede registrar nuevamente este cliente."
+                );
 
-localStorage.setItem(
-"clientes",
-JSON.stringify(clientes)
-);
+                documento.value =
+                "";
 
-actualizarTablaClientes();
+                return;
 
-limpiarFormulario();
+            }
 
-}
+
+            clientes.push({
+
+                id:
+                "CLI-" +
+                Date.now(),
+
+                nombre:
+                nombreValor,
+
+                documento:
+                documentoValor,
+
+                telefono:
+                telefonoValor,
+
+                direccion:
+                direccionValor,
+
+                ciudad:
+                ciudadValor,
+
+                estado:
+                estadoValor
+
+            });
+
+
+            mostrarMensaje(
+                "Cliente registrado correctamente.",
+                "exito"
+            );
+
+        }else{
+
+            clientes =
+            JSON.parse(
+                localStorage.getItem(
+                    "clientes"
+                )
+            ) || [];
+
+            const documentoExiste =
+            clientes.some(
+                function(c,index){
+
+                    return (
+                        index !==
+                        clienteEditando &&
+                        String(
+                            c.documento ||
+                            ""
+                        )
+                        .toLowerCase()
+                        .trim() ===
+                        documentoValor
+                        .toLowerCase()
+                    );
+
+                }
+            );
+
+            if(
+                documentoExiste
+            ){
+
+                alert(
+                    "La cédula o documento ya se encuentra registrado para otro cliente."
+                );
+
+                documento.value =
+                "";
+
+                return;
+
+            }
+
+
+            clientes[
+                clienteEditando
+            ] = {
+
+                ...clientes[
+                    clienteEditando
+                ],
+
+                nombre:
+                nombreValor,
+
+                documento:
+                documentoValor,
+
+                telefono:
+                telefonoValor,
+
+                direccion:
+                direccionValor,
+
+                ciudad:
+                ciudadValor,
+
+                estado:
+                estadoValor
+
+            };
+
+
+            mostrarMensaje(
+                "Cliente actualizado correctamente.",
+                "exito"
+            );
+
+        }
+
+
+               localStorage.setItem(
+            "clientes",
+            JSON.stringify(
+                clientes
+            )
+        );
+
+
+        const clienteGuardado =
+        clienteEditando === null
+        ? clientes[
+            clientes.length - 1
+        ]
+        : clientes[
+            clienteEditando
+        ];
+
+
+        const resultadoSupabase =
+        await guardarClienteSupabaseCrediFlow(
+            clienteGuardado
+        );
+
+
+        if(
+            !resultadoSupabase.ok
+        ){
+
+            alert(
+                "No fue posible guardar el cliente en la base de datos central."
+            );
+
+            return;
+
+        }
+
+
+        actualizarTablaClientes();
+
+        limpiarFormulario();
+
+    }
 );
 
 
@@ -1522,20 +2967,366 @@ BOTÓN LIMPIAR
 ====================================================== */
 
 btnLimpiarCliente.addEventListener(
-"click",
-function(){
+    "click",
+    function(){
 
-limpiarFormulario();
+        limpiarFormulario();
+
+    }
+);
+
+/* ======================================================
+PERMISOS DEL COLABORADOR - CLIENTES
+====================================================== */
+
+const esColaboradorClientesCrediFlow =
+String(
+    sessionStorage.getItem(
+        "rolCrediFlowSesion"
+    ) ||
+    ""
+)
+.trim()
+.toLowerCase() ===
+"colaborador";
+
+
+function aplicarPermisosColaboradorClientes(){
+
+    if(
+        !esColaboradorClientesCrediFlow
+    ){
+        return;
+    }
+
+
+    /* ==================================================
+    MENU
+    ================================================== */
+
+    const enlaceReportesClientes =
+    document.querySelector(
+        '.menu a[href="reportes.html"]'
+    );
+
+    const enlaceConfiguracionClientes =
+    document.querySelector(
+        '.menuConfiguracion a[href="configuracion.html"]'
+    );
+
+    if(
+        enlaceReportesClientes
+    ){
+
+        enlaceReportesClientes.style.display =
+        "none";
+
+    }
+
+    if(
+        enlaceConfiguracionClientes
+    ){
+
+        enlaceConfiguracionClientes.style.display =
+        "none";
+
+    }
+
+
+    /* ==================================================
+    CLIENTES REGISTRADOS
+    OCULTAR BOTON ELIMINAR DEL BUSCADOR
+    ================================================== */
+
+    if(
+        btnEliminarSeleccionados
+    ){
+
+        btnEliminarSeleccionados.style.display =
+        "none";
+
+    }
+
+    /* ==================================================
+    OCULTAR COLUMNA DE SELECCION
+    ================================================== */
+
+    const tablaSeleccionClientes =
+    document.querySelector(
+        "#contenedorTablaClientes table"
+    );
+
+    if(
+        tablaSeleccionClientes
+    ){
+
+        const encabezadoSeleccion =
+        tablaSeleccionClientes.querySelector(
+            "thead th:first-child"
+        );
+
+        if(
+            encabezadoSeleccion
+        ){
+
+            encabezadoSeleccion.style.display =
+            "none";
+
+        }
+
+        tablaSeleccionClientes
+        .querySelectorAll(
+            "tbody tr"
+        )
+        .forEach(
+            function(fila){
+
+                const primeraCelda =
+                fila.querySelector(
+                    "td:first-child"
+                );
+
+                if(
+                    primeraCelda
+                ){
+
+                    primeraCelda.style.display =
+                    "none";
+
+                }
+
+            }
+        );
+
+    }
+    /* ==================================================
+    CLIENTES REGISTRADOS
+    OCULTAR COLUMNA ACCIONES
+    ================================================== */
+
+    const tablaClientesRegistrados =
+    document.querySelector(
+        "#contenedorTablaClientes table"
+    );
+
+    if(
+        tablaClientesRegistrados
+    ){
+
+        const encabezados =
+        tablaClientesRegistrados.querySelectorAll(
+            "thead th"
+        );
+
+        if(
+            encabezados.length >= 8
+        ){
+
+            encabezados[
+                encabezados.length - 1
+            ].style.display =
+            "none";
+
+        }
+
+
+        tablaClientesRegistrados
+        .querySelectorAll(
+            "tbody tr"
+        )
+        .forEach(
+            function(fila){
+
+                const celdas =
+                fila.querySelectorAll(
+                    "td"
+                );
+
+                if(
+                    celdas.length >= 8
+                ){
+
+                    celdas[
+                        celdas.length - 1
+                    ].style.display =
+                    "none";
+
+                }
+
+            }
+        );
+
+    }
 
 }
+
+
+/* ======================================================
+APLICAR PERMISOS AL CARGAR
+====================================================== */
+
+aplicarPermisosColaboradorClientes();
+
+
+/* ======================================================
+MANTENER PERMISOS EN TABLAS GENERADAS DINAMICAMENTE
+====================================================== */
+
+if(
+    esColaboradorClientesCrediFlow
+){
+
+    const observadorPermisosClientes =
+    new MutationObserver(
+        function(){
+
+            aplicarPermisosColaboradorClientes();
+
+        }
+    );
+
+    observadorPermisosClientes.observe(
+        tablaClientes,
+        {
+            childList:true,
+            subtree:true
+        }
+    );
+
+}
+/* ======================================================
+SALIR DEL SISTEMA
+====================================================== */
+
+const btnSalirCrediFlow =
+document.getElementById(
+    "btnSalirCrediFlow"
 );
+
+if(
+    btnSalirCrediFlow
+){
+
+    btnSalirCrediFlow.addEventListener(
+        "click",
+        function(event){
+
+            event.preventDefault();
+
+            sessionStorage.removeItem(
+                "sesionCrediFlow"
+            );
+
+            localStorage.removeItem(
+                "rolCrediFlow"
+            );
+
+            localStorage.removeItem(
+                "usuarioCrediFlow"
+            );
+
+            window.location.href =
+            "index.html";
+
+        }
+    );
+
+}
+
+
+/* ======================================================
+MENU MOVIL
+EXCLUSIVO PARA VISTA CELULAR
+====================================================== */
+
+const btnMenuMovil =
+document.getElementById(
+    "btnMenuMovil"
+);
+
+const sidebarMovil =
+document.querySelector(
+    ".sidebar"
+);
+
+if(
+    btnMenuMovil &&
+    sidebarMovil
+){
+
+    btnMenuMovil.addEventListener(
+        "click",
+        function(){
+
+            const abierto =
+            sidebarMovil.classList.toggle(
+                "menuMovilAbierto"
+            );
+
+            btnMenuMovil.setAttribute(
+                "aria-expanded",
+                abierto
+                ? "true"
+                : "false"
+            );
+
+            btnMenuMovil.innerHTML =
+            abierto
+            ? '<i class="fa-solid fa-xmark"></i>'
+            : '<i class="fa-solid fa-bars"></i>';
+
+        }
+    );
+
+
+    document
+    .querySelectorAll(
+        ".menu a, .menuConfiguracion a"
+    )
+    .forEach(
+        function(enlace){
+
+            enlace.addEventListener(
+                "click",
+                function(){
+
+                    sidebarMovil.classList.remove(
+                        "menuMovilAbierto"
+                    );
+
+                    btnMenuMovil.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                    btnMenuMovil.innerHTML =
+                    '<i class="fa-solid fa-bars"></i>';
+
+                }
+            );
+
+        }
+    );
+
+}
 
 
 /* ======================================================
 INICIAR
 ====================================================== */
 
-actualizarTablaClientes();
+limpiarFormulario();
+
+buscarClientesRegistrados.value =
+"";
+
+tablaClientes.innerHTML =
+"";
+
+contenedorTablaClientes.style.display =
+"none";
+
+sincronizarClientesDesdeSupabase();
 
 </script>
 
